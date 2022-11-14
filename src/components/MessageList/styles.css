@@ -1,7 +1,16 @@
 .message-list-container {
     margin-bottom: 16px;
-    flex: 1;
+    /* flex: 0.6; */
     overflow: scroll;
+
+    /* スクロール → chromeのみに適用される */
+        overflow-y: scroll;
+        /* スクロールバーを消す */
+        min-width: 300px;
+        flex: none;
+}
+.message-list-container::-webkit-scrollbar {
+    display: none;
 }
 
 .message-list {
