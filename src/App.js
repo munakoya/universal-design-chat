@@ -11,7 +11,6 @@ function App() {
   return (
     <div className="App">
       <div className="container">
-        <h1>💬 Chat Room</h1>
         {/* ログインできてuserあればauthenticatedApp ログインしてない → Unauthだからgoogleログインボタン */}
         {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
       </div>

@@ -1,13 +1,13 @@
 import { Button } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
-import { auth } from "../../firebase";
-import SignIn from "../../pages/SignIn";
+// import { Link } from "react-router-dom";
+// import { auth } from "../../firebase";
+// import SignIn from "../../pages/SignIn";
 // import SignOutButton from "../../pages/SignIn";
 
 function Profile() {
   function SignOut() {
-    return auth.signOut();
+    // return auth.signOut();
   }
   return (
     <div>
