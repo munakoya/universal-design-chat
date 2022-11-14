@@ -1,0 +1,21 @@
+[debug] [2022-11-14T01:42:55.168Z] ----------------------------------------------------------------------
+[debug] [2022-11-14T01:42:55.170Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\k_munakata\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2022-11-14T01:42:55.170Z] CLI Version:   11.16.0
+[debug] [2022-11-14T01:42:55.171Z] Platform:      win32
+[debug] [2022-11-14T01:42:55.171Z] Node Version:  v16.16.0
+[debug] [2022-11-14T01:42:55.172Z] Time:          Mon Nov 14 2022 10:42:55 GMT+0900 (日本標準時)
+[debug] [2022-11-14T01:42:55.172Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-14T01:42:55.186Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-14T01:42:55.187Z] > authorizing via signed-in user (muna.sakasakuta@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\k_munakata\ReactProjects\universal-design-chat
+
