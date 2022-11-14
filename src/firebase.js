@@ -105,3 +105,4 @@ function getMessages(roomId, callback) {
 
 // export{}で定義した関数を外部でimport 可能に
 export { loginWithGoogle, sendMessage, getMessages };
+export default db;

@@ -1,12 +1,14 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 // import RoomList from "../components/room/RoomList";
-import RMCP from "../components/room/RMCP";
+import { Landing } from "../components/Landing";
+import { ChatRoom } from "../components/ChatRoom";
 export function Room() {
   return (
     <div className="app">
       <Sidebar />
-      <RMCP />
+      {/* <Landing />
+      <ChatRoom /> */}
     </div>
   );
 }

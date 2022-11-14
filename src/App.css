@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,27 @@
   to {
     transform: rotate(360deg);
   }
+} */
+/* グローバルにつかいたいcssを定義 */
+body {
+  --twitter-color: #50b7f5;
+  --twitter-background: #e6ecf0;
+}
+
+.app {
+  /* タイムラインとウィジェットをよこならびにするため */
+  display: flex;
+  /* 縦画面いっぱい */
+  height: 100vh;
+  /* 最大 */
+  max-width: 1300px;
+  /* 中央寄せ */
+  /* margin: 0, auto; */
+  margin-top: 0;
+  margin-left: auto;
+  margin-bottom: 0;
+  margin-right: auto;
+  /* 左右10px開けたい */
+  padding: 0, 10px;
+
 }

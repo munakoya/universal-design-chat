@@ -8,7 +8,8 @@ function UnauthenticatedApp() {
 
     return (
         <>
-            <h2>Log in to join a chat room!</h2>
+            <h1>Universal Design Chat</h1>
+            <h2>Log in to join a UDC!</h2>
             <div>
                 <button onClick={login} className="login">
                     Login with Google
