@@ -1,0 +1,37 @@
+.sidebarOption{
+    /* 横並びにしたい → displayのflex */
+    display: flex;
+    /* 縦並びをあわせられる */
+    align-items: center;
+    /* 各要素をクリックできるように */
+    cursor: pointer;
+    /* どれくらいの速さでhover適用 */
+    transition: color 0.15s ease-out;
+
+    margin-left: 20px;
+}
+
+/* 要素にカーソルが合うと色が変わる */
+.sidebarOption:hover{
+    background-color: #e8f5fe;
+    /* 丸み */
+    border-radius: 30px;
+    /* hover時の文字の色変更 */
+    color: var(--twitter-color);
+}
+
+/* materialUiの要素にcssを与えられる書き方 */
+.sidebarOption > .MuiSvgIcon-root{
+    padding-right: 20px;
+}
+
+/* > → sidebarOption野中の要素を指定しているだけわかりやすい */
+.sidebarOption > h2{
+    font-size: 24px;
+    margin-right: 20px;
+    font-weight: 800;
+}
+
+.sidebarOption--active{
+    color: var(--twitter-color);
+}

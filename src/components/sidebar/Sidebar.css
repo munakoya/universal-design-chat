@@ -1,0 +1,35 @@
+.sidebar{
+    border-right: 1px solid var(--twitter-background);
+    /* 画面の20%って意味 → flex: 0.2 */
+    flex: 0.2;
+    /* 最低でも最小の横幅 */
+    min-width: 250px;
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+/* マテリアルUIはcssが優先されずに適用されない時がある → !important */
+.sidebar_twitterIcon{
+    color: var(--twitter-color);
+    /* fontsize反応しないときは !importtant;をつけてあげる → materialUiより優先*/
+    font-size: 30px !important;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+.sidebar_tweet{
+    /* 背景 */
+    background-color: var(--twitter-color) !important;
+    /* 文字の色 */
+    color: white !important;
+    /* 太字 */
+    font-weight: 900 !important;
+    /* 枠線をなし */
+    border: none !important;
+    /* 枠線の丸み */
+    border-radius: 30px !important;
+    /* 要素の高さ */
+    height: 50px !important;
+    /* 上開ける */
+    margin-top: 20px !important;
+}

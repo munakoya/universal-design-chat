@@ -1,0 +1,30 @@
+.timeline{
+    /* タイムラインの画面の比率設定 → 45% */
+    flex: 0.45;
+    border-right: 1px solid var(--twitter-background);
+
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
+    /* スクロールバーを消す */
+    min-width: 300px;
+}
+.timeline::-webkit-scrollbar{
+    display: none;
+}
+
+/* headerのcss */
+.timeline_header{
+    /* 固定 → stickyで固定*/
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* headerは一番上に来てほしいので100を当てる */
+    z-index: 100;
+    border: 1px solid var(--twitter-background);
+    padding: 5px, 20px;
+}
+
+.timeline_header > h2{
+    font-size: 20px;
+    font-weight: 800;
+}

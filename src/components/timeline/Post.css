@@ -1,0 +1,55 @@
+/* 横並び */
+.post{
+    /* 横並び */
+    display: flex;
+    /* 縦方向に中央 */
+    align-items: flex-start;
+    border-bottom: 1px solid var(--twitter-background);
+
+}
+.post_body{
+    /* 100%あてる */
+    flex: 1;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.post_body > img{
+    border-radius: 20px;
+    /* post_bodyの横幅の100%ってこと */
+    width: 100% !important;
+}
+
+.post_footer{
+    display: flex;
+    /* display flexにするとjustify-content使えるようになる */
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.post_headerDescription{
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.post_headerText > h3{
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+.post_badge{
+    font-size: 14px !important;
+    color: var(--twitter-color);
+}
+
+.post_headerSpecial{
+    font-weight: 600;
+    font-size: 12px;
+    color: gray;
+}
+
+.post_avatar{
+    padding: 15px;
+}
