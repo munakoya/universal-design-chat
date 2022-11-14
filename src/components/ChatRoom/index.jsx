@@ -3,6 +3,7 @@ import { chatRooms } from '../../data/chatRooms';
 import { Landing } from '../Landing';
 import { MessageInput } from '../MessageInput';
 import { MessageList } from '../MessageList';
+import Sidebar from '../sidebar/Sidebar';
 import './styles.css';
 
 function ChatRoom() {
@@ -17,18 +18,17 @@ function ChatRoom() {
 
     return (
         <>  
-            {/* <Sidebar /> */}
-            <Landing/>
             {/* roomのタイトル → data/chatRooms指定*/}
             <div className='chatRoom'>
-            <h2>{room.title}</h2>
+            <h2 className='chatRoom_header'>{room.title}</h2>
                 <Link to="/">⬅️ Back to all rooms</Link>
-            </div>
+            
             <div className="messages-container">
                 <MessageList roomId={room.id} />
                 <MessageInput roomId={room.id} />
 
-            </div>
+                </div>
+                </div>
         </>
     );
 }

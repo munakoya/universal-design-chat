@@ -7,7 +7,7 @@ function Landing() {
     return (
         <>
             {/* <Sidebar /> */}
-            <Sidebar/>
+            {/* <Sidebar/> */}
             <div className='lading'>
             <h2>Choose a Chat Room</h2>
             <ul className="chat-room-list">

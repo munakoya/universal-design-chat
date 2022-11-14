@@ -1,13 +1,7 @@
-.room_list {
-    flex: 0.45;
-    border-right: 1px solid var(--twitter-background);
-
-}
-
 .chat-room-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+    gap: 4px;
 }
 
 .chat-room-list li {
@@ -19,4 +13,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.landing{
+    flex: 0.2;
+    border-right: 1px solid var(--twitter-background);
 }

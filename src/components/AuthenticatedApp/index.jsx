@@ -5,6 +5,8 @@ import Home from '../../pages/Home';
 import Inquiry from "../../pages/Inquiry";
 import Mypage from "../../pages/Mypage";
 import Tag from "../../pages/Tag";
+import Room from '../../pages/Room';
+import RoomChat from '../../pages/RoomChat';
 
 
 function AuthenticatedApp() {
@@ -18,11 +20,13 @@ function AuthenticatedApp() {
                 {/* <Route path="/rooms" element={<Landing />} /> */}
                 {/* chatRoom */}
                 <Route path="/" element={<Home />} />
-                <Route path="/rooms" element={<Landing />} />
-                <Route path="/room/:id" element={<ChatRoom />} />
+                {/* <Route path="/rooms" element={<Landing />} /> */}
+                <Route path="/room/:id" element={<RoomChat />} />
                 <Route path="/tags" element={<Tag />} />
                 <Route path="/inquiry" element={<Inquiry />} />
                 <Route path="/mypage" element={<Mypage />} />
+                <Route path="/rooms" element={<Room />} />
+
             </Routes>
         </BrowserRouter>
     );
