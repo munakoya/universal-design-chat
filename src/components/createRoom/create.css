@@ -1,0 +1,8 @@
+.createRoom-input{
+    display: flex;
+    flex-direction: column;
+}
+
+.createRoom-input > input{
+    margin: 20px 0 ;
+}

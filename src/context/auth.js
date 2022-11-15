@@ -3,7 +3,7 @@ import React from "react";
 import { loginWithGoogle } from "../firebase";
 
 // AuthContextオブジェクト作成 → contextの作成とは
-const AuthContext = React.createContext();
+const AuthContext = React.createContext(); // AuthContextでグローバルで使える変数の定義 → useAuthのカスタムフックに使う
 // AuthProviderコンポーネントを作成
 const AuthProvider = (props) => {
   // useStateで多分userデータをセット

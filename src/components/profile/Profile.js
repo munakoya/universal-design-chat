@@ -1,17 +1,15 @@
 import { Button } from "@mui/material";
 import React from "react";
-// import { Link } from "react-router-dom";
-// import { auth } from "../../firebase";
-// import SignIn from "../../pages/SignIn";
-// import SignOutButton from "../../pages/SignIn";
+import { useAuth } from "../../hooks/useAuth";
 
 function Profile() {
-  function SignOut() {
-    // return auth.signOut();
-  }
+  function SignOut() {}
+  // ログインユーザー情報
+  const { user } = useAuth();
   return (
     <div>
       <h1>Profile</h1>
+      {console.log(user)}
       <Button onClick={SignOut}>ログアウト</Button>
     </div>
   );

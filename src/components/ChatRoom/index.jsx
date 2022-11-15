@@ -1,9 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import { chatRooms } from '../../data/chatRooms';
-import { Landing } from '../Landing';
 import { MessageInput } from '../MessageInput';
 import { MessageList } from '../MessageList';
-import Sidebar from '../sidebar/Sidebar';
 import './styles.css';
 
 function ChatRoom() {

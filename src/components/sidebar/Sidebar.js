@@ -30,8 +30,8 @@ function Sidebar() {
         <Link to="/rooms">
           <SidebarOption text="ルーム" Icon={MailOutlineIcon} />
         </Link>
-        <Link to="/tags">
-          <SidebarOption text="タグ検索" Icon={SearchIcon} />
+        <Link to="/search-rooms">
+          <SidebarOption text="ルーム検索" Icon={SearchIcon} />
         </Link>
         <Link to="/inquiry">
           <SidebarOption text="お問い合わせ" Icon={NotificationsIcon} />

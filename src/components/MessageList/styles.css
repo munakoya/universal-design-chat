@@ -8,6 +8,8 @@
         /* スクロールバーを消す */
         min-width: 300px;
         flex: none;
+    position: sticky;
+    bottom: 0;
 }
 .message-list-container::-webkit-scrollbar {
     display: none;

@@ -7,24 +7,10 @@ import Post from "./Post.js";
 // import dbでfirestoreを持ってくる
 import db from "../../firebase";
 // dbでのデータ取得に使うライブラリ、関数のimport
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
-
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 // なめらかに動くライブラリ
 import FlipMove from "react-flip-move";
-// import { useAuthState } from "react-firebase-hooks";
 
-/*
-作り始める前に、どういう要素でこのコンポーネントが構成されているのかを確認すること
-header要素
-tweetbox
-postの3つの構造
-*/
 function Timeline() {
   // useState → データを保持 postsという変数に保持 setPosts()関数でset
   const [posts, setPosts] = useState([]);

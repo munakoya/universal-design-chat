@@ -1,14 +1,11 @@
 import { Link } from 'react-router-dom';
 import { chatRooms } from '../../data/chatRooms';
-import Sidebar from '../sidebar/Sidebar';
 import './styles.css';
 
 function Landing() {
     return (
         <>
-            {/* <Sidebar /> */}
-            {/* <Sidebar/> */}
-            <div className='lading'>
+            <div className='landing'>
             <h2>Choose a Chat Room</h2>
             <ul className="chat-room-list">
                 {/* chatRoomsからroomをすべて取り出してリスト表示 */}
@@ -18,6 +15,8 @@ function Landing() {
                         <Link to={`/room/${room.id}`}>{room.title}</Link>
                     </li>
                 ))}
+                    
+                {/* firestoreに登録されたroomを取得したい */}
             </ul>
 
             </div>
