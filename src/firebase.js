@@ -19,6 +19,8 @@ import {
   orderBy,
 } from "firebase/firestore";
 
+import { v4 as uuidv4 } from "uuid";
+
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
   authDomain: process.env.REACT_APP_AUTHDOMAIN,
@@ -45,8 +47,12 @@ async function loginWithGoogle() {
     //   ポップアップでサインフロー処理
     const { user } = await signInWithPopup(auth, provider);
 
-    //   propsかな？
-    return { uid: user.uid, displayName: user.displayName };
+    //   propsかな？ → ここにphotoURLを追加すればuserにはuid, displayName, photoURL
+    return {
+      uid: user.uid,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+    };
   } catch (error) {
     if (error.code !== "auth/cancelled-popup-request") {
       console.error(error);
@@ -103,6 +109,24 @@ function getMessages(roomId, callback) {
   );
 }
 
+// ルームを登録
+async function createRoom(roomName, description, quiz, user) {
+  try {
+    await addDoc(collection(db, "room-list"), {
+      roomId: uuidv4(),
+      title: roomName,
+      description: description,
+      createUser: user.uid,
+      quiz: quiz,
+      timestamp: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // export{}で定義した関数を外部でimport 可能に
-export { loginWithGoogle, sendMessage, getMessages };
+export { loginWithGoogle, sendMessage, getMessages, createRoom };
 export default db;
+
+// firebase関連の関数はfirebase.jsに記述されている

@@ -7,17 +7,18 @@ import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import db from "../../firebase";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { v4 as uuidv4 } from "uuid";
-export const yourfunc = () => {
-  const auth = getAuth();
-  auth.onAuthStateChanged((user) => {
-    console.log(user.email);
-  });
-};
+import { useAuth } from "../../hooks/useAuth";
+
+// export const yourfunc = () => {
+//   const auth = getAuth();
+//   auth.onAuthStateChanged((user) => {
+//     console.log(user.email);
+//   });
+// };
 
 function TweetBox() {
-  // ログインユーザーデータの取得
-  // authのログイン状態などをuserに入れる → authはfirebase.jsから取ってきてる
-  // const [user] = useAuthState(auth);
+  // ログインユーザー情報
+  const { user } = useAuth();
 
   // 入力された文字列を格納する変数を用意する → useState
   const [tweetMessage, setTweetMessage] = useState(""); // 初期値から
@@ -30,10 +31,8 @@ function TweetBox() {
     e.preventDefault();
     // 空の場合は送信できない
     if (tweetMessage === "") return;
-    // firebaseのドキュメントからコピペ
-    const auth = getAuth();
     // この関数内でログイン中のユーザデータにアクセスできる → グローバルにしたい
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(user, (user) => {
       if (user) {
         // firebaseに追加する → addDoc関数 引数にdbとその中のコレクション名
         // コレクションさえ作れば、以下のプロパティのデータがドキュメントとして追加される
@@ -64,7 +63,7 @@ function TweetBox() {
       <form>
         <div className="tweetBox_input">
           {/* material UI */}
-          <Avatar />
+          <Avatar src={user.photoURL} />
           <input
             // inputタグにvalueを指定すると、あとでアクセスできるようになって便利
             value={tweetMessage}
