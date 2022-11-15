@@ -32,6 +32,7 @@ function TweetBox() {
     // 空の場合は送信できない
     if (tweetMessage === "") return;
     // この関数内でログイン中のユーザデータにアクセスできる → グローバルにしたい
+    // ここの関数の意味とわんち関数使わずにdb登録でエラー解消説
     onAuthStateChanged(user, (user) => {
       if (user) {
         // firebaseに追加する → addDoc関数 引数にdbとその中のコレクション名
