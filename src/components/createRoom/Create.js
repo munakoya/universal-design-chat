@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import { onAuthStateChanged } from "firebase/auth";
-import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import {
+  collection,
+  serverTimestamp,
+  doc,
+  setDoc,
+  addDoc,
+} from "firebase/firestore";
 import db from "../../firebase";
 import { uuidv4 } from "@firebase/util";
 import { Button } from "@mui/material";
@@ -11,33 +16,101 @@ function Create() {
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
+  const [question1, setQuestion1] = useState("");
+  const [answer1, setAnswer1] = useState("");
+  const [question2, setQuestion2] = useState("");
+  const [answer2, setAnswer2] = useState("");
+
+  const [question3, setQuestion3] = useState("");
+  const [answer3, setAnswer3] = useState("");
+
+  const [question4, setQuestion4] = useState("");
+  const [answer4, setAnswer4] = useState("");
+
+  const [question5, setQuestion5] = useState("");
+  const [answer5, setAnswer5] = useState("");
+
+  // const [question6, setQuestion6] = useState("");
+  // const [answer6, setAnswer6] = useState("");
+
+  // const [question7, setQuestion7] = useState("");
+  // const [answer7, setAnswer7] = useState("");
+
+  // const [question8, setQuestion8] = useState("");
+  // const [answer8, setAnswer8] = useState("");
+
+  // const [question9, setQuestion9] = useState("");
+  // const [answer9, setAnswer9] = useState("");
+
+  // const [question10, setQuestion10] = useState("");
+  // const [answer10, setAnswer10] = useState("");
 
   const createRoom = (e) => {
     e.preventDefault();
+    let id = uuidv4();
     // onAuthStateChanged(user, (user) => {
     //   if (user) {
     // firebaseに追加する → addDoc関数 引数にdbとその中のコレクション名
     // コレクションさえ作れば、以下のプロパティのデータがドキュメントとして追加される
+    // setDoc(doc(db, "room-list", roomtitle))にするとidがroomTitleになるが重複した場合 → 上書きされる
     addDoc(collection(db, "room-list"), {
       // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
-      roomId: uuidv4(),
+      roomId: id,
       title: roomTitle,
       description: description,
       icon: icon,
       createUser: user.displayName,
       //   quiz: quiz, // quizはコレクションかなあ
       createdAt: serverTimestamp(),
+      members: [user.displayName],
+      // クイズはクイズで分けたほうがいいかもしれん
+      quiz: {
+        q1: {
+          question: question1,
+          answer: answer1,
+        },
+        q2: {
+          question: question2,
+          answer: answer2,
+        },
+        q3: {
+          question: question3,
+          answer: answer3,
+        },
+        q4: {
+          question: question4,
+          answer: answer4,
+        },
+        q5: {
+          question: question5,
+          answer: answer5,
+        },
+      },
     });
-    //   }
-    // });
-    //   ルームにリダイレクト
+    // all-room-list作成してidをタイトルにする
+    setDoc(doc(db, "all-room-list", roomTitle), {
+      roomId: id,
+      title: roomTitle,
+    });
+    //   ルームにリダイレクトしたい
     setRoomTitle("");
     setDescription("");
     setIcon("");
+    setQuestion1("");
+    setAnswer1("");
+    setQuestion2("");
+    setAnswer2("");
+    setQuestion3("");
+    setAnswer3("");
+    setQuestion4("");
+    setAnswer4("");
+    setQuestion5("");
+    setAnswer5("");
   };
 
   return (
     <div className="create">
+      <h2 className="create-header">ルーム作成</h2>
       <form>
         <div className="createRoom-input">
           <input
@@ -58,6 +131,78 @@ function Create() {
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setIcon(e.target.value)}
           ></input>
+          <div className="createQuiz-input">
+            <div className="createQuizSet">
+              <input
+                value={question1}
+                placeholder="Question 1"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setQuestion1(e.target.value)}
+              ></input>
+              <input
+                value={answer1}
+                placeholder="Answer 1"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setAnswer1(e.target.value)}
+              ></input>
+            </div>
+            <div className="createQuizSet">
+              <input
+                value={question2}
+                placeholder="Question 2"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setQuestion2(e.target.value)}
+              ></input>
+              <input
+                value={answer2}
+                placeholder="Answer 2"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setAnswer2(e.target.value)}
+              ></input>
+            </div>
+            <div className="createQuizSet">
+              <input
+                value={question3}
+                placeholder="Question 3"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setQuestion3(e.target.value)}
+              ></input>
+              <input
+                value={answer3}
+                placeholder="Answer 3"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setAnswer3(e.target.value)}
+              ></input>
+            </div>
+            <div className="createQuizSet">
+              <input
+                value={question4}
+                placeholder="Question 4"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setQuestion4(e.target.value)}
+              ></input>
+              <input
+                value={answer4}
+                placeholder="Answer 4"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setAnswer4(e.target.value)}
+              ></input>
+            </div>
+            <div className="createQuizSet">
+              <input
+                value={question5}
+                placeholder="Question 5"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setQuestion5(e.target.value)}
+              ></input>
+              <input
+                value={answer5}
+                placeholder="Answer 5"
+                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                onChange={(e) => setAnswer5(e.target.value)}
+              ></input>
+            </div>
+          </div>
           <Button
             className="createRoom-createButton"
             type="submit"
