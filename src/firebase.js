@@ -48,10 +48,12 @@ async function loginWithGoogle() {
     const { user } = await signInWithPopup(auth, provider);
 
     //   propsかな？ → ここにphotoURLを追加すればuserにはuid, displayName, photoURL
+    // user情報の登録とかデータ取得に失敗の場合ここでuserにデータをセットしていないのが原因のこと多い
     return {
       uid: user.uid,
       displayName: user.displayName,
       photoURL: user.photoURL,
+      email: user.email,
     };
   } catch (error) {
     if (error.code !== "auth/cancelled-popup-request") {
@@ -125,8 +127,28 @@ async function createRoom(roomName, description, quiz, user) {
   }
 }
 
+// ツイートする
+async function sendTweet(tweetMessage, tweetImage, user) {
+  try {
+    await addDoc(collection(db, "posts"), {
+      // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
+      displayName: user.displayName,
+      username: user.email,
+      verified: true,
+      text: tweetMessage,
+      avatar: user.photoURL,
+      image: tweetImage,
+      // 固有のuuidをset
+      id: uuidv4(),
+      // 時系列順に並べるため
+      timestamp: serverTimestamp(),
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
 // export{}で定義した関数を外部でimport 可能に
-export { loginWithGoogle, sendMessage, getMessages, createRoom };
+export { loginWithGoogle, sendMessage, getMessages, createRoom, sendTweet };
 export default db;
 
 // firebase関連の関数はfirebase.jsに記述されている
