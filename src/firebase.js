@@ -111,22 +111,6 @@ function getMessages(roomId, callback) {
   );
 }
 
-// ルームを登録
-async function createRoom(roomName, description, quiz, user) {
-  try {
-    await addDoc(collection(db, "room-list"), {
-      roomId: uuidv4(),
-      title: roomName,
-      description: description,
-      createUser: user.uid,
-      quiz: quiz,
-      timestamp: serverTimestamp(),
-    });
-  } catch (error) {
-    console.error(error);
-  }
-}
-
 // ツイートする
 async function sendTweet(tweetMessage, tweetImage, user) {
   try {
@@ -148,7 +132,7 @@ async function sendTweet(tweetMessage, tweetImage, user) {
   }
 }
 // export{}で定義した関数を外部でimport 可能に
-export { loginWithGoogle, sendMessage, getMessages, createRoom, sendTweet };
+export { loginWithGoogle, sendMessage, getMessages, sendTweet };
 export default db;
 
 // firebase関連の関数はfirebase.jsに記述されている

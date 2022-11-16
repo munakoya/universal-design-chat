@@ -6,6 +6,8 @@ import "../App.css";
 // ルーティングで表示されるページはexportする
 export function Home() {
   return (
+    // pagesフォルダにあるpageファイルはなるべくPageをファイル名につけたい
+    // ex) HomePage.jsにしたい → 人目でpageファイルだとわかるように
     <div className="app">
       {/* sidebar */}
       <Sidebar />
