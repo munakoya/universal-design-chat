@@ -20,7 +20,7 @@ function RoomList() {
     const roomsData = collection(db, "room-list");
     const qq = query(roomsData);
     onSnapshot(qq, (querySnapshots) => {
-      setDocId(querySnapshots.docs.map((doc) => doc.id));
+      setDocId(querySnapshots.docs.map((doc) => doc.data()));
     });
   }, []);
   return (

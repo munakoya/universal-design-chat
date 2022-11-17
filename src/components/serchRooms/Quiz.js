@@ -8,10 +8,12 @@ import {
   query,
   onSnapshot,
   getDoc,
+  getDocs,
 } from "firebase/firestore";
 import db from "../../firebase";
 import { useState } from "react";
 import "./quiz.css";
+import { async } from "@firebase/util";
 function Quiz() {
   // ルームの選択 → room/room.idが指定でidごとのルームにルーティング
   // useParamsでurl内のidを取得
@@ -31,9 +33,24 @@ function Quiz() {
     onSnapshot(q, (querySnapshots) => {
       setRooms(querySnapshots.docs.map((doc) => doc.data()));
       setDocId(querySnapshots.docs.map((doc) => doc.id));
-      setRoom(rooms.find((x) => x.title === params.id));
     });
   }, []);
+
+  function getRoom() {
+    const roomList = collection(db, "room-list");
+    const q = query(roomList, orderBy("createdAt", "desc"));
+
+    getDocs(q).then((querySnapshot) => {
+      setRoom(rooms.find((x) => x.title === params.id));
+    });
+    // onSnapshot(q, (querySnapshots) => {
+    //   setRoom(rooms.find((x) => x.title === params.id));
+    // });
+    return room;
+  }
+
+  const selectRoom = getRoom();
+
   // const room = doc(db, "room-list", "4D8Ab5Jd0sUSlrZ3IeUc");
   // const roomSnap = getDoc(room);
 
@@ -44,7 +61,12 @@ function Quiz() {
     <div>
       {/* roomのタイトル → data/chatRooms指定*/}
       <div className="quizList">
-        <h2 className="quiz_header">{rooms.title}</h2>
+        {/* これ挟まないとエラー */}
+        {selectRoom ? (
+          <h2 className="quiz_header">{selectRoom.title}</h2>
+        ) : (
+          console.log("no select")
+        )}
         {/* {room.map((r) =>
           // 似たような感じで出力したファイルあるはず
           console.log(r.quiz)
@@ -54,7 +76,13 @@ function Quiz() {
         {/* とれてますね */}
         {/* 一旦roomがとれたら、room.~~アクセスできる */}
         {/* マップが使えない */}
-        {console.log("room : ", room)}
+        {/* あとからアクセスで */}
+        {console.log("指定したルーム", selectRoom)}
+        {/* はてなをつけると出力できます */}
+        {selectRoom?.quiz?.map((value) => {
+          // 構造的な問題でした
+          return <p>{value.question}</p>;
+        })}
 
         <Link to="/search-rooms">⬅️ Back to all rooms</Link>
       </div>

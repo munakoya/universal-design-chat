@@ -45,7 +45,7 @@ function Create() {
   // const [question10, setQuestion10] = useState("");
   // const [answer10, setAnswer10] = useState("");
 
-  const createRoom = (e) => {
+  async function createRoom(e) {
     e.preventDefault();
     let id = uuidv4();
     // onAuthStateChanged(user, (user) => {
@@ -53,7 +53,8 @@ function Create() {
     // firebaseに追加する → addDoc関数 引数にdbとその中のコレクション名
     // コレクションさえ作れば、以下のプロパティのデータがドキュメントとして追加される
     // setDoc(doc(db, "room-list", roomtitle))にするとidがroomTitleになるが重複した場合 → 上書きされる
-    addDoc(collection(db, "room-list"), {
+    await addDoc(collection(db, "room-list"), {
+      // addCollection
       // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
       roomId: id,
       title: roomTitle,
@@ -64,30 +65,33 @@ function Create() {
       createdAt: serverTimestamp(),
       members: [user.displayName],
       // クイズはクイズで分けたほうがいいかもしれん
-      quiz: {
-        q1: {
+      // マップ型の配列に変更
+      quiz: [
+        {
           question: question1,
           answer: answer1,
         },
-        q2: {
+        {
           question: question2,
           answer: answer2,
         },
-        q3: {
+        {
           question: question3,
           answer: answer3,
         },
-        q4: {
+
+        {
           question: question4,
           answer: answer4,
         },
-        q5: {
+        {
           question: question5,
           answer: answer5,
         },
-      },
+      ],
     });
     // all-room-list作成してidをタイトルにする
+    // これにすると同じ名前のルームは最後に作成されたルームに更新される → 実際はルーム自体存在するけどアクセスできない
     setDoc(doc(db, "all-room-list", roomTitle), {
       roomId: id,
       title: roomTitle,
@@ -106,7 +110,7 @@ function Create() {
     setAnswer4("");
     setQuestion5("");
     setAnswer5("");
-  };
+  }
 
   return (
     <div className="create">
