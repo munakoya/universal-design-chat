@@ -7,6 +7,7 @@ import RoomChat from '../../pages/RoomChat';
 import SerchRooms from '../../pages/SearchRooms';
 import RoomQuiz from '../../pages/RoomQuiz';
 import CreateRoom from '../../pages/CreateRoom';
+import ScorePage from '../../pages/ScorePage';
 
 function AuthenticatedApp() {
     return (
@@ -30,7 +31,10 @@ function AuthenticatedApp() {
                 {/* ルームクイズ */}
                 <Route path="/search-rooms/:id/quiz" element={<RoomQuiz />} />
                 {/* ルーム作成 */}
-                <Route path='/create-room' element={ <CreateRoom/>} />
+                <Route path='/create-room' element={<CreateRoom />} />
+                
+                {/* 採点後画面 */}
+                <Route path='/search-rooms/:id/quiz/score' element={ <ScorePage/>} />
 
             </Routes>
         </BrowserRouter>

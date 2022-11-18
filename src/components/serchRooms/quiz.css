@@ -3,3 +3,7 @@
     flex-direction: column;
     
 }
+.ansInput{
+    display: flex;
+    flex-direction: column;
+}

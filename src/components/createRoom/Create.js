@@ -16,6 +16,8 @@ function Create() {
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
+
+  // マップ型配列だから、add? pushとかでも追加できると思われる
   const [question1, setQuestion1] = useState("");
   const [answer1, setAnswer1] = useState("");
   const [question2, setQuestion2] = useState("");
@@ -69,7 +71,7 @@ function Create() {
       quiz: [
         {
           question: question1,
-          answer: answer1,
+          answer: answer2,
         },
         {
           question: question2,
@@ -101,7 +103,7 @@ function Create() {
     setDescription("");
     setIcon("");
     setQuestion1("");
-    setAnswer1("");
+    setAnswer2("");
     setQuestion2("");
     setAnswer2("");
     setQuestion3("");
@@ -139,13 +141,13 @@ function Create() {
             <div className="createQuizSet">
               <input
                 value={question1}
-                placeholder="Question 1"
+                placeholder="Question1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion1(e.target.value)}
               ></input>
               <input
                 value={answer1}
-                placeholder="Answer 1"
+                placeholder="Answer1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer1(e.target.value)}
               ></input>
@@ -206,6 +208,9 @@ function Create() {
                 onChange={(e) => setAnswer5(e.target.value)}
               ></input>
             </div>
+            {/* <Button className="pushQuiz" onClick={addNewQuiz()}>
+              +
+            </Button> */}
           </div>
           <Button
             className="createRoom-createButton"
