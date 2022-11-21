@@ -10,16 +10,19 @@ import { useAuth } from "../hooks/useAuth";
 export function Home() {
   const { user } = useAuth();
   // userドキュメント追加
-  // ログインと同時に
+  // ログインと同時に初期化される → if分岐させるか、
   useEffect(() => {
     // setDoc(collection(db, "user", `${user.uid}`))みたいにドキュメントIDを指定
-    setDoc(doc(db, "user", `${user.uid}`), {
-      name: user.displayName,
-      uid: user.uid,
-      icon: user.photoURL,
-      email: user.email,
-      myRoomList: [],
-    });
+    user
+      ? console.log("登録済み")
+      : setDoc(doc(db, "user", `${user.uid}`), {
+          name: user.displayName,
+          uid: user.uid,
+          icon: user.photoURL,
+          email: user.email,
+          myRoomList: [],
+        });
+    // console.log("登録しました");
   }, []);
   return (
     // pagesフォルダにあるpageファイルはなるべくPageをファイル名につけたい

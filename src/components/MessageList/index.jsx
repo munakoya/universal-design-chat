@@ -21,6 +21,7 @@ function MessageList({ roomId }) {
         <div className="message-list-container" ref={containerRef}>
             <ul className="message-list">
                 {/* messagesは多分ルーム内の全メッセージデータ → useMessagesで取得 */}
+                {console.log(messages)}
                 {messages.map((x) => (
                     // メッセージcomponentにプロパティをpropsで渡す
                     // この下にMessageの関数コンポーネントあります
