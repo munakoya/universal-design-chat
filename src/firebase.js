@@ -80,6 +80,7 @@ async function sendMessage(roomId, user, text) {
       displayName: user.displayName,
       text: text.trim(),
       timestamp: serverTimestamp(),
+      messageId: uuidv4(),
     });
   } catch (error) {
     console.error(error);
