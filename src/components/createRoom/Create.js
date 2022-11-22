@@ -71,7 +71,7 @@ function Create() {
       quiz: [
         {
           question: question1,
-          answer: answer2,
+          answer: answer1,
         },
         {
           question: question2,
@@ -103,7 +103,7 @@ function Create() {
     setDescription("");
     setIcon("");
     setQuestion1("");
-    setAnswer2("");
+    setAnswer1("");
     setQuestion2("");
     setAnswer2("");
     setQuestion3("");
