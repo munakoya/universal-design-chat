@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { chatRooms } from '../../data/chatRooms';
 import './styles.css';
 import { useState,useEffect } from 'react';
-import { collection, query, onSnapshot ,doc} from 'firebase/firestore';
+import { collection, query, onSnapshot ,doc, getDoc} from 'firebase/firestore';
 import db from '../../firebase';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -10,7 +10,8 @@ function Landing() {
     const [rooms, setRooms] = useState([]);
     const [docId, setDocId] = useState([]);
     const [myRooms, setMyRooms] = useState([])
-    const user = useAuth();
+    const { user } = useAuth();
+    const [selectUser, setSelectUser] = useState([]);
      // マウント時に一回だけ読み込み → room-listの中身全部持ってこれる
   useEffect(() => {
     const allroomsData = collection(db, "all-room-list");
@@ -20,12 +21,22 @@ function Landing() {
     });
     // ドキュメントidを取得するため
     // const roomsData = collection(db, "room-list"); ここで特定のユーザー取得したい
-    const roomsData = collection(db, "user");
-    const qq = query(roomsData);
-      onSnapshot(qq, (querySnapshots) => {
-        setDocId(querySnapshots.docs.map((doc) => doc.data()));
-    });
-  }, []);
+    // const roomsData = collection(db, "user");
+    // const qq = query(roomsData);
+    //   onSnapshot(qq, (querySnapshots) => {
+    //     setDocId(querySnapshots.docs.map((doc) => doc.data()));
+    // });
+      getUser();
+}, []);
+async function getUser() {
+    const selectUser = doc(db, "user", `${user.uid}`);
+    const selectUserSnap = await getDoc(selectUser);
+    if (selectUserSnap.exists()) {
+        setSelectUser(selectUserSnap.data())
+    } else {
+            console.log("(泣)")
+        }
+    }
     return (
         <>
             <div className='landing'>
@@ -38,8 +49,10 @@ function Landing() {
                         {/* <Link to={`/room/${room.id}`}>{room.title}</Link>
                     </li>
                 ))} */}
-                    {docId.map((userInfo) => (
-                        userInfo.myRoomList.map((myRoom, index) => {
+                    {/* ↓これは一番最初に取得したuserのmyRoomList表示 */}
+                    {/* {docId.map((userInfo) => (
+                        console.log(`user.uid : ${user.uid} || docId : ${userInfo.uid}`),
+                        (user.uid === userInfo.uid ?userInfo.myRoomList.map((myRoom, index) => {
                             // returnで返したら出力されました
                             return (
                                 <div>
@@ -49,8 +62,18 @@ function Landing() {
                                 </div>
                             )
                             
-                        })
-                    ))}
+                        }) : console.log("失敗"))
+                    ))} */}
+                    
+                    {selectUser?.myRoomList?.map((myRoom, index) => {
+                        return (
+                            <div>
+                                <li key={myRoom}>
+                                    <Link to={`/room/${myRoom}/chat-room`}>{myRoom}</Link>
+                                </li>
+                            </div>
+                        );
+                    })}
             </ul>
 
             </div>
