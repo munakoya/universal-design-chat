@@ -1,15 +1,17 @@
 import React from "react";
+import { ChatRoom } from "../components/chatRoomPage";
 import { MyRoomList } from "../components/roomListPage/MyRoomList";
 import Sidebar from "../components/sidebar/Sidebar";
-import Chat from "../components/chatRoomPage/Chat";
-function ChatRoomPage() {
+
+// これは使わないかもです
+function RoomChatPage() {
   return (
     <div className="app">
       <Sidebar />
       <MyRoomList />
-      <Chat />
+      <ChatRoom />
     </div>
   );
 }
 
-export default ChatRoomPage;
+export default RoomChatPage;

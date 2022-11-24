@@ -1,13 +1,13 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import Score from "../components/scorePage/Score";
-function ScorePage() {
+import Create from "../components/createRoomPage/Create";
+function CreateRoomPage() {
   return (
     <div className="app">
       <Sidebar />
-      <Score />
+      <Create />
     </div>
   );
 }
 
-export default ScorePage;
+export default CreateRoomPage;
