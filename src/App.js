@@ -1,6 +1,6 @@
 import "./App.css";
-import { AuthenticatedApp } from "./components/AuthenticatedApp";
-import { UnauthenticatedApp } from "./components/UnauthenticatedApp";
+import { AuthenticatedApp } from "./components/authenticatedApp/AuthenticatedApp";
+import { UnauthenticatedApp } from "./components/unauthenticatedApp/UnauthenticatedApp";
 import { useAuth } from "./hooks/useAuth";
 
 function App() {

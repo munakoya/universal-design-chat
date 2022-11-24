@@ -1,13 +1,13 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import Score from "../components/scorePage/Score";
-function ScorePage() {
+import Quiz from "../components/roomQuizPage/Quiz";
+function RoomQuizPage() {
   return (
     <div className="app">
       <Sidebar />
-      <Score />
+      <Quiz />
     </div>
   );
 }
 
-export default ScorePage;
+export default RoomQuizPage;

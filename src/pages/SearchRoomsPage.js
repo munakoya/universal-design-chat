@@ -1,13 +1,13 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
-import Score from "../components/scorePage/Score";
-function ScorePage() {
+import RoomList from "../components/serchRoomsPage/RoomList";
+function SerchRoomsPage() {
   return (
     <div className="app">
       <Sidebar />
-      <Score />
+      <RoomList />
     </div>
   );
 }
 
-export default ScorePage;
+export default SerchRoomsPage;
