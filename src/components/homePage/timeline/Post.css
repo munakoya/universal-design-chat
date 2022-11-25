@@ -1,4 +1,6 @@
-/* 横並び */
+/* 
+Post.jsのcss
+*/
 .post{
     /* 横並び */
     display: flex;
