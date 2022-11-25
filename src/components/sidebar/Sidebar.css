@@ -1,3 +1,6 @@
+/* 
+Sidebar.jsのcss
+*/
 .sidebar{
     border-right: 1px solid var(--udc-background);
     /* 画面の20%って意味 → flex: 0.2 */
@@ -7,18 +10,18 @@
     margin-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    /* 固定 */
     height: 100%;
     position: sticky;
 
 }
 /* マテリアルUIはcssが優先されずに適用されない時がある → !important */
-.sidebar_udcIcon{
+/* .sidebar_udcIcon{
     color: var(--udc-color);
-    /* fontsize反応しないときは !importtant;をつけてあげる → materialUiより優先*/
     font-size: 30px !important;
     margin-left: 20px;
     margin-bottom: 20px;
-}
+} */
 .sidebar_udc_icon{
     margin-left: 20px;
     margin-bottom: 20px;

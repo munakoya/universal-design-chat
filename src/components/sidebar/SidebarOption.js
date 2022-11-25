@@ -1,6 +1,14 @@
+/**
+Sidebarの個々の要素のコンポーネント
+→ SidebarOption
+
+TODO
+・propsで渡されるactive → 自分が今いるページのときにactiveを渡したい
+現状 : ホームをクリック → propsでactiveが引き渡される → sidebarOption--activeになる
+ */
 import React from "react";
 import "./SidebarOption.css";
-// {でpropsを受け取る}
+
 function SidebarOption({ text, Icon, active }) {
   return (
     // && 左が存在するならば右 → cssの指定

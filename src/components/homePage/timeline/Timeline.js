@@ -1,23 +1,23 @@
+/*
+タイムラインのコンポーネント
+PostとTweetBoxコンポーネントを組み合わせてタイムライン画面を作成
+
+*/
+
 import React, { useEffect, useState } from "react";
-// cssの読み込み
-import "./Timeline.css";
-import TweetBox from "./TweetBox";
-import "./Post.js";
-import Post from "./Post.js";
-// import dbでfirestoreを持ってくる
-import db from "../../../firebase";
-// dbでのデータ取得に使うライブラリ、関数のimport
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
-// なめらかに動くライブラリ
-import FlipMove from "react-flip-move";
+import FlipMove from "react-flip-move"; // なめらかに動くライブラリ
+import db from "../../../firebase";
+import TweetBox from "./TweetBox";
+import Post from "./Post.js";
+import "./Timeline.css";
 
 function Timeline() {
-  // useState → データを保持 postsという変数に保持 setPosts()関数でset
   const [posts, setPosts] = useState([]);
 
   // マウント時に一回だけ読み込み
   useEffect(() => {
-    // collectionで取得したコレクションを指定する
+    // firebaseのコレクションを指定
     const postData = collection(db, "posts");
     // 時系列に並び替える → データの並べ替え ドキュメントで検索
     // 最新の投稿順にしたデータq
@@ -25,11 +25,10 @@ function Timeline() {
     // リアルタイムでデータを取得 → ドキュメント参照
     // onSnapshotの第一引数に qをいれる 、第2引数で取り出す(名前はなんでもおk)
     onSnapshot(q, (querySnapshots) => {
-      // setPost関数でpostsにデータをセット
       // リアルタイムにデータ取得
       setPosts(querySnapshots.docs.map((doc) => doc.data()));
     });
-  }, []); // 配列からにする → 発火するタイミング → 空だとマウント時一回
+  }, []);
 
   return (
     <div className="timeline">

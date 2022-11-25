@@ -28,6 +28,7 @@ function Sidebar() {
           <SidebarOption text="ホーム" Icon={HomeIcon} active />
         </Link>
         <Link to="/rooms">
+          {/* TODO icon変更 */}
           <SidebarOption text="ルーム" Icon={MailOutlineIcon} />
         </Link>
         <Link to="/search-rooms">
