@@ -17,7 +17,7 @@
     /* 丸み */
     border-radius: 30px;
     /* hover時の文字の色変更 */
-    color: var(--twitter-color);
+    color: var(--udc-color);
 }
 
 /* materialUiの要素にcssを与えられる書き方 */
@@ -33,5 +33,5 @@
 }
 
 .sidebarOption--active{
-    color: var(--twitter-color);
+    color: var(--udc-color);
 }

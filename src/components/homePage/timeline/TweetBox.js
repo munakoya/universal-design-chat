@@ -30,6 +30,8 @@ function TweetBox() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // 空送信できないように変更
+    if (tweetMessage === "" && tweetImage === "") return;
     sendTweet(tweetMessage, tweetImage, user);
     setTweetMessage("");
     setTweetImage("");
@@ -61,7 +63,7 @@ function TweetBox() {
         {/* ツイートボタン */}
         {/* Button タグ → onClickとセット → htmlの要素にclassNameをつけてcss当てられるように */}
         <Button className="tweetBox_tweetButton" type="submit">
-          ツイートする
+          投稿する
         </Button>
       </form>
     </div>

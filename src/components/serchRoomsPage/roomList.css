@@ -17,5 +17,5 @@
 
 .landing {
     flex: 0.2;
-    border-right: 1px solid var(--twitter-background);
+    border-right: 1px solid var(--udc-background);
 }

@@ -20,7 +20,7 @@
         background-color: white;
         /* headerは一番上に来てほしいので100を当てる */
         z-index: 100;
-        border: 1px solid var(--twitter-background);
+        border: 1px solid var(--udc-background);
         padding: 5px, 20px;
 }
 

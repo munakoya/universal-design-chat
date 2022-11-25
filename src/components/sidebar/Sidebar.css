@@ -1,5 +1,5 @@
 .sidebar{
-    border-right: 1px solid var(--twitter-background);
+    border-right: 1px solid var(--udc-background);
     /* 画面の20%って意味 → flex: 0.2 */
     flex: 0.2;
     /* 最低でも最小の横幅 */
@@ -12,16 +12,23 @@
 
 }
 /* マテリアルUIはcssが優先されずに適用されない時がある → !important */
-.sidebar_twitterIcon{
-    color: var(--twitter-color);
+.sidebar_udcIcon{
+    color: var(--udc-color);
     /* fontsize反応しないときは !importtant;をつけてあげる → materialUiより優先*/
     font-size: 30px !important;
     margin-left: 20px;
     margin-bottom: 20px;
 }
+.sidebar_udc_icon{
+    margin-left: 20px;
+    margin-bottom: 20px;
+    max-width: 30%;
+    height:auto;
+    background-color: white;
+}
 .sidebar_tweet{
     /* 背景 */
-    background-color: var(--twitter-color) !important;
+    background-color: var(--udc-color) !important;
     /* 文字の色 */
     color: white !important;
     /* 太字 */

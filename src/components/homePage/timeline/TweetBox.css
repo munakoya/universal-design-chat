@@ -1,6 +1,6 @@
 .tweetBox{
     padding-bottom: 10px;
-    border-bottom: 8px solid var(--twitter-background);
+    border-bottom: 8px solid var(--udc-background);
     padding-right: 10px;
 }
 
@@ -35,7 +35,7 @@
 .tweetBox_tweetButton{
     /* materialUiの要素には!importantつける */
     /* materialUiには基本的にimportantつけた上げたほうが確実にcss反映されるかな？ */
-    background-color: var(--twitter-color) !important;
+    background-color: var(--udc-color) !important;
     color: white !important;
     font-weight: 900 !important;
     width: 130px !important;

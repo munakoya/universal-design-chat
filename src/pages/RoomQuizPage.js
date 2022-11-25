@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Quiz from "../components/roomQuizPage/Quiz";
+import "../App.css";
 function RoomQuizPage() {
   return (
     <div className="app">

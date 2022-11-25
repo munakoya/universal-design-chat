@@ -4,7 +4,7 @@
     display: flex;
     /* 縦方向に中央 */
     align-items: flex-start;
-    border-bottom: 1px solid var(--twitter-background);
+    border-bottom: 1px solid var(--udc-background);
 
 }
 .post_body{
@@ -41,7 +41,7 @@ p{
 
 .post_badge{
     font-size: 14px !important;
-    color: var(--twitter-color);
+    color: var(--udc-color);
 }
 
 .post_headerSpecial{
