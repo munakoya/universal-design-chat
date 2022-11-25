@@ -1,6 +1,5 @@
 /*
-投稿されたツイートを表示するコンポーネント
-
+投稿されたツイートのコンポーネント
 */
 import React, { forwardRef } from "react";
 import {
@@ -19,23 +18,19 @@ const Post = forwardRef(
   // propsとref → fowardRefの()で最後閉じる
   ({ displayName, username, verified, text, image, avatar }, ref) => {
     return (
-      // Timeline.jsからのpropsを使って(dbから取得したデータ) post内容を表示
-      //   タイムラインの投稿部分
       // 大枠のdivにもrefをつけること
       <div className="post" ref={ref}>
         <div className="post_avatar">
-          {/* アバターの作成 srcに画像を入れてあげる */}
           <Avatar src={avatar} />
         </div>
         <div className="post_body">
           <div className="post_header">
             <div className="post_headerText">
-              {/* のちのちpropsでやります */}
+              {/* ユーザーネーム */}
               <h3>
-                {/* jsx記法で受け取った引数を表示 */}
                 {displayName}
                 <span className="post_headerSpecial">
-                  {/* マテリアルUIっすね バッジマーク 、、、いらん */}
+                  {/* バッジ */}
                   <VerifiedUser className="post_badge" />@{username}
                 </span>
               </h3>
@@ -46,7 +41,7 @@ const Post = forwardRef(
             </div>
           </div>
           {/* ランダムで画像を取ってくる */}
-          <img src={image} />
+          <img src={image} alt="" />
           {/* footer → 実装しなくてもいいかなと */}
           <div className="post_footer">
             <ChatBubbleOutline fontSize="small" />

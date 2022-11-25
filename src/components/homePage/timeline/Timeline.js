@@ -1,7 +1,6 @@
 /*
 タイムラインのコンポーネント
 PostとTweetBoxコンポーネントを組み合わせてタイムライン画面を作成
-
 */
 
 import React, { useEffect, useState } from "react";
@@ -32,18 +31,13 @@ function Timeline() {
 
   return (
     <div className="timeline">
-      {/* Header */}
       <div className="timeline_header">
         <h2>ホーム</h2>
       </div>
-
-      {/* TweetBox */}
       <TweetBox />
-
-      {/* postsに入ったデータを1つずつmap関数で取り出す */}
-      {/* dbのコレクションから取ってきたデータ  → postsを一個ずつ中身を見る → propsでPost.jsに値を渡す */}
       {/* FlipMoveで囲む + 関数コンポーネントで使うなら → fowardRefで囲んで,,,ドキュメントみて → post.jsにある */}
       <FlipMove>
+        {/* マウント時にpostsにdb/posts内のデータがセットされる */}
         {posts.map((post) => (
           <Post
             // 固有のID(uid)を本当は入れたい → 動くけどwarning

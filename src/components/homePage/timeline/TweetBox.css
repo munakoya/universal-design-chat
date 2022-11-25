@@ -1,3 +1,7 @@
+/*
+tweetBox.jsのcss
+
+*/
 .tweetBox{
     padding-bottom: 10px;
     border-bottom: 8px solid var(--udc-background);
@@ -8,7 +12,7 @@
 .tweetBox > form{
     /* 横並び */
     display: flex; 
-    /* columnにすることで行にできる 多分displayのflexはmainAxisAlignment的な感じかと */
+    /* 縦並びに変更 */
     flex-direction: column;
 }
 
@@ -33,8 +37,7 @@
 }
 
 .tweetBox_tweetButton{
-    /* materialUiの要素には!importantつける */
-    /* materialUiには基本的にimportantつけた上げたほうが確実にcss反映されるかな？ */
+    /* materialUiの要素にcssが反応しないときは、!importantつける */
     background-color: var(--udc-color) !important;
     color: white !important;
     font-weight: 900 !important;
