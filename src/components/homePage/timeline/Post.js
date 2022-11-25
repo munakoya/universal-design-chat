@@ -1,4 +1,8 @@
-// material Icon
+/*
+投稿されたツイートを表示するコンポーネント
+
+*/
+import React, { forwardRef } from "react";
 import {
   ChatBubbleOutline,
   FavoriteBorder,
@@ -7,11 +11,9 @@ import {
   VerifiedUser,
 } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
-import React, { forwardRef } from "react";
 import "./Post.css";
 
-// コンストラクタを用意
-// なめらかに動かす 47
+// なめらかに動かす(udemy 47)
 const Post = forwardRef(
   // propsで受け取る変数 → Timeline.jsでuseState使ってfirebaseから値を取得 ex) post.displayName
   // propsとref → fowardRefの()で最後閉じる
