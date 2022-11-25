@@ -12,7 +12,7 @@
     /* 子要素がすべてflexItemになる */
     display: flex;
     align-items: center;
-    background-color: var(--twitter-background);
+    background-color: var(--udc-background);
     padding: 10px;
     border-radius: 20px;
     margin-top: 10px;
@@ -21,7 +21,7 @@
 
 .widgets_input > input{
     border: none;
-    background-color: var(--twitter-background);
+    background-color: var(--udc-background);
 }
 .widgets_searchIcon{
     color: gray;

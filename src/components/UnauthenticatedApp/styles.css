@@ -2,3 +2,10 @@
     background: var(--color-blue);
     padding: 16px;
 }
+
+.unAuthenticated{
+    /* flexBox → 縦並び、中央揃え */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

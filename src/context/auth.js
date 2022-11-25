@@ -15,7 +15,7 @@ const AuthProvider = (props) => {
     if (!user) {
       // TODO: Handle failed login
     }
-
+    // googleアカウントのユーザー情報をuserにセット
     setUser(user);
   };
 

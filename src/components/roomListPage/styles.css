@@ -1,7 +1,14 @@
-.chat-room-list {
-    /* display: flex; */
+.landing {
+    display: flex;
+    flex-direction: column;
     /* flex-wrap: wrap; */
     gap: 4px;
+    /* スクロール → chromeのみに適用される */
+        overflow-y: scroll;
+        min-width: 200px;
+}
+.landing::-webkit-scrollbar {
+    display: none;
 }
 
 .chat-room-list li {
@@ -16,5 +23,5 @@
 }
 .landing{
     flex: 0.2;
-    border-right: 1px solid var(--twitter-background);
+    border-right: 1px solid var(--udc-background);
 }

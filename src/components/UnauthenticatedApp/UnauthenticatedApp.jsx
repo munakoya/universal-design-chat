@@ -7,7 +7,7 @@ function UnauthenticatedApp() {
     const { login } = useAuth();
 
     return (
-        <>
+        <div className='unAuthenticated'>
             <h1>Universal Design Chat</h1>
             <h2>Log in to join a UDC!</h2>
             <div>
@@ -15,7 +15,7 @@ function UnauthenticatedApp() {
                     Login with Google
                 </button>
             </div>
-        </>
+        </div>
     );
 }
 
