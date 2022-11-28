@@ -1,21 +1,22 @@
 .chat {
-    flex: 0.7;
+    flex: 0.6;
     border-right: 1px solid var(--udc-background);
     border-left: 1px solid var(--udc-background);
     /* スクロール → chromeのみに適用される */
     overflow-y: scroll;
+    /* x軸方向の動きをなくす？ */
+    overflow-x: hidden;
     /* スクロールバーを消す */
     min-width: 300px;
     /* flex: none; */
 }
 
-.messages-container {
+.messages_container {
     width: 100%;
     padding: 16px;
     flex-grow: 1;
     border: 1px solid var(--color-gray);
     border-radius: var(--border-radius);
-    /* overflow: hidden; */
     flex-direction: row;
     flex: none;
 }
@@ -25,7 +26,7 @@
 }
 
 /* headerのcss */
-.chat-header {
+.chat_header {
     /* 固定 → stickyで固定*/
     position: sticky;
     top: 0;

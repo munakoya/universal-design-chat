@@ -1,4 +1,4 @@
-.landing {
+.myRoomList {
     display: flex;
     flex-direction: column;
     /* flex-wrap: wrap; */
@@ -6,8 +6,10 @@
     /* スクロール → chromeのみに適用される */
         overflow-y: scroll;
         min-width: 200px;
+
+    flex: 0.2;
 }
-.landing::-webkit-scrollbar {
+.myRoomList::-webkit-scrollbar {
     display: none;
 }
 
@@ -21,7 +23,7 @@
     justify-content: center;
     align-items: center;
 }
-.landing{
+.myRoomList{
     flex: 0.2;
     border-right: 1px solid var(--udc-background);
 }

@@ -1,3 +1,8 @@
+/*
+RoomListPage.js
+→ 自分の保持しているルーム 
+*/
+
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import { MyRoomList } from "../components/roomListPage/MyRoomList";

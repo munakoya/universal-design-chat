@@ -1,21 +1,23 @@
-.message-list-container {
-    margin-bottom: 16px;
-    /* flex: 0.6; */
-    overflow: scroll;
+/* 
+ChatMessageListのcss
 
+*/
+.message_list_container {
+    margin-bottom: 16px;
+    /* overflow: scroll; */
     /* スクロール → chromeのみに適用される */
-        overflow-y: scroll;
-        /* スクロールバーを消す */
-        min-width: 300px;
-        flex: none;
+    overflow-y: scroll;
+    min-width: 250px;
+    width: 100%;
     position: sticky;
     bottom: 0;
+        overflow-x: hidden;
 }
-.message-list-container::-webkit-scrollbar {
+.message_list_container::-webkit-scrollbar {
     display: none;
 }
 
-.message-list {
+.message_list {
     height: 100%;
 
     display: flex;
@@ -29,12 +31,15 @@
     background: var(--color-gray);
     border-radius: var(--border-radius);
     text-align: left;
+    /* list-style:noneと同じ */
+    display: block;
 }
 
-.own-message {
+.own_message {
     background: var(--color-blue);
     align-self: flex-end;
     text-align: right;
+    display: block;
 }
 
 .sender {

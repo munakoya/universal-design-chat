@@ -5,8 +5,6 @@ import HomePage from '../../pages/HomePage';
 import InquiryPage from "../../pages/InquiryPage";
 import ProfilePage from "../../pages/ProfilePage";
 import RoomListPage from '../../pages/RoomListPage';
-import RoomChatPage from '../../pages/RoomChatPage';
-
 import SerchRoomsPage from '../../pages/SearchRoomsPage';
 import RoomQuizPage from '../../pages/RoomQuizPage';
 import CreateRoomPage from '../../pages/CreateRoomPage';
@@ -22,8 +20,6 @@ function AuthenticatedApp() {
                 <Route path="/inquiry" element={<InquiryPage />} />
                 <Route path="/mypage" element={<ProfilePage />} />
                 <Route path="/rooms" element={<RoomListPage />} />
-                {/* 使ってないと思って消したら、チャット内のcss崩れました */}
-                <Route path="/room/:id" element={<RoomChatPage />} />
 
                 <Route path="/search-rooms" element={<SerchRoomsPage />} />
                 <Route path="/search-rooms/:id/quiz" element={<RoomQuizPage />} />
