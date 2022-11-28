@@ -34,12 +34,22 @@ ChatMessageListのcss
     /* list-style:noneと同じ */
     display: block;
 }
+.message_avatar{
+    float: left;
+    margin-top: 25px;
+    margin-right: 10px;
+}
 
 .own_message {
     background: var(--color-blue);
     align-self: flex-end;
     text-align: right;
     display: block;
+}
+.own_message_avatar{
+    float: right;
+    margin-top: 25px;
+    margin-left: 10px;
 }
 
 .sender {
