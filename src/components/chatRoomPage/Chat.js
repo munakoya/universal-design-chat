@@ -1,6 +1,16 @@
-import { Link, useParams } from "react-router-dom";
-import "./chat.css";
-import React, { useEffect } from "react";
+/*
+MyRoomListで選択されたルームのチャット画面を表示する
+→ urlのルーム名で遷移
+TODO
+ルームのidをurlから取得って微妙かも
+→ 入室処理していないルームもidをurlに入力すれば入室できてしまう。urlから取得が良くないかも
+ワンちゃんセキュリティルールの設定でアクセス不可にすれば所属ルームしか取得できないかも
+
+画面いっぱいに表示させたいけど、多分右側が切れてる
+→ overflow-x : hiddenにするとx軸方向は固定されるけど、その分右側が見切れている
+*/
+
+import React, { useEffect, useState } from "react";
 import {
   collection,
   orderBy,
@@ -10,10 +20,11 @@ import {
   doc,
 } from "firebase/firestore";
 import db from "../../firebase";
-import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import { Link, useParams } from "react-router-dom";
 import ChatMessageList from "./MessageList/ChatMessageList";
 import ChatMessageInput from "./MessageInput/ChatMessageInput";
+import "./chat.css";
 
 function Chat() {
   // ルームの選択 → room/room.idが指定でidごとのルームにルーティング
@@ -22,7 +33,6 @@ function Chat() {
 
   // 編集
   const [rooms, setRooms] = useState([]);
-  // const [docId, setDocId] = useState([]);
   const [room, setRoom] = useState([]);
   const { user } = useAuth();
   const userInfo = doc(db, "user", `${user.uid}`);
@@ -36,6 +46,7 @@ function Chat() {
     });
   }, []);
 
+  // すべてのルームデータから選択されたルームデータを取得する → roomに入る
   function getRoom() {
     const roomList = collection(db, "room-list");
     const q = query(roomList, orderBy("createdAt", "desc"));
@@ -50,19 +61,17 @@ function Chat() {
   const selectRoom = getRoom();
 
   return (
-    <>
+    <div className="chat">
       {console.log("url内のid : ", params.id)}
-      <div className="chat">
-        <h2 className="chat-header">{selectRoom?.title}</h2>
-        <Link to="/rooms">⬅️ Back to all rooms</Link>
+      <h2 className="chat_header">{selectRoom?.title}</h2>
+      <Link to="/rooms">⬅️ Back to all rooms</Link>
 
-        <div className="messages-container">
-          {/* そもそもちゃんとpropsを渡せてない */}
-          <ChatMessageList roomId={params.id} />
-          <ChatMessageInput roomId={params.id} />
-        </div>
+      <div className="messages_container">
+        {/* そもそもちゃんとpropsを渡せてない → urlで渡したくないならpropsだけど渡せない */}
+        <ChatMessageList roomId={params.id} />
+        <ChatMessageInput roomId={params.id} />
       </div>
-    </>
+    </div>
   );
 }
 

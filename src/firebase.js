@@ -101,10 +101,6 @@ function getMessages(roomId, callback) {
         ...x.data(),
       }));
 
-      //   なんの関数か不明
-      // callbackの引数 → 最初のクエリと、更新後のクエリを受信したときに呼び出される
-      // callbackで、、各ドキュメントをマッピングしてメッセージの配列を作成 → フォーマットされたメッセを使用して呼び出す?
-      // わからん
       callback(messages);
     }
   );

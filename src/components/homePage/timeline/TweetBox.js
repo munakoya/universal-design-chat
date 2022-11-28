@@ -1,6 +1,9 @@
 /*
 ツイートボックスのコンポーネント
 文字列と画像urlを入力 → 投稿ボタンをクリックすると、sendTweet関数が実行されてdbに登録される
+
+TODO
+tweetを複数行入力できるようにする
 */
 
 import React, { useState } from "react";
