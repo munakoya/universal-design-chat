@@ -76,6 +76,7 @@ async function sendMessage(roomId, user, text) {
       // userはuseAuthで取得したログインユーザー情報を使用していると思われ
       uid: user.uid,
       displayName: user.displayName,
+      avatar: user.photoURL,
       text: text.trim(),
       timestamp: serverTimestamp(),
       messageId: uuidv4(),

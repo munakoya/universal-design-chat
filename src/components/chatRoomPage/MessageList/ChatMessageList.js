@@ -11,6 +11,8 @@ import React from "react";
 import { useAuth } from "../../../hooks/useAuth";
 import { useMessages } from "../../../hooks/useMessages";
 import { useParams } from "react-router-dom";
+import { Avatar } from "@mui/material";
+
 import "./chatMessageList.css";
 
 // roomIdが取得できない問題 propsをやめるかあ
@@ -41,11 +43,19 @@ function ChatMessageList({ roomId }) {
 }
 // あんまし何やってるかわからん
 function Message({ message, isOwnMessage }) {
-  // messagesの要素を入れてる？
-  const { displayName, text } = message;
+  // messagesの要素を入れてる？ → iconも一緒に送ればいい
+  const { displayName, text, avatar } = message;
 
   return (
     <li className={["message", isOwnMessage && "own_message"].join(" ")}>
+      <div
+        className={[
+          "message_avatar",
+          isOwnMessage && "own_message_avatar",
+        ].join(" ")}
+      >
+        <Avatar src={avatar} />
+      </div>
       <h4 className="sender">{isOwnMessage ? displayName : displayName}</h4>
       <div>{text}</div>
     </li>
