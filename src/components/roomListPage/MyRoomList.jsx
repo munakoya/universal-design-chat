@@ -30,7 +30,7 @@ async function getUser() {
     
 return (
     <div className='myRoomList'>
-        <h2>マイルーム一覧</h2>
+        <h2 className='myRoomList_header'>マイルーム一覧</h2>
         <ul className="chat-room-list">
                 {selectUser?.myRoomList?.map((myRoom) => {
                     return (

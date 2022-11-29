@@ -1,29 +1,49 @@
 .myRoomList {
     display: flex;
     flex-direction: column;
-    /* flex-wrap: wrap; */
-    gap: 4px;
-    /* スクロール → chromeのみに適用される */
-        overflow-y: scroll;
-        min-width: 200px;
-
+    overflow-y: scroll;
+    min-width: 200px;
     flex: 0.2;
+    border-right: 1px solid var(--udc-background);
 }
 .myRoomList::-webkit-scrollbar {
     display: none;
 }
 
 .chat-room-list li {
-    height: 100px;
-    background: var(--color-gray);
+    /* height: 100px; */
+    /* background: var(--color-gray);
     flex: 1 1 calc(50% - 4px);
     border-radius: var(--border-radius);
 
     display: flex;
     justify-content: center;
+    align-items: center; */
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: var(--color-gray);
+    flex: 1 1 calc(50% - 4px);
+
+    display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--udc-background);
+    border-radius: 20px;
+    width: 100%;
+    justify-content: center;
 }
-.myRoomList{
-    flex: 0.2;
-    border-right: 1px solid var(--udc-background);
+
+.myRoomList_header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid var(--udc-background);
+    /* border: 1px solid var(--udc-background); */
+    padding: 10px 20px;
+    margin-top: 0;
+    font-size: 20px;
+    font-weight: 800;
+}
+ul {
+    padding: 0;
 }
