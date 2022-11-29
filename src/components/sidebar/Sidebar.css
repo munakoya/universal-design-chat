@@ -13,7 +13,6 @@ Sidebar.jsのcss
     /* 固定 */
     height: 100%;
     position: sticky;
-
 }
 /* マテリアルUIはcssが優先されずに適用されない時がある → !important */
 /* .sidebar_udcIcon{

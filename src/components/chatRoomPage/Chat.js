@@ -8,6 +8,8 @@ TODO
 
 画面いっぱいに表示させたいけど、多分右側が切れてる
 → overflow-x : hiddenにするとx軸方向は固定されるけど、その分右側が見切れている
+
+urlはそのままでセキュリティルールを編集して登録済みのルームのみアクセス可能にする
 */
 
 import React, { useEffect, useState } from "react";

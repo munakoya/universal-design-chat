@@ -1,21 +1,42 @@
-.chat-room-list {
-    /* display: flex; */
-    /* flex-wrap: wrap; */
-    gap: 4px;
-}
-
-.chat-room-list li {
-    height: 100px;
-    background: var(--color-gray);
-    flex: 1 1 calc(50% - 4px);
-    border-radius: var(--border-radius);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.landing {
+.roomList {
+    /* 画面の20% */
     flex: 0.2;
     border-right: 1px solid var(--udc-background);
+    min-width: 200px;
+    overflow-y: scroll;
+}
+.roomList::-webkit-scrollbar{
+    display: none;
+}
+
+.roomList li {
+    /* height: 100px; */
+    padding-top: 25px;
+    padding-bottom: 25px;
+    background: var(--color-gray);
+    flex: 1 1 calc(50% - 4px);
+
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--udc-background);
+    border-radius: 20px;
+    width: 100%;
+    justify-content: center;
+}
+.roomList_header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid var(--udc-background);
+    /* border: 1px solid var(--udc-background); */
+    padding: 10px 20px;
+    margin-top: 0;
+}
+ul{
+    padding: 0;
+}
+.roomList_header > h2{
+    font-size: 20px;
+    font-weight: 800;
 }

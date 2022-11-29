@@ -10,9 +10,9 @@ import React from "react";
 import SidebarOption from "./SidebarOption";
 import HomeIcon from "@mui/icons-material/Home";
 import SearchIcon from "@mui/icons-material/Search";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import ChatIcon from "@mui/icons-material/Chat";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import udc_icon from "../../img/UDC_icon.png";
@@ -25,11 +25,11 @@ function Sidebar() {
       {/* サイドバーオプション */}
       <nav>
         <Link to="/">
-          <SidebarOption text="ホーム" Icon={HomeIcon} active />
+          <SidebarOption text="ホーム" Icon={HomeIcon} />
         </Link>
         <Link to="/rooms">
           {/* TODO icon変更 */}
-          <SidebarOption text="ルーム" Icon={MailOutlineIcon} />
+          <SidebarOption text="ルーム" Icon={ChatIcon} />
         </Link>
         <Link to="/search-rooms">
           <SidebarOption text="ルーム検索" Icon={SearchIcon} />
