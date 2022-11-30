@@ -1,9 +1,15 @@
-.uiz_header{
-    display: flex;
-    flex-direction: column;
+.quizList_header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 100;
+    border-bottom: 1px solid var(--udc-background);
+    /* border: 1px solid var(--udc-background); */
+    padding: 10px 20px;
+    margin-top: 0;
     
 }
-.ansInput{
+.quizList_ansInput{
     display: flex;
     flex-direction: column;
 }
