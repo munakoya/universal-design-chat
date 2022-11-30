@@ -1,3 +1,7 @@
+/**
+ * お問い合わせページ
+ * 後回しにします
+ */
 import React from "react";
 import SendMail from "../components/inquiryPage/SendMail";
 import Sidebar from "../components/sidebar/Sidebar";

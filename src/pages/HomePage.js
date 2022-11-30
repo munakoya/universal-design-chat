@@ -33,7 +33,13 @@ export function HomePage() {
           uid: user.uid,
           icon: user.photoURL,
           email: user.email,
-          myRoomList: [],
+          myRoomList: ["test"],
+          myRoomScore: [
+            {
+              title: "test",
+              score: 5,
+            },
+          ],
         });
   }, []);
   return (

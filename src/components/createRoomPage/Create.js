@@ -1,3 +1,6 @@
+/**
+ * Createコンポーネント
+ */
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import {
@@ -6,6 +9,8 @@ import {
   doc,
   setDoc,
   addDoc,
+  query,
+  onSnapshot,
 } from "firebase/firestore";
 import db from "../../firebase";
 import { uuidv4 } from "@firebase/util";
@@ -47,17 +52,16 @@ function Create() {
   // const [question10, setQuestion10] = useState("");
   // const [answer10, setAnswer10] = useState("");
 
-  async function createRoom(e) {
-    e.preventDefault();
+  const [rooms, setRooms] = useState([]);
+  // 入力項目をdbに登録
+  async function createRoom() {
+    if (roomTitle === "") return;
+    console.log(`checkCount : ${checkCount} | 新規ルーム作成を行います`);
+    // e.preventDefault();
     let id = uuidv4();
-    // onAuthStateChanged(user, (user) => {
-    //   if (user) {
-    // firebaseに追加する → addDoc関数 引数にdbとその中のコレクション名
-    // コレクションさえ作れば、以下のプロパティのデータがドキュメントとして追加される
-    // setDoc(doc(db, "room-list", roomtitle))にするとidがroomTitleになるが重複した場合 → 上書きされる
+
+    // userのmyRoomListにも追加する
     await addDoc(collection(db, "room-list"), {
-      // addCollection
-      // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
       roomId: id,
       title: roomTitle,
       description: description,
@@ -112,6 +116,31 @@ function Create() {
     setAnswer4("");
     setQuestion5("");
     setAnswer5("");
+  }
+
+  let checkCount = 0;
+  function registerRoomCheck(e) {
+    // 初期化
+    checkCount = 0;
+    e.preventDefault();
+    const allroomsData = collection(db, "all-room-list");
+    const q = query(allroomsData);
+    onSnapshot(q, (querySnapshots) => {
+      setRooms(querySnapshots.docs.map((doc) => doc.data()));
+    });
+    for (let room of rooms) {
+      if (room.title === roomTitle) {
+        checkCount = 0;
+        console.log(`checkCount : ${checkCount} | 同じルーム名が存在します。`);
+        break;
+      } else {
+        checkCount = 1;
+        console.log(`check : ${checkCount}`);
+      }
+    }
+    checkCount === 1
+      ? createRoom()
+      : console.log(`checkCount : ${checkCount} | ルームを作成しません。`);
   }
 
   return (
@@ -215,7 +244,7 @@ function Create() {
           <Button
             className="createRoom-createButton"
             type="submit"
-            onClick={createRoom}
+            onClick={registerRoomCheck}
           >
             ルーム作成
           </Button>

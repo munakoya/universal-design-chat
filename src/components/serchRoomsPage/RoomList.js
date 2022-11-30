@@ -3,6 +3,9 @@
 → ユーザーが作成した、ルームを一覧で表示する
 
 TODO
+myRoomListにあるものは表示しない or クイズ画面に遷移しない
+
+TODO
 ・検索機能の実装
 */
 import React, { useEffect, useState } from "react";
@@ -28,11 +31,17 @@ function RoomList() {
         <h2 className="roomList_header">Room List</h2>
         <ul>
           {/* urlにtitleを埋め込んでルーム指定 → propsだとうまくいかない */}
-          {rooms.map((room) => (
-            <li key={room.roomId}>
-              <Link to={`/search-rooms/${room.title}/quiz`}>{room.title}</Link>
-            </li>
-          ))}
+          {rooms.map((room) =>
+            room.title !== "test" ? (
+              <li key={room.roomId}>
+                <Link to={`/search-rooms/${room.title}/quiz`}>
+                  {room.title}
+                </Link>
+              </li>
+            ) : (
+              console.log("testはスルー")
+            )
+          )}
         </ul>
         {/* ルーム作成機能を最下部に置くのはux的に良くない → サイドバーの最下部のボタンに新規ルーム作成ってしてもいいかも */}
         <p>

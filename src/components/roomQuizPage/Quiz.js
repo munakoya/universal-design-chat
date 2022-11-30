@@ -1,3 +1,12 @@
+/*
+Quizコンポーネント
+RoomList.js → 検索タブで選択されたルームのクイズ情報を出力する
+
+TODO
+クイズの形式を4択に変える
+クイズの出力の仕方
+ルーム選択 → 詳細画面 → 問題 と 解答(4 : 4)
+*/
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
@@ -9,19 +18,21 @@ import {
   doc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import db from "../../firebase";
 import { useState } from "react";
 import "./quiz.css";
 import { Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
+
 function Quiz() {
-  // ルームの選択 → room/room.idが指定でidごとのルームにルーティング
-  // useParamsでurl内のidを取得
+  // urlからroomIDを取得して、クイズ情報を読み込む → 本当は関数にしたい
   const params = useParams();
   const [rooms, setRooms] = useState([]);
-  // const [docId, setDocId] = useState([]);
   const [room, setRoom] = useState([]);
+  const [usersData, setUsersData] = useState([]);
+  const [userData, setUserData] = useState([]);
 
   const [ans1, setAns1] = useState("");
   const [ans2, setAns2] = useState("");
@@ -29,19 +40,26 @@ function Quiz() {
   const [ans4, setAns4] = useState("");
   const [ans5, setAns5] = useState("");
 
+  let score = 0;
+
   const { user } = useAuth();
   const userInfo = doc(db, "user", `${user.uid}`);
-
   useEffect(() => {
-    // ここで直接ドキュメントidを指定 → urlはテキストに戻してわかりやすk
+    // すべてのルームデータをroomsに → roomsから選択されたルームと一致するものをroomに
     const roomList = collection(db, "room-list");
     const q = query(roomList, orderBy("createdAt", "desc"));
     onSnapshot(q, (querySnapshots) => {
-      setRooms(querySnapshots.docs.map((doc) => doc.data())); // roomsにはすべてのルームのデータ
-      // setDocId(querySnapshots.docs.map((doc) => doc.id)); // すべてのルームのドキュメントID
+      setRooms(querySnapshots.docs.map((doc) => doc.data()));
+    });
+    // すべてのuserデータをusersに → usersから選択されたユーザーデータと一致するものをuserDataに
+    const userList = collection(db, "user");
+    const qq = query(userList);
+    onSnapshot(qq, (querySnapshots) => {
+      setUsersData(querySnapshots.docs.map((doc) => doc.data()));
     });
   }, []);
 
+  // roomsからurl内のroomId(params.id)と同じroomを取り出す
   function getRoom() {
     const roomList = collection(db, "room-list");
     const q = query(roomList, orderBy("createdAt", "desc"));
@@ -50,13 +68,63 @@ function Quiz() {
       // ここでurl内のid(ルーム名)とroom-listにあるルーム一覧データのtitleが同じものを取り出す → roomにセット
       setRoom(rooms.find((x) => x.title === params.id));
     });
-    // onSnapshot(q, (querySnapshots) => {
-    //   setRoom(rooms.find((x) => x.title === params.id));
-    // });
     return room;
   }
+
+  // ログイン中のuserデータを取得
+  function getUser() {
+    const userList = collection(db, "user");
+    const qq = query(userList);
+    getDocs(qq).then((querySnapshot) => {
+      setUserData(usersData.find((x) => x.uid === user.uid));
+    });
+    return userData;
+  }
+
+  // クイズ初回答時にmyRoomScoreを登録
+  function registerScore() {
+    updateDoc(userInfo, {
+      myRoomScore: arrayUnion({ title: selectRoom.title, score: score }),
+    });
+  }
+
+  //
+  function checkMyRoomScore() {
+    let checkCount = 0;
+    let index = 0;
+    // myRoomScoreをmapで一つ一つ調べる
+    for (let myScore of selectUser?.myRoomScore) {
+      // 以前不合格で再受験 → 合格
+      if (myScore.title === params.id) {
+        // 不合格の点数 かつ 今回合格
+        if (myScore.score <= 3 && score >= 4) {
+          // 更新(削除)
+          updateDoc(userInfo, {
+            myRoomScore: arrayRemove({
+              title: myScore.title,
+              score: myScore.score,
+            }),
+          });
+          // 更新(追加)
+          updateDoc(userInfo, {
+            myRoomScore: arrayUnion({ title: selectRoom.title, score: score }),
+          });
+        }
+        checkCount = 0;
+        break;
+      } else {
+        checkCount = 1;
+      }
+    }
+
+    // 初受験
+    checkCount === 1
+      ? registerScore()
+      : console.log(`check : ${checkCount} | 受験済み`);
+  }
+  // 採点処理
+
   async function quizScore() {
-    let score = 0;
     if (ans1 === selectRoom.quiz[0].answer) {
       score++;
     }
@@ -73,7 +141,13 @@ function Quiz() {
       score++;
     }
 
-    // scoreを登録したい
+    // 合否処理 → 画面遷移
+    // 合格の場合 → 得点出力 → room入室ボタンを出力
+    // 不合格 → 得点と再入試ボタン
+
+    // 初受験かどうか調べて、初 → score登録, 2回目以降 → 更新
+    checkMyRoomScore();
+    // 合否を判断 → 4点以上でmyRoomListに追加
     if (score >= 4) {
       await updateDoc(userInfo, {
         myRoomList: arrayUnion(selectRoom.title),
@@ -87,19 +161,16 @@ function Quiz() {
 
   // 上で特定したroomのデータをselectRoomに入れる
   const selectRoom = getRoom();
+  const selectUser = getUser();
   return (
     <div>
-      <Link to="/search-rooms">⬅️ Back to all rooms</Link>
-
       <div className="quizList">
-        {/* selectRoom? ~~~でエラー吐かずにアクセス可 */}
-        {<h2 className="quiz_header">{selectRoom?.title}</h2>}
-        {/* はてなをつけると出力できます */}
+        <h2 className="quizList_header">{selectRoom?.title}</h2>
+        <h3>問題</h3>
         {selectRoom?.quiz?.map((value, index) => {
-          // 構造的な問題でした
           return (
-            <div>
-              <p key={value.question}>
+            <div key={value.question} className="quizList_question">
+              <p>
                 {`Q.${index + 1} : `}
                 {value.question}
               </p>
@@ -107,8 +178,9 @@ function Quiz() {
           );
         })}
       </div>
+      <h3>解答</h3>
       {/* 本当はcreateでmap型配列にクイズを追加していってプロパティを名揃えたい */}
-      <div className="ansInput">
+      <div className="quizList_ansInput">
         <input
           value={ans1}
           placeholder="Q1"

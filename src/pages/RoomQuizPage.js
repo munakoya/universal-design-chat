@@ -1,3 +1,6 @@
+/**
+ * 選択したルームのクイズを出力する
+ */
 import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Quiz from "../components/roomQuizPage/Quiz";
