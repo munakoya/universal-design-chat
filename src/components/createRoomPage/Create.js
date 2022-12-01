@@ -1,5 +1,9 @@
 /**
  * Createコンポーネント
+ *
+ * TODO
+ * 一回目なぜかルーム作成できない
+ * → ルーム作成しませんってでる
  */
 import React, { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
@@ -11,6 +15,8 @@ import {
   addDoc,
   query,
   onSnapshot,
+  updateDoc,
+  arrayUnion,
 } from "firebase/firestore";
 import db from "../../firebase";
 import { uuidv4 } from "@firebase/util";
@@ -18,6 +24,8 @@ import { Button } from "@mui/material";
 import "./create.css";
 function Create() {
   const { user } = useAuth();
+  const userInfo = doc(db, "user", `${user.uid}`);
+
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
@@ -101,6 +109,10 @@ function Create() {
     setDoc(doc(db, "all-room-list", roomTitle), {
       roomId: id,
       title: roomTitle,
+    });
+    // userdbに追加
+    updateDoc(userInfo, {
+      createRooms: arrayUnion(roomTitle),
     });
     //   ルームにリダイレクトしたい
     setRoomTitle("");

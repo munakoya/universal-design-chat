@@ -19,10 +19,10 @@ import {
   query,
   onSnapshot,
   getDocs,
-  doc,
+  // doc,
 } from "firebase/firestore";
 import db from "../../firebase";
-import { useAuth } from "../../hooks/useAuth";
+// import { useAuth } from "../../hooks/useAuth";
 import { Link, useParams } from "react-router-dom";
 import ChatMessageList from "./MessageList/ChatMessageList";
 import ChatMessageInput from "./MessageInput/ChatMessageInput";
@@ -36,8 +36,8 @@ function Chat() {
   // 編集
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState([]);
-  const { user } = useAuth();
-  const userInfo = doc(db, "user", `${user.uid}`);
+  // const { user } = useAuth();
+  // const userInfo = doc(db, "user", `${user.uid}`);
 
   useEffect(() => {
     // ここで直接ドキュメントidを指定 → urlはテキストに戻してわかりやすk
