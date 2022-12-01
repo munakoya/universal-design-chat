@@ -12,8 +12,15 @@ TODO
 ・useAuthについて理解する
 
  */
-import React, { useEffect } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import {
+  collection,
+  doc,
+  getDocs,
+  onSnapshot,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 import db from "../firebase";
 import Sidebar from "../components/sidebar/Sidebar";
@@ -24,8 +31,24 @@ import "../App.css";
 export function HomePage() {
   // useAuth()つかうと変数にログイン中のユーザー情報が取得できる
   const { user } = useAuth();
+  const [usersData, setUsersData] = useState([]);
+
+  const getAllUser = () => {
+    const userData = collection(db, "user");
+    const q = query(userData);
+    onSnapshot(q, (querySnapshots) => {
+      setUsersData(querySnapshots.docs.map((doc) => doc.data()));
+    });
+  };
+
+  let check = 0;
+
+  const checkUser = () => {
+    usersData.map((userData) => (userData.uid === user.uid ? 0 : 1));
+  };
+
   useEffect(() => {
-    user
+    checkUser === 0
       ? console.log("登録済み")
       : // ここにセットするものがuserに入る
         setDoc(doc(db, "user", `${user.uid}`), {
@@ -40,6 +63,7 @@ export function HomePage() {
               score: 5,
             },
           ],
+          createRooms: [],
         });
   }, []);
   return (
