@@ -43,12 +43,15 @@ export function HomePage() {
 
   let check = 0;
 
-  const checkUser = () => {
-    usersData.map((userData) => (userData.uid === user.uid ? 0 : 1));
-  };
+  function checkUser() {
+    usersData.map((userData) =>
+      userData.uid === user.uid ? (check = 0) : (check = 1)
+    );
+  }
 
   useEffect(() => {
-    checkUser === 0
+    checkUser();
+    check === 0
       ? console.log("登録済み")
       : // ここにセットするものがuserに入る
         setDoc(doc(db, "user", `${user.uid}`), {
