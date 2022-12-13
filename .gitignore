@@ -22,7 +22,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-.runtimeconfig.json
-.package-lock.json
 functions
 firestore-send-email.env
