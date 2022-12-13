@@ -1,0 +1,52 @@
+/*
+tweetBox.jsのcss
+
+*/
+.tweetBox {
+    padding-bottom: 10px;
+    border-bottom: 8px solid var(--udc-background);
+    padding-right: 10px;
+}
+
+/* formタグのcss */
+.tweetBox>form {
+    /* 横並び */
+    display: flex;
+    /* 縦並びに変更 */
+    flex-direction: column;
+}
+
+.tweetBox_input {
+    /* 上下左右に20px */
+    padding: 20px;
+    /* avaterとtweetのtextFormが横並びになる */
+    display: flex;
+}
+
+.tweetBox_input>input {
+    /* inputタグが目いっぱいに広がる */
+    flex: 1;
+    font-size: 20px;
+    margin-left: 20px;
+    border: none;
+}
+
+.tweetBox_imageInput {
+    border: none;
+    padding: 20px;
+}
+
+.tweetBox_tweetButton {
+    /* materialUiの要素にcssが反応しないときは、!importantつける */
+    background-color: var(--udc-color) !important;
+    color: white !important;
+    font-weight: 900 !important;
+    width: 130px !important;
+    /* つけなくてもいいのかな？ */
+    height: 40px !important;
+    border-radius: 30px !important;
+    margin-top: 20px !important;
+    /* 左側に余白を設けて、自動的に右側に寄せられる */
+    margin-left: auto !important;
+
+}

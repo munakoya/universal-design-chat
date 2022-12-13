@@ -1,18 +1,19 @@
 /*
 MyRoomListで選択したルームのチャット画面に遷移する
-→ チャット画面の前にルーム情報を出力したい
+→ タイムライン + チャット画面にしたい
 */
 
 import React from "react";
-import { MyRoomList } from "../components/roomListPage/MyRoomList";
 import Sidebar from "../components/sidebar/Sidebar";
 import Chat from "../components/chatRoomPage/Chat";
 import "../App.css";
+import RoomTimeLine from "../components/chatRoomPage/timeline/RoomTimeLine";
 function ChatRoomPage() {
   return (
     <div className="app">
       <Sidebar />
-      <MyRoomList />
+      {/* 新しいcompornent作成する → RoomTimeLine */}
+      <RoomTimeLine />
       <Chat />
     </div>
   );

@@ -1,32 +1,18 @@
-.chat {
+.roomTimeLine{
     flex: 0.4;
+    /* タイムラインの画面の比率設定 → 45% */
     border-right: 1px solid var(--udc-background);
-    border-left: 1px solid var(--udc-background);
+
     /* スクロール → chromeのみに適用される */
     overflow-y: scroll;
-    /* x軸方向の動きをなくす？ */
-    overflow-x: hidden;
     /* スクロールバーを消す */
     min-width: 300px;
-    /* flex: none; */
 }
-
-.messages_container {
-    width: 100%;
-    padding: 16px;
-    flex-grow: 1;
-    border: 1px solid var(--color-gray);
-    border-radius: var(--border-radius);
-    flex-direction: row;
-    flex: none;
-}
-
-.chat::-webkit-scrollbar {
+.roomTimeLine::-webkit-scrollbar{
     display: none;
 }
 
-/* headerのcss */
-.chat_header {
+.roomTimeLine_header{
     /* 固定 → stickyで固定*/
     position: sticky;
     top: 0;
@@ -35,4 +21,8 @@
     z-index: 100;
     border: 1px solid var(--udc-background);
     padding: 5px, 20px;
+}
+.roomTimeLine_header>h2 {
+    font-size: 20px;
+    font-weight: 800;
 }
