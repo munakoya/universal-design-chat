@@ -34,13 +34,13 @@ export function HomePage() {
   const [usersData, setUsersData] = useState([]);
   let check = 0;
 
-  function getAllUser() {
+  const getAllUser = () => {
     const userData = collection(db, "user");
     const q = query(userData);
     onSnapshot(q, (querySnapshots) => {
       setUsersData(querySnapshots.docs.map((doc) => doc.data()));
     });
-  }
+  };
 
   // ここチェックしてるように見えて最後のuserデータが一致するかどうかの判定になっている
   // userが見つかればloop抜ける処理 → mapだとできないのでfor文で書いて → creaateで同じ処理しているはずです
@@ -49,7 +49,7 @@ export function HomePage() {
   //     userData.uid === user.uid ? (check = 0) : (check = 1)
   //   );
   // }
-  function checkUser() {
+  const checkUser = () => {
     for (let userInfo of usersData) {
       if (userInfo.uid === user.uid) {
         check = 0;
@@ -60,7 +60,7 @@ export function HomePage() {
         console.log("check : ", check);
       }
     }
-  }
+  };
 
   useEffect(() => {
     getAllUser();
@@ -68,21 +68,20 @@ export function HomePage() {
     check === 0
       ? console.log("登録済み")
       : // ここにセットするものがuserに入る
-        console.log("新規ユーザー登録を行います");
-    setDoc(doc(db, "user", `${user.uid}`), {
-      name: user.displayName,
-      uid: user.uid,
-      icon: user.photoURL,
-      email: user.email,
-      myRoomList: ["test"],
-      myRoomScore: [
-        {
-          title: "test",
-          score: 5,
-        },
-      ],
-      createRooms: [],
-    });
+        setDoc(doc(db, "user", `${user.uid}`), {
+          name: user.displayName,
+          uid: user.uid,
+          icon: user.photoURL,
+          email: user.email,
+          myRoomList: ["test"],
+          myRoomScore: [
+            {
+              title: "test",
+              score: 5,
+            },
+          ],
+          createRooms: [],
+        });
   }, []);
   return (
     // Pageって付いてるのは基本className="app"でApp.cssを適用
