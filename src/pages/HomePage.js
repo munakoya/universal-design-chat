@@ -13,14 +13,7 @@ TODO
 
  */
 import React, { useEffect, useState } from "react";
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  query,
-  setDoc,
-} from "firebase/firestore";
+import { collection, doc, onSnapshot, query, setDoc } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 import db from "../firebase";
 import Sidebar from "../components/sidebar/Sidebar";
