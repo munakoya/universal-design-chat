@@ -7,16 +7,20 @@ tweetを複数行入力できるようにする
 */
 
 import React, { useState } from "react";
-import { sendTweet } from "../../../firebase";
 import { useAuth } from "../../../hooks/useAuth";
 import { Avatar, Button } from "@mui/material";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
+import db from "../../../firebase";
 import "./tweetBox.css";
+import { useParams } from "react-router-dom";
 
 function TweetBox() {
   const { user } = useAuth();
 
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
+  const params = useParams();
 
   // input内に文字列が入力されると、↑で定義した変数にセットされる
   const handleChangeImage = (e) => {
@@ -33,11 +37,31 @@ function TweetBox() {
     e.preventDefault();
     // 空送信できないように変更
     if (tweetMessage === "" && tweetImage === "") return;
-    sendTweet(tweetMessage, tweetImage, user); // firebase.jsで定義している関数
+    sendRoomTweet(tweetMessage, tweetImage, user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
     setTweetImage("");
   };
+
+  async function sendRoomTweet(tweetMessage, tweetImage, user) {
+    try {
+      await addDoc(collection(db, "roomPosts", params.id, "posts"), {
+        // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
+        displayName: user.displayName,
+        username: user.email,
+        verified: true,
+        text: tweetMessage,
+        avatar: user.photoURL,
+        image: tweetImage,
+        // 固有のuuidをset → map関数で回すため → docidとかでもいいかも
+        id: uuidv4(),
+        // 時系列順に並べるため
+        timestamp: serverTimestamp(),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
   return (
     <div className="tweetBox">
       <form onSubmit={handleSubmit}>

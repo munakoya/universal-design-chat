@@ -6,14 +6,16 @@ import TweetBox from "./TweetBox";
 import Post from "./Post.js";
 
 import "./roomTimeLine.css";
+import { useParams } from "react-router-dom";
 
 function RoomTimeLine() {
   const [posts, setPosts] = useState([]);
+  const params = useParams();
 
   // マウント時に一回だけ読み込み
   useEffect(() => {
-    // firebaseのコレクションを指定
-    const postData = collection(db, "posts");
+    // firebaseのコレクションを指定 → idの指定
+    const postData = collection(db, "roomPosts", params.id, "posts");
     // 時系列に並び替える → データの並べ替え ドキュメントで検索
     // 最新の投稿順にしたデータq
     const q = query(postData, orderBy("timestamp", "desc"));
