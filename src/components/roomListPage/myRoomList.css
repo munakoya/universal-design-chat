@@ -32,6 +32,14 @@
     justify-content: center;
 }
 
+.chat-room-list li:hover{
+    background-color: #e8f5fe;
+    /* 丸み */
+    border-radius: 30px;
+    /* hover時の文字の色変更 */
+    color: var(--udc-color);
+}
+
 .myRoomList_header{
     position: sticky;
     top: 0;

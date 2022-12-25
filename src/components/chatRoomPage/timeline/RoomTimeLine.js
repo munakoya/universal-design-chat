@@ -1,3 +1,8 @@
+/**
+ * ルームごとのタイムライン
+ * データベース構造はhomeとほぼ一緒で、保存場所をいじってるだけ
+ */
+
 import React, { useEffect, useState } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import FlipMove from "react-flip-move"; // なめらかに動くライブラリ

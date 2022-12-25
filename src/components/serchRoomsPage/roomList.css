@@ -22,6 +22,14 @@
     border-radius: 20px;
     width: 100%;
     justify-content: center;
+    cursor: pointer;
+}
+.roomList li:hover{
+    background-color: #e8f5fe;
+    /* 丸み */
+    border-radius: 30px;
+    /* hover時の文字の色変更 */
+    color: var(--udc-color);
 }
 .roomList_header{
     position: sticky;
