@@ -44,7 +44,7 @@ function Sidebar() {
 
       {/* fullWidth → 画面いっぱい */}
       <Button variant="outlined" className="sidebar_tweet" fullWidth>
-        投稿する
+        <Link to={"/create-room"}>新規ルーム作成</Link>
       </Button>
     </div>
   );
