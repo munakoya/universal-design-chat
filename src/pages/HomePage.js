@@ -25,7 +25,7 @@ export function HomePage() {
   // useAuth()つかうと変数にログイン中のユーザー情報が取得できる
   const { user } = useAuth();
   const [usersData, setUsersData] = useState([]);
-  let check = 0;
+  let check;
 
   const getAllUser = () => {
     const userData = collection(db, "user");
