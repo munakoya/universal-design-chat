@@ -11,71 +11,17 @@ TODO
 
 ・useAuthについて理解する
 
+・このページで初期化処理を行う → ×
+useEffect → ページ遷移時一回のみ → アクセスすると一回は毎回初期化
+
  */
-import React, { useEffect, useState } from "react";
-import { collection, doc, onSnapshot, query, setDoc } from "firebase/firestore";
-import { useAuth } from "../hooks/useAuth";
-import db from "../firebase";
+import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import Timeline from "../components/homePage/timeline/Timeline";
 import Widgets from "../components/homePage/widget/Widgets";
 import "../App.css";
 
 export function HomePage() {
-  // useAuth()つかうと変数にログイン中のユーザー情報が取得できる
-  const { user } = useAuth();
-  const [usersData, setUsersData] = useState([]);
-  let check;
-
-  const getAllUser = () => {
-    const userData = collection(db, "user");
-    const q = query(userData);
-    onSnapshot(q, (querySnapshots) => {
-      setUsersData(querySnapshots.docs.map((doc) => doc.data()));
-    });
-  };
-
-  // ここチェックしてるように見えて最後のuserデータが一致するかどうかの判定になっている
-  // userが見つかればloop抜ける処理 → mapだとできないのでfor文で書いて → creaateで同じ処理しているはずです
-  // function checkUser() {
-  //   usersData.map((userData) =>
-  //     userData.uid === user.uid ? (check = 0) : (check = 1)
-  //   );
-  // }
-  const checkUser = () => {
-    for (let userInfo of usersData) {
-      if (userInfo.uid === user.uid) {
-        check = 0;
-        console.log("check : ", check);
-        break;
-      } else {
-        check = 1;
-        console.log("check : ", check);
-      }
-    }
-  };
-
-  useEffect(() => {
-    getAllUser();
-    checkUser();
-    check === 0
-      ? console.log("登録済み")
-      : // ここにセットするものがuserに入る
-        setDoc(doc(db, "user", `${user.uid}`), {
-          name: user.displayName,
-          uid: user.uid,
-          icon: user.photoURL,
-          email: user.email,
-          myRoomList: ["test"],
-          myRoomScore: [
-            {
-              title: "test",
-              score: 5,
-            },
-          ],
-          createRooms: [],
-        });
-  }, []);
   return (
     // Pageって付いてるのは基本className="app"でApp.cssを適用
     <div className="app">

@@ -41,11 +41,14 @@ async function loginWithGoogle() {
     //   googleのクレデンシャル？を生成
     const provider = new GoogleAuthProvider();
     // getAuthでfirebaseのauthenticationインスタンスを返す
-    const auth = getAuth();
+    // const auth = getAuth();
 
     //   ポップアップでサインフロー処理
     const { user } = await signInWithPopup(auth, provider);
 
+    // ここの関数内で初期化を行う
+    // 変数より、filter関数とかでやりたい
+    // そもそものログイン認証系の処理の構造の変更などなど → 自分が一番理解しやすいor解説が詳しくて実装したい内容が同じようなもののパクリで行きましょう
     // ここにuser情報をセットすると、データベースに登録される
     return {
       uid: user.uid,
@@ -127,6 +130,8 @@ async function sendTweet(tweetMessage, tweetImage, user) {
     console.error(error);
   }
 }
+const auth = getAuth();
+
 // export{}で定義した関数を外部でimport 可能に
-export { loginWithGoogle, sendMessage, getMessages, sendTweet };
+export { loginWithGoogle, sendMessage, getMessages, sendTweet, auth };
 export default db;
