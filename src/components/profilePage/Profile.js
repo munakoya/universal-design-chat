@@ -4,17 +4,25 @@
  */
 
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { Avatar, Button } from "@mui/material";
 import { useAuth } from "../../hooks/useAuth";
-import db from "../../firebase";
+import db, { auth } from "../../firebase";
 import "./profile.css";
+import { signOut } from "@firebase/auth";
 
 function Profile() {
-  function SignOut() {}
+  function SignOut() {
+    signOut(auth);
+    navigation("/");
+    window.location.reload();
+  }
   // ログインユーザー情報
   const { user } = useAuth();
   const [selectUser, setSelectUser] = useState([]);
+
+  const navigation = useNavigate();
 
   useEffect(() => {
     getUser();

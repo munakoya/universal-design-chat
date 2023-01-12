@@ -15,7 +15,7 @@ import { useModal } from "react-hooks-use-modal"; // モーダルコンポーネ
 import db from "../../firebase";
 import "./roomList.css";
 import "./roomDetail.css";
-import { Avatar, Button, Icon } from "@mui/material";
+import { Button } from "@mui/material";
 
 function RoomList() {
   const [rooms, setRooms] = useState([]);
