@@ -10,3 +10,18 @@ p.limit {
 p.case {
     line-height: 3.0;
 }
+
+.sendMail-form{
+    display:flex;
+    flex-direction: column;
+    flex: 0.7;
+    
+
+}
+.sendMail-title{
+    width: 500px;
+}
+.sendMail-content{
+    width: 500px;
+}
+
