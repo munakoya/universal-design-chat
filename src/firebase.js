@@ -19,6 +19,7 @@ import {
 } from "firebase/firestore";
 
 import { v4 as uuidv4 } from "uuid";
+import TweetBox from "./components/homePage/timeline/TweetBox";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -132,6 +133,27 @@ async function sendTweet(tweetMessage, tweetImage, user) {
 }
 const auth = getAuth();
 
+// async function checkAdminiStrator(user) {
+//   try {
+//     (await user.uid) === process.env.REACT_APP_ADMIN ? (
+//       <div>
+//         <TweetBox />
+//       </div>
+//     ) : (
+//       console.log("管理者ではありません。管理者 : ", process.env.ADMIN)
+//     );
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
+
 // export{}で定義した関数を外部でimport 可能に
-export { loginWithGoogle, sendMessage, getMessages, sendTweet, auth };
+export {
+  loginWithGoogle,
+  sendMessage,
+  getMessages,
+  sendTweet,
+  // checkAdminiStrator,
+  auth,
+};
 export default db;
