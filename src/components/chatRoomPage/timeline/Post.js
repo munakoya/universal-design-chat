@@ -29,10 +29,10 @@ const Post = forwardRef(
               {/* ユーザーネーム */}
               <h3>
                 {displayName}
-                <span className="post_headerSpecial">
-                  {/* バッジ */}
-                  <VerifiedUser className="post_badge" />@{username}
-                </span>
+                {/* <span className="post_headerSpecial"> */}
+                {/* バッジ */}
+                {/* <VerifiedUser className="post_badge" />@{username} */}
+                {/* </span> */}
               </h3>
             </div>
             {/* ツイートのテキスト内容 */}
@@ -43,12 +43,12 @@ const Post = forwardRef(
           {/* ランダムで画像を取ってくる */}
           <img src={image} alt="" />
           {/* footer → 実装しなくてもいいかなと */}
-          <div className="post_footer">
+          {/* <div className="post_footer">
             <ChatBubbleOutline fontSize="small" />
             <Repeat fontSize="small" />
             <FavoriteBorder fontSize="small" />
             <PublishOutlined fontSize="small" />
-          </div>
+          </div> */}
         </div>
       </div>
     );
