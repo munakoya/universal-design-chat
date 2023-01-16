@@ -74,7 +74,7 @@ function Create() {
     let id = uuidv4();
 
     // userのmyRoomListにも追加する
-    await addDoc(collection(db, "room-list"), {
+    await setDoc(doc(db, "room-list", id), {
       roomId: id,
       title: roomTitle,
       description: description,

@@ -45,7 +45,7 @@ function TweetBox() {
           <Avatar src={user.photoURL} />
           <input
             value={tweetMessage}
-            placeholder="いまどうしてる？"
+            placeholder="お知らせを投稿してください"
             type="text"
             onChange={handleChangeMessage}
           ></input>

@@ -122,6 +122,20 @@ function Quiz() {
       ? registerScore()
       : console.log(`check : ${checkCount} | 受験済み`);
   }
+
+  // 合否判定、登録
+  async function judgeScorePass() {
+    const roomInfo = doc(db, "room-list", `${selectRoom?.roomId}`);
+
+    await updateDoc(userInfo, {
+      myRoomList: arrayUnion(selectRoom.title),
+    });
+    // ここ変更 roomIdと作成時のidを統一 → roomIdを取得して
+    await updateDoc(roomInfo, {
+      members: arrayUnion(user.displayName),
+    });
+    console.log("合格");
+  }
   // 採点処理
 
   async function quizScore() {
@@ -149,10 +163,7 @@ function Quiz() {
     checkMyRoomScore();
     // 合否を判断 → 4点以上でmyRoomListに追加
     if (score >= 4) {
-      await updateDoc(userInfo, {
-        myRoomList: arrayUnion(selectRoom.title),
-      });
-      console.log("合格");
+      judgeScorePass();
     } else {
       console.log("不合格");
     }
@@ -162,6 +173,7 @@ function Quiz() {
   // 上で特定したroomのデータをselectRoomに入れる
   const selectRoom = getRoom();
   const selectUser = getUser();
+
   return (
     <div>
       <div className="quizList">
