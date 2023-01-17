@@ -3,7 +3,14 @@
 */
 body {
   --udc-color: #50b7f5;
+  /* --udc-color: #7150f5; */
   --udc-background: #e6ecf0;
+  /* --udc-background: #6a9cbd; */
+
+  /* 背景色 */
+  --udc-backGroundColor: white;
+  /* rgb(239, 244, 253); */
+  background-color: var(--udc-backGroundColor);
 }
 
 .app {

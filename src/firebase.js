@@ -16,10 +16,13 @@ import {
   onSnapshot,
   query,
   orderBy,
+  doc,
+  getDoc,
 } from "firebase/firestore";
 
 import { v4 as uuidv4 } from "uuid";
 import TweetBox from "./components/homePage/timeline/TweetBox";
+import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
