@@ -9,11 +9,13 @@ import React from "react";
 import Sidebar from "../components/sidebar/Sidebar";
 import RoomList from "../components/serchRoomsPage/RoomList";
 import "../App.css";
+import Widgets from "../components/homePage/widget/Widgets";
 function SerchRoomsPage() {
   return (
     <div className="app">
       <Sidebar />
       <RoomList />
+      <Widgets />
     </div>
   );
 }

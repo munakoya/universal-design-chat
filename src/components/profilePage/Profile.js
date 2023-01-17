@@ -1,6 +1,8 @@
 /**
  * マイページのコンポーネント
  * ユーザー情報を出力する。
+ *
+ * 設定メニュー作成
  */
 
 import React, { useEffect, useState } from "react";
