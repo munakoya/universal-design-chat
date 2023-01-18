@@ -1,50 +1,58 @@
 .roomList {
+    /*修正*/
     /* 画面の20% */
-    flex: 0.2;
-    border-right: 1px solid var(--udc-background);
-    min-width: 200px;
+    display: flex;
+    flex-direction: column;
     overflow-y: scroll;
+    min-width: 200px;
+    flex: 0.45;
+    border-right: 1px solid var(--udc-background);
 }
-.roomList::-webkit-scrollbar{
+
+.roomList::-webkit-scrollbar {
     display: none;
 }
 
 .roomList li {
     /* height: 100px; */
-    padding-top: 25px;
+    padding-top: 20px;
     padding-bottom: 25px;
     background: var(--color-gray);
     flex: 1 1 calc(50% - 4px);
 
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--udc-background);
+    border-bottom: 2px solid var(--udc-background);
     border-radius: 20px;
     width: 100%;
     justify-content: center;
-    cursor: pointer;
+
+    font-size: 25px;
 }
-.roomList li:hover{
+
+.roomList li:hover {
     background-color: #e8f5fe;
     /* 丸み */
     border-radius: 30px;
     /* hover時の文字の色変更 */
     color: var(--udc-color);
 }
-.roomList_header{
+
+.roomList_header {
     position: sticky;
     top: 0;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     z-index: 100;
-    border-bottom: 1px solid var(--udc-background);
+    border-bottom: 2px solid var(--udc-background);
     /* border: 1px solid var(--udc-background); */
-    padding: 10px 20px;
-    margin-top: 0;
-}
-ul{
-    padding: 0;
-}
-.roomList_header > h2{
-    font-size: 20px;
+    padding: 20px 20px;
+    margin-top: 4px;
+    margin-bottom: -10px;
+    font-size: 25px;
     font-weight: 800;
+    text-align: center;
+}
+
+ul {
+    padding: 0;
 }

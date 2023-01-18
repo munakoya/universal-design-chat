@@ -4,45 +4,65 @@
 
 /* ここにcss貼り付け */
 
-.timeline,
+.timeline {
+  background-color: #fff;
+  margin-top: 20px;
+  height: 100%;
+}
+
 .roomTimeLine {
   background-color: #fff;
   margin-top: 20px;
   margin-bottom: -20px;
 }
 
+
 .chat {
   background-color: #fff;
   margin-top: 20px;
-  margin-bottom: -20px;
+  height: 100%;
   width: 120%;
 }
+
+
 
 .sidebar {
   background-color: #fff;
   margin-bottom: 20px;
+  margin-left: 10px;
 }
+
+
 
 .roomList,
 .myRoomList {
   background-color: #fff;
   margin-top: 20px;
   height: 100%;
-  size-adjust: 100%;
 }
 
+
 .sendMail,
-.profile {
+.quiz {
   width: 100%;
   height: 100%;
   background-color: #fff;
   margin-top: 20px;
+  margin-right: 10px;
+}
+
+.profile {
+  flex: 0.45;
+  height: 100%;
+  background-color: #fff;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .create {
   background-color: #fff;
   margin-top: 20px;
-  margin-bottom: -20px;
+  height: 100%;
   width: 100%;
 }
 
@@ -52,6 +72,13 @@
   margin-bottom: -20px;
   width: 100%;
 }
+
+
+.widgets {
+  margin-right: 10px;
+}
+
+
 
 /*ログインボタン*/
 button.login {
@@ -72,10 +99,14 @@ button.login {
   font-weight: 500;
 }
 
+
+
 button.login {
   background: #fff;
   color: #000;
 }
+
+
 
 button.login:after {
   /*矢印大きさ*/
@@ -92,15 +123,28 @@ button.login:after {
   transition: 0.3s ease-in-out;
 }
 
+
+
+
+
 button.login:hover:after {
   border-color: #FFF;
 }
+
+
+
+
 
 body {
   --udc-color: #50b7f5;
   --udc-background: #e6ecf0;
   background-color: #50b7f5;
 }
+
+
+
+
+
 
 .app {
   /* タイムラインとウィジェットをよこならびにするため */
@@ -119,9 +163,11 @@ body {
   padding: 0, 10px;
 
 }
+
 a {
   text-decoration: none;
 }
-a:visited{
+
+a:visited {
   color: inherit;
 }

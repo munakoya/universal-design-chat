@@ -11,17 +11,33 @@ p.case {
     line-height: 3.0;
 }
 
-.sendMail-form{
-    display:flex;
+.sendMail-form {
+    display: flex;
     flex-direction: column;
     flex: 0.7;
-    
+
 
 }
-.sendMail-title{
-    width: 500px;
+
+.sendMail-header {
+    text-align: center;
 }
-.sendMail-content{
+
+.sendMail-title {
+    width: 500px;
+
+}
+
+.sendMail-content {
     width: 500px;
 }
 
+.MuiBox-root.css-xn6ruc {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.Send {
+    font-size: 200%;
+    text-align: center;
+}
