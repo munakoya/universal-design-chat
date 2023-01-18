@@ -1,16 +1,105 @@
 /* 
 グローバルにつかいたいcssを定義
 */
+
+/* ここにcss貼り付け */
+
+.timeline,
+.roomTimeLine {
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: -20px;
+}
+
+.chat {
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  width: 120%;
+}
+
+.sidebar {
+  background-color: #fff;
+  margin-bottom: 20px;
+}
+
+.roomList,
+.myRoomList {
+  background-color: #fff;
+  margin-top: 20px;
+  height: 100%;
+  size-adjust: 100%;
+}
+
+.sendMail,
+.profile {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  margin-top: 20px;
+}
+
+.create {
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  width: 100%;
+}
+
+.score {
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: -20px;
+  width: 100%;
+}
+
+/*ログインボタン*/
+button.login {
+  /*ボタンの大きさ*/
+  height: 50px;
+  width: 1000px;
+  background: #eee;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 260px;
+  padding: 10px 25px;
+  color: #313131;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+button.login {
+  background: #fff;
+  color: #000;
+}
+
+button.login:after {
+  /*矢印大きさ*/
+  content: '';
+  width: 9px;
+  height: 9px;
+  border-top: 3px solid #313131;
+  border-right: 2px solid #313131;
+  transform: rotate(45deg) translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  border-radius: 1px;
+  transition: 0.3s ease-in-out;
+}
+
+button.login:hover:after {
+  border-color: #FFF;
+}
+
 body {
   --udc-color: #50b7f5;
-  /* --udc-color: #7150f5; */
   --udc-background: #e6ecf0;
-  /* --udc-background: #6a9cbd; */
-
-  /* 背景色 */
-  --udc-backGroundColor: white;
-  /* rgb(239, 244, 253); */
-  background-color: var(--udc-backGroundColor);
+  background-color: #50b7f5;
 }
 
 .app {

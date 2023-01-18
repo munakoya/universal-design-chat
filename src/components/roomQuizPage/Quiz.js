@@ -175,7 +175,7 @@ function Quiz() {
   const selectUser = getUser();
 
   return (
-    <div>
+    <div className="quiz">
       <div className="quizList">
         <h2 className="quizList_header">{selectRoom?.title}</h2>
         <h3>問題</h3>
