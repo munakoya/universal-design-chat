@@ -82,9 +82,11 @@ function SendMail() {
           />
         </div>
       </Box>
-      <Button type="submit" onClick={sendInquiryForm}>
-        送信
-      </Button>
+      <div className="Send">
+        <Button type="submit" onClick={sendInquiryForm}>
+          送信
+        </Button>
+      </div>
     </div>
   );
 }

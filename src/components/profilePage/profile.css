@@ -1,3 +1,11 @@
-.profile{
-    flex: 0.4;
+/* 修正
+
+
+.profile {
+    text-align: center;
 }
+
+.MuiAvatar-root.MuiAvatar-circular.css-1wlk0hk-MuiAvatar-root {
+    margin-left: auto;
+    margin-right: auto;
+} */

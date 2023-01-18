@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 //   TwitterShareButton,
 //   TwitterTweetEmbed,
 // } from "react-twitter-embed";
-import "./Widgets.css";
+import "./profileWidget.css";
 import {
   collection,
   doc,
@@ -16,9 +16,9 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import db from "../../../firebase";
+import db from "../../firebase";
 
-function Widgets() {
+function ProfileWidgets() {
   let roomMembers = [];
   let [searchKeyword, setSearchKeyword] = useState("");
 
@@ -143,4 +143,4 @@ function Widgets() {
   );
 }
 
-export default Widgets;
+export default ProfileWidgets;

@@ -1,4 +1,4 @@
-.timeline{
+.timeline {
     /* タイムラインの画面の比率設定 → 45% */
     flex: 0.45;
     border-right: 1px solid var(--udc-background);
@@ -8,12 +8,13 @@
     /* スクロールバーを消す */
     min-width: 300px;
 }
-.timeline::-webkit-scrollbar{
+
+.timeline::-webkit-scrollbar {
     display: none;
 }
 
 /* headerのcss */
-.timeline_header{
+.timeline_header {
     /* 固定 → stickyで固定*/
     position: sticky;
     top: 0;
@@ -21,10 +22,12 @@
     /* headerは一番上に来てほしいので100を当てる */
     z-index: 100;
     border: 1px solid var(--udc-background);
-    padding: 5px, 20px;
+    padding: 20px, 25px;
 }
 
-.timeline_header > h2{
-    font-size: 20px;
+.timeline_header>h2 {
+    font-size: 25px;
     font-weight: 800;
+    text-align: center;
+
 }

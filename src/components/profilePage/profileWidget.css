@@ -1,0 +1,45 @@
+.widgets {
+    /* 全体の35% → 合計で100% */
+    flex: 0.35;
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
+
+}
+
+.widgets::-webkit-scrollbar {
+    display: none;
+}
+
+.widgets_input {
+    /* 子要素がすべてflexItemになる */
+    display: flex;
+    align-items: center;
+    background-color: var(--udc-background);
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.widgets_input>input {
+    border: none;
+    background-color: var(--udc-background);
+}
+
+.widgets_searchIcon {
+    color: gray;
+}
+
+.widgets_widgetContainer {
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 20px;
+    padding-top: 5px;
+    background-color: #f5f8fa;
+    border-radius: 20px;
+}
+
+.widgets_widgetContainer>h2 {
+    font-size: 18px;
+    font-weight: 800;
+}

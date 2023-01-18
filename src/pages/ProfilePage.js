@@ -6,12 +6,13 @@ import Sidebar from "../components/sidebar/Sidebar";
 import Profile from "../components/profilePage/Profile";
 import "../App.css";
 import Settings from "../components/profilePage/Settings";
+import ProfileWidgets from "../components/profilePage/ProfileWidget";
 export function ProfilePage() {
   return (
     <div className="app">
       <Sidebar />
       <Profile />
-      <Settings />
+      <ProfileWidgets />
     </div>
   );
 }

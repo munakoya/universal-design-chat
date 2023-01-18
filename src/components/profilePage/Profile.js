@@ -13,6 +13,8 @@ import { useAuth } from "../../hooks/useAuth";
 import db, { auth } from "../../firebase";
 import "./profile.css";
 import { signOut } from "@firebase/auth";
+import Widgets from "../homePage/widget/Widgets";
+import Settings from "./Settings";
 
 function Profile() {
   function SignOut() {
@@ -77,6 +79,7 @@ function Profile() {
         <p></p>
       </div>
       <Button onClick={SignOut}>ログアウト</Button>
+      <Settings />
     </div>
   );
 }
