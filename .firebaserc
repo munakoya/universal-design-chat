@@ -5,9 +5,7 @@
   "targets": {},
   "etags": {
     "universal-design-chat-67f6b": {
-      "extensionInstances": {
-        "firestore-send-email": "ddff9e7c546573cf32409da20c0803dd316a59c2dd1b95cdf535755afd890821"
-      }
+      
     }
   }
 }
