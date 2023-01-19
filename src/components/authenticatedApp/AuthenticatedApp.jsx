@@ -25,7 +25,7 @@ function AuthenticatedApp() {
                 <Route path="/search-rooms/:id/quiz" element={<RoomQuizPage />} />
                 <Route path='/create-room' element={<CreateRoomPage />} />
                 <Route path='/search-rooms/:id/quiz/score' element={<ScorePage/>} />
-                <Route path='/room/:id/chat-room' element={ <ChatRoomPage/>} />
+                <Route path='/room/:id/chat-room' element={<ChatRoomPage />} />
             </Routes>
         </BrowserRouter>
     );
