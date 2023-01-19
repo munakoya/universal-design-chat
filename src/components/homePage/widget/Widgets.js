@@ -17,6 +17,8 @@ import {
   where,
 } from "firebase/firestore";
 import db from "../../../firebase";
+import { Link } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function Widgets() {
   let roomMembers = [];
@@ -25,6 +27,12 @@ function Widgets() {
   // ルーム取得
   const [rooms, setRooms] = useState([]);
   let [searchRooms, setSearchRooms] = useState([]);
+
+  useEffect(() => {
+    //  すべてのルームデータ取得
+    getRoomList();
+  }, []);
+
   async function getRoomList() {
     // すべてのルームデータをroomsに → roomsから選択されたルームと一致するものをroomに
     const roomList = collection(db, "room-list");
@@ -33,17 +41,6 @@ function Widgets() {
       setRooms(querySnapshots.docs.map((doc) => doc.data()));
     });
   }
-
-  // 人気ルーム取得
-  // async function getPopularRoom() {
-  //   rooms.map((room) => {
-  //     len(room.members)
-  //   })
-  // }
-
-  useEffect(() => {
-    getRoomList();
-  }, []);
 
   function compareFunc(a, b) {
     return b.members - a.members;
@@ -65,16 +62,24 @@ function Widgets() {
     // 検索欄に文字が入ったら
     return (
       <div className="widgets_widgetContainer">
-        <h2>検索結果</h2>
-        {searchRooms.map((roomArray) => {
-          // firestore db, all-room-array, all-room,rooms
-          return roomArray.rooms.map((room) => {
-            if (room.indexOf(`${searchKeyword}`)) {
-            } else {
-              return <li>{room}</li>;
-            }
-          });
-        })}
+        <div className="modal">
+          <h2>検索結果</h2>
+          {searchRooms.map((roomArray) => {
+            // firestore db, all-room-array, all-room,rooms
+            return roomArray.rooms.map((room) => {
+              if (room.indexOf(`${searchKeyword}`)) {
+              } else {
+                return (
+                  <div>
+                    <Link to={`/search-rooms/${room}/quiz`}>
+                      <li>{room}</li>
+                    </Link>
+                  </div>
+                );
+              }
+            });
+          })}
+        </div>
       </div>
     );
   }
@@ -92,6 +97,7 @@ function Widgets() {
         />
       </div>
       {searchKeyword ? searchRoom() : console.log("keyword入ってません")}
+
       <div className="widgets_widgetContainer">
         <h2>人気ルーム</h2>
         {/* タイムラインを取得 */}

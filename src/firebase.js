@@ -71,6 +71,7 @@ async function loginWithGoogle() {
 // sendMessage関数 → roomのサブコレクションsendMessageにドキュメントを追加する関数？
 // propsにroomIDとuserデータとtextを受け取る
 async function sendMessage(roomId, user, text) {
+  // topic
   try {
     //   addDocとcollectionの関数を使用してドキュメントを追加
     // addDocを使用するために参照を取得するcollectionを使用
@@ -79,6 +80,7 @@ async function sendMessage(roomId, user, text) {
     //   firestoreは存在しないコレクションとドキュメントを作成するため、目的のパスを指定するだけで済む
     //   個人的に後でroomごとのmembersっていうのとquiz追加して、自分の保持しているroomを表示
     await addDoc(collection(db, "chat-rooms", roomId, "messages"), {
+      // db, "chat-rooms", roomId, "topic"
       // messagesの中に以下のプロパティが追加される(メッセージを送信するたびに)
       // userはuseAuthで取得したログインユーザー情報を使用していると思われ
       uid: user.uid,

@@ -9,8 +9,9 @@ function UnauthenticatedApp() {
     return (
         <div className='unAuthenticated'>
             <h1>Universal Design Chat</h1>
-            <h2>Log in to join a UDC!</h2>
+            <h2>Welcome to UDC !</h2>
             <div>
+                {/* 利用規約文を追加 */}
                 <button onClick={login} className="login">
                     Login with Google
                 </button>

@@ -1,5 +1,8 @@
 /*
 投稿されたツイートのコンポーネント
+
+TODO
+話題の投稿
 */
 import React, { forwardRef } from "react";
 import {
@@ -11,6 +14,7 @@ import {
 } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import "./post.css";
+import { Link } from "react-router-dom";
 
 // なめらかに動かす(udemy 47)
 const Post = forwardRef(

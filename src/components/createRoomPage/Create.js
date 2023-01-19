@@ -32,7 +32,7 @@ import "./create.css";
 function Create() {
   const { user } = useAuth();
   const userInfo = doc(db, "user", `${user.uid}`);
-
+  const allRoomArray = doc(db, "all-room-array", "all-rooms");
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
@@ -120,6 +120,11 @@ function Create() {
     // userdbに追加
     updateDoc(userInfo, {
       createRooms: arrayUnion(roomTitle),
+    });
+
+    // all-room-arrayに追加
+    await updateDoc(allRoomArray, {
+      rooms: arrayUnion(roomTitle),
     });
     //   ルームにリダイレクトしたい
     setRoomTitle("");
