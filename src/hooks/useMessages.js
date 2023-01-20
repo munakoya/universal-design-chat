@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { getMessages } from "../firebase";
+import { getMessages, getTopicMessages } from "../firebase";
 
 function useMessages(roomId) {
   const [messages, setMessages] = React.useState([]);
@@ -19,4 +19,17 @@ function useMessages(roomId) {
   return messages;
 }
 
-export { useMessages };
+function useTopicMessages(roomId, topicId) {
+  const [messages, setMessages] = React.useState([]);
+
+  // roomIDがセットされると発火 → roomIDのroom内データを取得 → return
+  React.useEffect(() => {
+    const unsubscribe = getTopicMessages(roomId, topicId, setMessages);
+
+    return unsubscribe;
+  }, [roomId, topicId]);
+
+  return messages;
+}
+
+export { useMessages, useTopicMessages };

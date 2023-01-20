@@ -1,0 +1,60 @@
+/* 
+ChatMessageListのcss
+
+*/
+.message_list_container {
+    margin-bottom: 16px;
+    /* overflow: scroll; */
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
+    min-width: 250px;
+    width: 100%;
+    position: sticky;
+    bottom: 0;
+    overflow-x: hidden;
+}
+
+.message_list_container::-webkit-scrollbar {
+    display: none;
+}
+
+.message_list {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.message {
+    padding: 8px 16px;
+    margin-bottom: 8px;
+    background: var(--color-gray);
+    border-radius: var(--border-radius);
+    text-align: left;
+    /* list-style:noneと同じ */
+    display: block;
+}
+
+.message_avatar {
+    float: left;
+    margin-top: 25px;
+    margin-right: 10px;
+}
+
+.own_message {
+    background: var(--color-blue);
+    align-self: flex-end;
+    text-align: right;
+    display: block;
+}
+
+.own_message_avatar {
+    float: right;
+    margin-top: 25px;
+    margin-left: 10px;
+}
+
+.sender {
+    margin-bottom: 8px;
+}

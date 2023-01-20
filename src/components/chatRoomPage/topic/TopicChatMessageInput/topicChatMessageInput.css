@@ -1,0 +1,25 @@
+/*
+*/
+.message_input_container {
+    display: flex;
+    gap: 4px;
+    /* flex: 0.6; */
+    /* 入力フォームを下に固定 */
+    position: sticky;
+    bottom: 0;
+
+}
+
+.message_input {
+    padding: 12px 8px;
+    flex: 1;
+    background: var(--color-gray);
+    border-radius: var(--border-radius);
+}
+
+.send_message {
+    padding: 12px 14px;
+    background: var(--color-blue);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
