@@ -44,7 +44,9 @@ function TopicChat() {
       {console.log("params.id : ", params.id)}
       {console.log("params.id2 : ", params.id2)}
       <h2 className="chat_header">{params.id2}</h2>
-      <Link to={`/room/${params.id}/chat-room`}>全体チャットに戻る</Link>
+      <Link className="back" to={`/room/${params.id}/chat-room`}>
+        ◀
+      </Link>
 
       <div className="messages_container">
         {/* そもそもちゃんとpropsを渡せてない → urlで渡したくないならpropsだけど渡せない */}

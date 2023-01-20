@@ -79,7 +79,6 @@ function Profile() {
         <p></p>
       </div>
       <Button onClick={SignOut}>ログアウト</Button>
-      <Settings />
     </div>
   );
 }
