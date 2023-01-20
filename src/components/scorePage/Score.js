@@ -42,7 +42,7 @@ function Score() {
 
   return (
     <div className="score">
-      <h2 className="score_header">SCORE</h2>
+      <h2 className="score_header">採点結果</h2>
       {/* 合否それぞれの画面出力 */}
       {/* {score ? (
         score >= 4 ? (
