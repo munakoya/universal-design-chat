@@ -7,12 +7,12 @@
     /* 入力フォームを下に固定 */
     position: sticky;
     bottom: 0;
-    
+    left: 20px;
+
 }
 
 .message_input {
-    padding: 12px 8px;
-    flex: 1;
+    padding: 12px 90px;
     background: var(--color-gray);
     border-radius: var(--border-radius);
 }
