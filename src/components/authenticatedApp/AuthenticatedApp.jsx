@@ -10,6 +10,7 @@ import RoomQuizPage from '../../pages/RoomQuizPage';
 import CreateRoomPage from '../../pages/CreateRoomPage';
 import ScorePage from '../../pages/ScorePage';
 import ChatRoomPage from '../../pages/ChatRoomPage';
+import TopicChatPage from '../../pages/TopicChatPage';
 
 function AuthenticatedApp() {
     return (
@@ -26,6 +27,7 @@ function AuthenticatedApp() {
                 <Route path='/create-room' element={<CreateRoomPage />} />
                 <Route path='/search-rooms/:id/quiz/score' element={<ScorePage/>} />
                 <Route path='/room/:id/chat-room' element={<ChatRoomPage />} />
+                <Route path='/room/:id/chat-room/topic/:id2' element={<TopicChatPage />} />
             </Routes>
         </BrowserRouter>
     );

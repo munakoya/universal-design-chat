@@ -8,7 +8,9 @@ import { doc, getDoc} from 'firebase/firestore';
 import { useAuth } from '../../hooks/useAuth';
 import db from '../../firebase';
 import './myRoomList.css';
+import RoomTimeLine from '../chatRoomPage/timeline/RoomTimeLine';
 
+// propsで渡す
 function MyRoomList() {
     const { user } = useAuth();
     const [selectUser, setSelectUser] = useState([]);

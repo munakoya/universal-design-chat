@@ -9,6 +9,11 @@
     /* スクロールバーを消す */
     min-width: 300px;
     /* flex: none; */
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 25px;
+    height: 100%;
+    width: 120%;
 }
 
 .messages_container {

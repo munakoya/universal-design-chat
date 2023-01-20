@@ -7,6 +7,10 @@
     overflow-y: scroll;
     /* スクロールバーを消す */
     min-width: 300px;
+
+    background-color: #fff;
+    margin-top: 20px;
+    height: 100%;
 }
 
 .timeline::-webkit-scrollbar {

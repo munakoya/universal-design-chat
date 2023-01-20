@@ -13,8 +13,9 @@ import Post from "./Post.js";
 import "./roomTimeLine.css";
 import { useParams } from "react-router-dom";
 
-function RoomTimeLine() {
+function RoomTimeLine({ roomTitle }) {
   const [posts, setPosts] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const params = useParams();
 
   // マウント時に一回だけ読み込み
@@ -30,7 +31,16 @@ function RoomTimeLine() {
       // リアルタイムにデータ取得
       setPosts(querySnapshots.docs.map((doc) => doc.data()));
     });
+    getRooms();
   }, []);
+
+  function getRooms() {
+    const allroomsData = collection(db, "all-room-list");
+    const q = query(allroomsData);
+    onSnapshot(q, (querySnapshots) => {
+      setRooms(querySnapshots.docs.map((doc) => doc.data()));
+    });
+  }
 
   return (
     <div className="roomTimeLine">
@@ -50,9 +60,12 @@ function RoomTimeLine() {
             text={post.text}
             avatar={post.avatar}
             image={post.image}
+            roomId={params.id}
           />
         ))}
       </FlipMove>
+      {console.log("props", roomTitle)}
+      {console.log("params.id", params.id)}
     </div>
   );
 }

@@ -1,14 +1,18 @@
-.widgets{
+.widgets {
     /* 全体の35% → 合計で100% */
     flex: 0.35;
     /* スクロール → chromeのみに適用される */
-        overflow-y: scroll;
+    overflow-y: scroll;
+    margin-top: 10px;
+    margin-right: 10px;
 
 }
+
 .widgets::-webkit-scrollbar {
     display: none;
 }
-.widgets_input{
+
+.widgets_input {
     /* 子要素がすべてflexItemになる */
     display: flex;
     align-items: center;
@@ -19,15 +23,16 @@
     margin-left: 20px;
 }
 
-.widgets_input > input{
+.widgets_input>input {
     border: none;
     background-color: var(--udc-background);
 }
-.widgets_searchIcon{
+
+.widgets_searchIcon {
     color: gray;
 }
 
-.widgets_widgetContainer{
+.widgets_widgetContainer {
     margin-top: 15px;
     margin-left: 20px;
     padding: 20px;
@@ -36,7 +41,7 @@
     border-radius: 20px;
 }
 
-.widgets_widgetContainer > h2{
+.widgets_widgetContainer>h2 {
     font-size: 18px;
     font-weight: 800;
 }
