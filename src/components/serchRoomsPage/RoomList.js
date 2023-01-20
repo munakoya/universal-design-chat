@@ -92,7 +92,7 @@ function RoomList() {
   return (
     <div className="roomList">
       <div className="allRooms">
-        <h2 className="roomList_header">Room List</h2>
+        <h2 className="roomList_header">ルームリスト</h2>
       </div>
       <div className="modal">
         <ul>

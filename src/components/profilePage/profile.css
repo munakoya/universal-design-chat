@@ -1,11 +1,6 @@
-/* 修正
-
-
 .profile {
-    text-align: center;
+    flex: 0.45;
+    height: 100%;
+    background-color: #fff;
+    margin-top: 20px;
 }
-
-.MuiAvatar-root.MuiAvatar-circular.css-1wlk0hk-MuiAvatar-root {
-    margin-left: auto;
-    margin-right: auto;
-} */

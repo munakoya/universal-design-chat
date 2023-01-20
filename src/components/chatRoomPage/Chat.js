@@ -10,6 +10,8 @@ TODO
 → overflow-x : hiddenにするとx軸方向は固定されるけど、その分右側が見切れている
 
 urlはそのままでセキュリティルールを編集して登録済みのルームのみアクセス可能にする
+
+チャット → 話題からにしたい
 */
 
 import React, { useEffect, useState } from "react";
@@ -36,8 +38,6 @@ function Chat() {
   // 編集
   const [rooms, setRooms] = useState([]);
   const [room, setRoom] = useState([]);
-  // const { user } = useAuth();
-  // const userInfo = doc(db, "user", `${user.uid}`);
 
   useEffect(() => {
     // ここで直接ドキュメントidを指定 → urlはテキストに戻してわかりやすk

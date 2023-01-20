@@ -1,4 +1,14 @@
-.quizList_header{
+.quiz {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+
+
+.quizList_header {
     position: sticky;
     top: 0;
     background-color: white;
@@ -7,9 +17,10 @@
     /* border: 1px solid var(--udc-background); */
     padding: 10px 20px;
     margin-top: 0;
-    
+
 }
-.quizList_ansInput{
+
+.quizList_ansInput {
     display: flex;
     flex-direction: column;
 }

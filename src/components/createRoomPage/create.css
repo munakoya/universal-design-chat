@@ -1,33 +1,52 @@
-.createRoom-input{
+.create {
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 25px;
+    height: 100%;
+    width: 100%;
+
+}
+
+
+.createRoom-input {
+    width: 70%;
     display: flex;
     flex-direction: column;
     overflow: scroll;
     /* スクロール → chromeのみに適用される */
-        overflow-y: scroll;
-        /* スクロールバーを消す */
+    overflow-y: scroll;
+    margin: auto;
+    /* スクロールバーを消す */
+
 }
+
 .createRoom-input::-webkit-scrollbar {
     display: none;
 }
 
-.createRoom-input > input{
-    margin: 20px 0 ;
-}
-.create-header{
-    /* 固定 → stickyで固定*/
-        position: sticky;
-        top: 0;
-        background-color: white;
-        /* headerは一番上に来てほしいので100を当てる */
-        z-index: 100;
-        border: 1px solid var(--udc-background);
-        padding: 5px, 20px;
+.createRoom-input>input {
+    margin: 20px 0;
 }
 
-.createQuiz-input{
+.create-header {
+    /* 固定 → stickyで固定*/
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* headerは一番上に来てほしいので100を当てる */
+    z-index: 100;
+    padding: 5px, 20px;
+    text-align: center;
+
+}
+
+.createQuiz-input {
     display: flex;
     flex-direction: column;
 }
-.createQuizSet{
-    margin: 20px 0;
+
+.createQuizSet input {
+    margin: 10px 25px;
+    width: 40%;
+
 }

@@ -1,4 +1,4 @@
-.roomTimeLine{
+.roomTimeLine {
     flex: 0.4;
     /* タイムラインの画面の比率設定 → 45% */
     border-right: 1px solid var(--udc-background);
@@ -7,12 +7,18 @@
     overflow-y: scroll;
     /* スクロールバーを消す */
     min-width: 300px;
+
+    background-color: #fff;
+    margin-top: 20px;
+    margin-bottom: -20px;
+
 }
-.roomTimeLine::-webkit-scrollbar{
+
+.roomTimeLine::-webkit-scrollbar {
     display: none;
 }
 
-.roomTimeLine_header{
+.roomTimeLine_header {
     /* 固定 → stickyで固定*/
     position: sticky;
     top: 0;
@@ -22,6 +28,7 @@
     border: 1px solid var(--udc-background);
     padding: 5px, 20px;
 }
+
 .roomTimeLine_header>h2 {
     font-size: 20px;
     font-weight: 800;
