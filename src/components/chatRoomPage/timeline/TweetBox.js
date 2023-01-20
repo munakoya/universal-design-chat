@@ -36,7 +36,7 @@ function TweetBox() {
     // リロードされないように
     e.preventDefault();
     // 空送信できないように変更
-    if (tweetMessage === "" && tweetImage === "") return;
+    if (tweetMessage === "") return;
     sendRoomTweet(tweetMessage, tweetImage, user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
@@ -69,9 +69,10 @@ function TweetBox() {
           <Avatar src={user.photoURL} />
           <input
             value={tweetMessage}
-            placeholder="いまどうしてる？"
+            placeholder="話題を投稿しよう！"
             type="text"
             onChange={handleChangeMessage}
+            required
           ></input>
         </div>
         <input

@@ -133,7 +133,7 @@ function Widgets() {
           // 上位10ルーム出力
           if (index < 10) {
             return (
-              <div className="roomRank">
+              <div className="room_rank">
                 <p className="no">
                   {index + 1}. {room.roomTitle}
                 </p>
@@ -143,7 +143,16 @@ function Widgets() {
         })}
       </div>
       <div className="widgets_widgetContainer">
-        <h2>なんかしらの項目足す予定 ↑ 上位10ルーム出力されます</h2>
+        <h2>新規ルーム</h2>
+        {rooms.map((room, index) => {
+          if (index < 5) {
+            return (
+              <div className="new_room">
+                <p>New ! {room.title}</p>
+              </div>
+            );
+          }
+        })}
       </div>
     </div>
   );

@@ -137,7 +137,7 @@ function ProfileWidgets() {
         })}
       </div>
       <div className="widgets_widgetContainer">
-        <h2>なんかしらの項目足す予定 ↑ 上位10ルーム出力されます</h2>
+        <h2>aaa↑ 上位10ルーム出力されます</h2>
       </div>
     </div>
   );
