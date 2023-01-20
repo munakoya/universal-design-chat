@@ -65,8 +65,8 @@ function Chat() {
   return (
     <div className="chat">
       {console.log("url内のid : ", params.id)}
-      <h2 className="chat_header">{selectRoom?.title}</h2>
-      <Link to="/rooms">⬅️ Back to all rooms</Link>
+      <h2 className="chat_header">全体チャット</h2>
+      {/* <Link to="/rooms">⬅️ Back to all rooms</Link> */}
 
       <div className="messages_container">
         {/* そもそもちゃんとpropsを渡せてない → urlで渡したくないならpropsだけど渡せない */}

@@ -94,6 +94,8 @@ async function sendMessage(roomId, user, text) {
     console.error(error);
   }
 }
+// sendMessage関数 → roomのサブコレクションsendMessageにドキュメントを追加する関数？
+// propsにroomIDとuserデータとtextを受け取る
 
 // チャットルーム内のすべてのメッセージを取得
 function getMessages(roomId, callback) {
@@ -101,6 +103,27 @@ function getMessages(roomId, callback) {
   return onSnapshot(
     query(
       collection(db, "chat-rooms", roomId, "messages"),
+      // 最新版が下に来るように並び替えてる？
+      orderBy("timestamp", "asc")
+    ),
+    (querySnapshot) => {
+      // messagesにルーム内のデータ(db/chat-rooms/roomId/messagesのデータ)をすべて取得
+      const messages = querySnapshot.docs.map((x) => ({
+        id: x.id,
+        ...x.data(),
+      }));
+
+      callback(messages);
+    }
+  );
+}
+
+// チャットルーム内のすべてのメッセージを取得
+function getTopicMessages(roomId, topicId, callback) {
+  // onSnapshot でfirestoreをリアルタイム更新できる → 変更が加えられると更新を受けとる
+  return onSnapshot(
+    query(
+      collection(db, "chat-rooms", roomId, "topics", topicId, "messages"),
       // 最新版が下に来るように並び替えてる？
       orderBy("timestamp", "asc")
     ),
@@ -158,6 +181,7 @@ export {
   sendMessage,
   getMessages,
   sendTweet,
+  getTopicMessages,
   // checkAdminiStrator,
   auth,
 };
