@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "../../../../hooks/useAuth";
 import db, { sendMessage, sendTopicMessage } from "../../../../firebase";
 import "./topicChatMessageInput.css";
+// import "../../MessageInput/chatMessageInput.css";
 import { useParams } from "react-router-dom";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
