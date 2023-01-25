@@ -9,10 +9,11 @@ ChatMessageListのcss
     overflow-y: scroll;
     min-width: 250px;
     width: 100%;
-    position: sticky;
-    bottom: 0;
-        overflow-x: hidden;
+    position: fixed;
+    bottom: 2px;
+    overflow-x: hidden;
 }
+
 .message_list_container::-webkit-scrollbar {
     display: none;
 }
@@ -34,7 +35,8 @@ ChatMessageListのcss
     /* list-style:noneと同じ */
     display: block;
 }
-.message_avatar{
+
+.message_avatar {
     float: left;
     margin-top: 25px;
     margin-right: 10px;
@@ -46,7 +48,8 @@ ChatMessageListのcss
     text-align: right;
     display: block;
 }
-.own_message_avatar{
+
+.own_message_avatar {
     float: right;
     margin-top: 25px;
     margin-left: 10px;

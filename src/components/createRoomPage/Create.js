@@ -152,6 +152,7 @@ function Create() {
     onSnapshot(q, (querySnapshots) => {
       setRooms(querySnapshots.docs.map((doc) => doc.data()));
     });
+    // existsで実装できそう → userと一緒
     for (let room of rooms) {
       if (room.title === roomTitle) {
         checkCount = 0;
@@ -177,12 +178,14 @@ function Create() {
             placeholder="ルーム名"
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setRoomTitle(e.target.value)}
+            required
           ></input>
           <input
             value={description}
             placeholder="ルーム説明"
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setDescription(e.target.value)}
+            required
           ></input>
           <input
             value={icon}
@@ -197,12 +200,14 @@ function Create() {
                 placeholder="Question1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion1(e.target.value)}
+                required
               ></input>
               <input
                 value={answer1}
                 placeholder="Answer1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer1(e.target.value)}
+                required
               ></input>
             </div>
             <div className="createQuizSet">
@@ -211,12 +216,14 @@ function Create() {
                 placeholder="Question 2"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion2(e.target.value)}
+                required
               ></input>
               <input
                 value={answer2}
                 placeholder="Answer 2"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer2(e.target.value)}
+                required
               ></input>
             </div>
             <div className="createQuizSet">
@@ -225,12 +232,14 @@ function Create() {
                 placeholder="Question 3"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion3(e.target.value)}
+                required
               ></input>
               <input
                 value={answer3}
                 placeholder="Answer 3"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer3(e.target.value)}
+                required
               ></input>
             </div>
             <div className="createQuizSet">
@@ -239,12 +248,14 @@ function Create() {
                 placeholder="Question 4"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion4(e.target.value)}
+                required
               ></input>
               <input
                 value={answer4}
                 placeholder="Answer 4"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer4(e.target.value)}
+                required
               ></input>
             </div>
             <div className="createQuizSet">
@@ -253,12 +264,14 @@ function Create() {
                 placeholder="Question 5"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion5(e.target.value)}
+                required
               ></input>
               <input
                 value={answer5}
                 placeholder="Answer 5"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer5(e.target.value)}
+                required
               ></input>
             </div>
             {/* <Button className="pushQuiz" onClick={addNewQuiz()}>
