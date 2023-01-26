@@ -5,3 +5,35 @@
     margin-top: 20px;
     overflow-y: scroll;
 }
+
+.profile_container {
+    margin-top: -20px;
+    line-height: 1.2;
+}
+
+.profile_header {
+    margin-top: -2px;
+    line-height: 1.8;
+}
+
+.user_name {
+    margin-left: 12%;
+    margin-top: -35px;
+    line-height: 1.8;
+}
+
+.List_2 {
+    line-height: 0.5;
+}
+
+.New_List {
+    line-height: 0.1;
+}
+
+.My_List {
+    line-height: 0.1;
+}
+
+.profile_myRoomList_score {
+    margin-bottom: 10px;
+}
