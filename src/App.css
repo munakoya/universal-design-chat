@@ -15,10 +15,6 @@
 }
 
 
-
-
-
-
 /*ログインボタン*/
 button.login {
   /*ボタンの大きさ*/
@@ -77,7 +73,8 @@ button.login:hover:after {
 body {
   --udc-color: #50b7f5;
   --udc-background: #e6ecf0;
-  background-color: #50b7f5;
+  /* background-color: #50b7f2; */
+  /* background-color: antiquewhite; */
 }
 
 

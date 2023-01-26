@@ -12,7 +12,7 @@ export function ProfilePage() {
     <div className="app">
       <Sidebar />
       <Profile />
-      <ProfileWidgets />
+      {/* <ProfileWidgets /> */}
     </div>
   );
 }

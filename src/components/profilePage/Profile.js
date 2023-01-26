@@ -50,21 +50,27 @@ function Profile() {
         {console.log(user)}
 
         <Avatar src={selectUser.icon} />
-        <p>ユーザー名 : {selectUser.name}</p>
+        <h3 className="user_name">ユーザー名 : {selectUser.name}</h3>
 
         {/* <p>Email : {user.email}</p> */}
         {/* firestoreからdb/userを持ってくる → ルーム一覧と点数 */}
         <div className="profile_myRoomList">
-          <h2>所属ルーム一覧</h2>
-          <h3>所属ルーム数 : {selectUser?.myRoomList?.length}</h3>
-          <h3>作成ルーム数 : {selectUser?.createRooms?.length}</h3>
+          <div className="List_2">
+            {/* <h2>所属ルーム一覧</h2> */}
+            <h3>所属ルーム数 : {selectUser?.myRoomList?.length}</h3>
+            <h3>作成ルーム数 : {selectUser?.createRooms?.length}</h3>
+          </div>
+
           <p>----------------------------------------------------</p>
-          <h3>作成ルーム一覧</h3>
+
+          <h3 className="New_List">作成ルーム一覧</h3>
           {selectUser?.createRooms?.map((createRoom) => (
-            <p>{createRoom}</p>
+            <p>・{createRoom}</p>
           ))}
+
           <p>----------------------------------------------------</p>
-          <h3>所属ルーム一覧</h3>
+
+          <h3 className="My_List">所属ルーム一覧</h3>
           {selectUser?.myRoomScore?.map((myRoom) =>
             // 4点以上の入室中ルームのみを表示
             myRoom.score >= 4 ? (
@@ -73,10 +79,10 @@ function Profile() {
                   {/* Linkにしてルーム詳細画面に遷移できるようにしたい */}
                   ・ルーム名 : {myRoom.title}
                 </p>
+
                 <p className="profile_myRoomList_score">
                   ・スコア : {myRoom.score}
                 </p>
-                <br />
               </div>
             ) : (
               console.log(`不合格ルーム : ${myRoom.title} | ${myRoom.score}`)
