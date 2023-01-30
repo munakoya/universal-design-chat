@@ -62,47 +62,65 @@ function App() {
             className="back_default"
             value="#50b7f5"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            水
+          </button>
           <button
             className="back_black"
             value="#000"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            黒
+          </button>
           <button
             className="back_orange"
             value="#F4D21F"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            橙
+          </button>
           <button
             className="back_green"
             value="#E8FFD1"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            黄緑
+          </button>
           <button
             className="back_blue"
             value="#3754B1"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            青
+          </button>
           <button
             className="back_pink"
             value="#FDE1E9"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            桃
+          </button>
           <button
             className="back_gray"
             value="#646566"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            灰
+          </button>
           <button
             className="back_purple"
             value="#8731AD"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            紫
+          </button>
           <button
             className="back_white"
             value="#fff"
             onClick={(e) => changeColor(e.target.value)}
-          ></button>
+          >
+            白
+          </button>
         </div>
       ) : (
         console.log("ログイン状態ではありません")

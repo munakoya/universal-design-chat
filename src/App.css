@@ -73,6 +73,7 @@ button.login:hover:after {
 body {
   --udc-color: #50b7f5;
   --udc-background: #e6ecf0;
+
   /* background-color: #50b7f2; */
   /* background-color: antiquewhite; */
 }
@@ -91,7 +92,7 @@ body {
   max-width: 1300px;
   /* 中央寄せ */
   /* margin: 0, auto; */
-  margin-top: 0;
+
   margin-left: auto;
   margin-bottom: 0;
   margin-right: auto;
@@ -106,4 +107,94 @@ a {
 
 a:visited {
   color: inherit;
+}
+
+
+.selectColor{
+/*ボタンの大きさ*/
+  height: 10px;
+  width: 800px;
+  background: #eee;
+  border-radius: 50px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  /* max-width: 260px; */
+  padding: 10px 10px;
+  color: #313131;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+
+  
+}
+
+.back_default,
+.back_black,
+.back_orange,
+.back_green,
+.back_blue,
+.back_pink,
+.back_gray,
+.back_purple,
+.back_white {
+  height: 25px;
+  width: 85px;
+  border-radius: 50px;
+  border-width: 1.34px;
+  position: relative;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 260px;
+  padding: 10px 25px;
+  transition: 0.3s ease-in-out;
+  font-weight: 500;
+}
+
+.back_default {
+  background: #50b7f5;
+  color: #fff;
+}
+
+.back_black {
+  background: #000;
+  color: #fff;
+}
+
+.back_orange {
+  background: #F4D21F;
+  color: #2E79BE;
+}
+
+.back_green {
+  background: #E8FFD1;
+  color: #313131;
+}
+
+.back_blue {
+  background-color: #3754B1;
+  color: #fff;
+}
+
+.back_pink {
+  background: #FDE1E9;
+  color: #313131;
+}
+
+.back_gray {
+  background: #646566;
+  color: #fff;
+}
+
+.back_purple {
+  background: #8731AD;
+  color: #fff;
+}
+
+.back_white {
+  background: #fff;
+  color: #000;
 }
