@@ -11,7 +11,7 @@ import TweetBox from "./TweetBox";
 import Post from "./Post.js";
 
 import "./roomTimeLine.css";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function RoomTimeLine({ roomTitle }) {
   const [posts, setPosts] = useState([]);
@@ -45,7 +45,12 @@ function RoomTimeLine({ roomTitle }) {
   return (
     <div className="roomTimeLine">
       <div className="roomTimeLine">
-        <h2>タイムライン</h2>
+        <h2>
+          <Link to="/rooms" className="back">
+            ◀
+          </Link>
+          {`${params.id}`}
+        </h2>
       </div>
       <TweetBox />
       <FlipMove>

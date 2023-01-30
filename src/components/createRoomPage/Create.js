@@ -24,6 +24,7 @@ import {
   onSnapshot,
   updateDoc,
   arrayUnion,
+  getDoc,
 } from "firebase/firestore";
 import db from "../../firebase";
 import { uuidv4 } from "@firebase/util";
@@ -52,26 +53,11 @@ function Create() {
   const [question5, setQuestion5] = useState("");
   const [answer5, setAnswer5] = useState("");
 
-  // const [question6, setQuestion6] = useState("");
-  // const [answer6, setAnswer6] = useState("");
-
-  // const [question7, setQuestion7] = useState("");
-  // const [answer7, setAnswer7] = useState("");
-
-  // const [question8, setQuestion8] = useState("");
-  // const [answer8, setAnswer8] = useState("");
-
-  // const [question9, setQuestion9] = useState("");
-  // const [answer9, setAnswer9] = useState("");
-
-  // const [question10, setQuestion10] = useState("");
-  // const [answer10, setAnswer10] = useState("");
-
   const [rooms, setRooms] = useState([]);
   // 入力項目をdbに登録
   async function createRoom() {
     if (roomTitle === "") return;
-    console.log(`checkCount : ${checkCount} | 新規ルーム作成を行います`);
+    // console.log(`checkCount : ${checkCount} | 新規ルーム作成を行います`);
     // e.preventDefault();
     let id = uuidv4();
 
@@ -142,30 +128,43 @@ function Create() {
     setAnswer5("");
   }
 
-  let checkCount = 0;
-  function registerRoomCheck(e) {
-    // 初期化
-    checkCount = 0;
+  // let checkCount = 0;
+  async function registerRoomCheck(e) {
     e.preventDefault();
-    const allroomsData = collection(db, "all-room-list");
-    const q = query(allroomsData);
-    onSnapshot(q, (querySnapshots) => {
-      setRooms(querySnapshots.docs.map((doc) => doc.data()));
-    });
-    // existsで実装できそう → userと一緒
-    for (let room of rooms) {
-      if (room.title === roomTitle) {
-        checkCount = 0;
-        console.log(`checkCount : ${checkCount} | 同じルーム名が存在します。`);
-        break;
-      } else {
-        checkCount = 1;
-        console.log(`check : ${checkCount}`);
-      }
+
+    const allRoomData = doc(db, "all-room-list", `${roomTitle}`);
+    const allRoomDataSnap = await getDoc(allRoomData);
+
+    if (allRoomDataSnap.exists()) {
+      console.log("同じルーム名が存在されます");
+      // ここにエラー出力
+    } else {
+      // 同じルーム名が無い
+      createRoom();
     }
-    checkCount === 1
-      ? createRoom()
-      : console.log(`checkCount : ${checkCount} | ルームを作成しません。`);
+
+    // 初期化
+    // checkCount = 0;
+    // e.preventDefault();
+    // const allroomsData = collection(db, "all-room-list");
+    // const q = query(allroomsData);
+    // onSnapshot(q, (querySnapshots) => {
+    //   setRooms(querySnapshots.docs.map((doc) => doc.data()));
+    // });
+    // // existsで実装できそう → userと一緒 auth.jsに書いてある
+    // for (let room of rooms) {
+    //   if (room.title === roomTitle) {
+    //     checkCount = 0;
+    //     console.log(`checkCount : ${checkCount} | 同じルーム名が存在します。`);
+    //     break;
+    //   } else {
+    //     checkCount = 1;
+    //     console.log(`check : ${checkCount}`);
+    //   }
+    // }
+    // checkCount === 1
+    //   ? createRoom()
+    //   : console.log(`checkCount : ${checkCount} | ルームを作成しません。`);
   }
 
   return (
@@ -280,7 +279,7 @@ function Create() {
           </div>
           <Button
             className="createRoom-createButton"
-            type="submit"
+            type="button" // type="submit"にするとenterキーで送信される buttonならenterキー誤送信防げます
             onClick={registerRoomCheck}
           >
             ルーム作成
