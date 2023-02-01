@@ -12,7 +12,9 @@ import RoomTimeLine from '../chatRoomPage/timeline/RoomTimeLine';
 
 // propsで渡す
 function MyRoomList() {
-    const { user } = useAuth();
+    // const { user } = useAuth();
+    // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
     const [selectUser, setSelectUser] = useState([]);
 
     useEffect(() => {
@@ -21,7 +23,7 @@ function MyRoomList() {
     
 // ログイン中のユーザーデータを取得する
 async function getUser() {
-    const selectUser = doc(db, "user", `${user.uid}`);
+    const selectUser = doc(db, "user", `${auth_user.uid}`);
     const selectUserSnap = await getDoc(selectUser);
     if (selectUserSnap.exists()) {
         setSelectUser(selectUserSnap.data())

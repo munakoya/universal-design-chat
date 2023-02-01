@@ -1,14 +1,17 @@
+/**
+ * ルーム内の話題ごとのチャットルーム → 送信のとこ
+ */
 import React from "react";
-import { useAuth } from "../../../../hooks/useAuth";
-import db, { sendMessage, sendTopicMessage } from "../../../../firebase";
-import "./topicChatMessageInput.css";
-// import "../../MessageInput/chatMessageInput.css";
 import { useParams } from "react-router-dom";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import db from "../../../../firebase";
+import "./topicChatMessageInput.css";
 
 function TopicChatMessageInput({ roomId }) {
-  const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
+
   const [value, setValue] = React.useState("");
   const params = useParams();
 
@@ -16,32 +19,21 @@ function TopicChatMessageInput({ roomId }) {
     setValue(e.target.value);
   };
   const handleSubmit = (e) => {
-    // リロードされないように
     e.preventDefault();
-    // firebaseのsendMessage関数を呼び出して、dbに値をセット
-    sendTopicMessage(roomId, params.id2, user, value);
+    // firebaseのsendTopicMessage関数を呼び出して、dbに値をセット → roomIDはuseParams使って取得してもおk
+    sendTopicMessage(roomId, params.id2, auth_user, value);
     // 送信後は入力欄を空にする
     setValue("");
   };
 
-  async function sendTopicMessage(roomId, topicId, user, text) {
-    // topic
+  async function sendTopicMessage(roomId, topicId, auth_user, text) {
     try {
-      //   addDocとcollectionの関数を使用してドキュメントを追加
-      // addDocを使用するために参照を取得するcollectionを使用
-      //   collectionの引数 → パスを形成するfirebaseインスタンス chat-roomコレクション roomID(textでdogsとかfoodとか)コレクションのmessages(こいつもコレクション)
-      //   多分firebaseのパス指定は、カンマ
-      //   firestoreは存在しないコレクションとドキュメントを作成するため、目的のパスを指定するだけで済む
-      //   個人的に後でroomごとのmembersっていうのとquiz追加して、自分の保持しているroomを表示
       await addDoc(
         collection(db, "chat-rooms", roomId, "topics", topicId, "messages"),
         {
-          // db, "chat-rooms", roomId, "topic"
-          // messagesの中に以下のプロパティが追加される(メッセージを送信するたびに)
-          // userはuseAuthで取得したログインユーザー情報を使用していると思われ
-          uid: user.uid,
-          displayName: user.displayName,
-          avatar: user.photoURL,
+          uid: auth_user.uid,
+          displayName: auth_user.displayName,
+          avatar: auth_user.photoURL,
           text: text.trim(),
           timestamp: serverTimestamp(),
           messageId: uuidv4(),
@@ -53,21 +45,20 @@ function TopicChatMessageInput({ roomId }) {
   }
 
   return (
-    //   {/* // buttonで実行 → handlSubmit */}
     <div>
       <form onSubmit={handleSubmit} className="message_input_container">
         <input
           type="text"
-          placeholder="Enter a message"
+          placeholder="メッセージを入力しよう！"
           value={value}
           onChange={handleChange}
           className="message_input"
           // 空送信できないように
-          required
+          required="true" // 指定しなくても送信ボタンが押せないためなくても良い
           minLength={1}
         />
         <button type="submit" disabled={value < 1} className="send_message">
-          Send
+          送信
         </button>
       </form>
     </div>

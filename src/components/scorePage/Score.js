@@ -9,7 +9,9 @@ import Pass from "./Pass";
 function Score() {
   // user/myRoomScoreから取り出す
   const params = useParams(); // params.id → roomIDが取れます
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
   const [selectUser, setSelectUser] = useState([]);
   const [score, setScore] = useState();
   // roomIdのインデックス値をmyRoomListから取り出す
@@ -20,7 +22,7 @@ function Score() {
 
   // ログイン中のユーザーデータを取得する
   async function getUser() {
-    const selectUser = doc(db, "user", `${user.uid}`);
+    const selectUser = doc(db, "user", `${auth_user.uid}`);
     const selectUserSnap = await getDoc(selectUser);
     if (selectUserSnap.exists()) {
       setSelectUser(selectUserSnap.data());

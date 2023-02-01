@@ -1,43 +1,44 @@
 /*
 メッセージフォームのコンポーネント
+
 */
 import React from "react";
-import { useAuth } from "../../../hooks/useAuth";
 import { sendMessage } from "../../../firebase";
 import "./chatMessageInput.css";
 
 function ChatMessageInput({ roomId }) {
-  const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
   const [value, setValue] = React.useState("");
 
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  // 送信処理
   const handleSubmit = (e) => {
-    // リロードされないように
     e.preventDefault();
     // firebaseのsendMessage関数を呼び出して、dbに値をセット
-    sendMessage(roomId, user, value);
+    sendMessage(roomId, auth_user, value);
     // 送信後は入力欄を空にする
     setValue("");
   };
 
   return (
-    //   {/* // buttonで実行 → handlSubmit */}
     <div>
       <form onSubmit={handleSubmit} className="message_input_container">
+        {/* できたらtextareaで改行可能に */}
         <input
           type="text"
-          placeholder="Enter a message"
+          placeholder="メッセージを入力しよう！"
           value={value}
           onChange={handleChange}
           className="message_input"
           // 空送信できないように
-          required
+          required="true" // valueが1文字以上でないとenter押せない
           minLength={1}
         />
         <button type="submit" disabled={value < 1} className="send_message">
-          Send
+          送信
         </button>
       </form>
     </div>

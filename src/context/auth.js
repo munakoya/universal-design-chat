@@ -2,7 +2,6 @@
 import React from "react";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import db from "../firebase";
-
 import { loginWithGoogle } from "../firebase";
 
 // AuthContextオブジェクト作成 → contextの作成とは
@@ -43,6 +42,12 @@ const AuthProvider = (props) => {
         createRooms: [],
       });
     }
+    // セッションストレージに保存
+    const jsonObj = JSON.stringify(user);
+    sessionStorage.setItem("AUTH_USER", jsonObj);
+    // uidへの直接アクセス用 ↑ 経由だとエラー出る
+    sessionStorage.setItem("AUTH_USER_UID", user.uid);
+    sessionStorage.setItem("AUTH_USER_PHOTOURL", user.photoURL);
   };
 
   const value = { user, login };

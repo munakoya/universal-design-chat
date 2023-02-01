@@ -13,7 +13,9 @@ import db from "../../firebase";
 import "./SendMail.css";
 import { useAuth } from "../../hooks/useAuth";
 function SendMail() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
   const [inquiryTitle, setInquiryTitle] = useState([]);
   const [inquiryContent, setInquiryContent] = useState([]);
 
@@ -23,7 +25,7 @@ function SendMail() {
       await addDoc(collection(db, "inquiry"), {
         title: inquiryTitle,
         text: inquiryContent,
-        from: user.uid,
+        from: auth_user.uid,
         timestamp: serverTimestamp(),
       });
       setInquiryTitle("");
@@ -36,9 +38,9 @@ function SendMail() {
   function testMail() {
     console.log("testMail");
     // set
-    setDoc(doc(db, "mail", user.uid), {
+    setDoc(doc(db, "mail", auth_user.uid), {
       to: "muna.sakasakuta@gmail.com",
-      from: user.email,
+      from: auth_user.email,
       message: {
         subject: "Hello from Firebase!",
         html: "This is an <code>HTML</code> email body.",

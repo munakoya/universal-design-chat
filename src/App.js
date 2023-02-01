@@ -1,66 +1,94 @@
-import { doc, getDoc, updateDoc } from "firebase/firestore";
+/*
+App.js
+
+stateのuserではなく、セッションストレージのauth_userを使っている理由
+→ リロード時のログイン画面遷移を防ぐ
+ログインの構造自体を変えた方がいい？
+
+ログインフロー
+・初ログイン時
+1. Unauthに遷移 → ログインボタンをクリック
+2. sessionStrageとauthProviderにユーザーデータ
+useAuthで定義したuserデータはリロードで消える
+
+・リロード
+1. useAuthから取得していたuserデータにはアクセスできなくなる
+→ googleログインを挟まないと行けないため
+
+2. sessionStrageに保存してあるデータは消えないため、ログインページに遷移しない
+→ ログインボタンをクリックしません
+
+3. Auth~以降のuserデータは基本的にsessionStrage管理
+
+memo
+・最初から全部sessionStrage管理にすればいいのでは？
+・auth_userより、直接JSON.parse(session~~~~)にしたほうが早い？
+・sessionStrageでの管理の安全性 localStrageとどっちがいいか
+
+*/
+
 import { useState, useEffect } from "react";
-import "./App.css";
-import { AuthenticatedApp } from "./components/authenticatedApp/AuthenticatedApp";
-import ProfileWidgets from "./components/profilePage/ProfileWidget";
-import { UnauthenticatedApp } from "./components/unauthenticatedApp/UnauthenticatedApp";
-import db from "./firebase";
 import { useAuth } from "./hooks/useAuth";
+import { AuthenticatedApp } from "./components/authenticatedApp/AuthenticatedApp";
+import { UnauthenticatedApp } from "./components/unauthenticatedApp/UnauthenticatedApp";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import db from "./firebase";
+import "./App.css";
 
 function App() {
   // ログイン状態のチェックのため？
-  // useAuth(カスタムフック)で認証情報をuserに入れる
   const { user } = useAuth();
-
-  // TODO
-  // 最終ログイン日時から1ヶ月以内ならAuthenticatedAppに遷移させる
-  // 今のとこfirebaseにつなげて最終ログインが一ヶ月以内なら → AuthenticatedAppに遷移
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
   // 今のところdbにカラーコード保存している意味はありません
+  // state管理だとリロード時になくなる
   const [selectUser, setSelectUser] = useState([]);
   let [selectColor, setSelectColor] = useState("");
+
   useEffect(() => {
-    // 最初の一回だけ
     getUser();
-    // setSelectColor(selectUser.selectedColor);
   }, []);
-  // firestoreから色を持ってくる 変数名はselectColor
+
   // ログイン中のユーザーデータを取得する
   async function getUser() {
-    const selectUser = doc(db, "user", `${user.uid}`);
-    const selectUserSnap = await getDoc(selectUser);
+    const selectUserSnap = await getDoc(doc(db, "user", `${auth_user.uid}`));
     if (selectUserSnap.exists()) {
       setSelectUser(selectUserSnap.data());
-      // return selectUserSnap.data();
     } else {
       console.log("(泣)");
     }
   }
 
+  // firestoreから色を持ってくる 変数名はselectColor
   async function changeColor(color) {
     setSelectColor(color);
+    // db / user / selectedColorをアップデート
     try {
-      console.log("追加します");
-      await updateDoc(doc(db, "user", `${user.uid}`), {
+      await updateDoc(doc(db, "user", `${auth_user.uid}`), {
         selectedColor: color,
       });
     } catch (error) {
       console.error(error);
     }
   }
+
   return (
     <div
       className="App"
       style={{
+        // なるべくdbに登録されたdbを取ってきたいorセッション
         backgroundColor: selectColor,
       }}
     >
-      {/* ここにカラーリストを出す */}
-      {user ? (
+      {/* カラーリスト*/}
+      {auth_user ? (
         <div className="selectColor">
           <button
             className="back_default"
             value="#50b7f5"
+            // クリックするとselectColorの値が更新されるため、背景色が変わる
+            // userデータのselectedColorがnullならばselectColorにするみたいな処理追加
             onClick={(e) => changeColor(e.target.value)}
           >
             水
@@ -123,12 +151,17 @@ function App() {
           </button>
         </div>
       ) : (
-        console.log("ログイン状態ではありません")
+        console.log("auth_userがありません。")
       )}
 
       <div className="container">
-        {/* ログインできてuserあればauthenticatedApp ログインしてない → Unauthだからgoogleログインボタン */}
-        {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
+        {/* auth_userでやると多分遅いのかな？ → エラー出る */}
+        {/* AUTH_USER_UIDのみで行けそう？ */}
+        {JSON.parse(sessionStorage.getItem("AUTH_USER")) || user ? (
+          <AuthenticatedApp />
+        ) : (
+          <UnauthenticatedApp />
+        )}
       </div>
     </div>
   );

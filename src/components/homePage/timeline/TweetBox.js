@@ -13,7 +13,9 @@ import { Avatar, Button } from "@mui/material";
 import "./TweetBox.css";
 
 function TweetBox() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
@@ -33,7 +35,7 @@ function TweetBox() {
     e.preventDefault();
     // 空送信できないように変更
     if (tweetMessage === "" && tweetImage === "") return;
-    sendTweet(tweetMessage, tweetImage, user); // firebase.jsで定義している関数
+    sendTweet(tweetMessage, tweetImage, auth_user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
     setTweetImage("");
@@ -42,7 +44,7 @@ function TweetBox() {
     <div className="tweetBox">
       <form onSubmit={handleSubmit}>
         <div className="tweetBox_input">
-          <Avatar src={user.photoURL} />
+          <Avatar src={sessionStorage.getItem("AUTH_USER_PHOTOURL")} />
           <input
             value={tweetMessage}
             placeholder="お知らせを投稿してください"
