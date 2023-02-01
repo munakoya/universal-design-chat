@@ -6,8 +6,8 @@
     /* flex: 0.6; */
     /* 入力フォームを下に固定 */
     position: fixed;
-    bottom: 0;
-    left: 63%;
+    margin-bottom: 15px;
+    margin-left: 3%;
     background-color: #fff;
 
 }

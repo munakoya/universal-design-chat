@@ -13,7 +13,7 @@ Sidebar.jsのcss
     padding-left: 20px;
     padding-right: 20px;
     /* 固定 */
-    height: 100%;
+    height: 90vh;
     position: sticky;
 
     background-color: #fff;
@@ -31,7 +31,7 @@ Sidebar.jsのcss
 } */
 .sidebar_udc_icon {
     margin-left: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     max-width: 30%;
     height: auto;
     background-color: white;
