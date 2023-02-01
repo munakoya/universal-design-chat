@@ -19,12 +19,14 @@ import Settings from "./Settings";
 function Profile() {
   function SignOut() {
     signOut(auth);
+    sessionStorage.removeItem("AUTH_USER");
     navigation("/");
     window.location.reload();
   }
   // ログインユーザー情報
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const [selectUser, setSelectUser] = useState([]);
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
   const navigation = useNavigate();
 
@@ -34,7 +36,7 @@ function Profile() {
 
   // ログイン中のユーザーデータを取得する
   async function getUser() {
-    const selectUser = doc(db, "user", `${user.uid}`);
+    const selectUser = doc(db, "user", `${auth_user.uid}`);
     const selectUserSnap = await getDoc(selectUser);
     if (selectUserSnap.exists()) {
       setSelectUser(selectUserSnap.data());
@@ -47,8 +49,6 @@ function Profile() {
     <div className="profile">
       <h1 className="profile_header">マイページ</h1>
       <div className="profile_container">
-        {console.log(user)}
-
         <Avatar src={selectUser.icon} />
         <h3 className="user_name">ユーザー名 : {selectUser.name}</h3>
 

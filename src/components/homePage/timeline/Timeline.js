@@ -18,6 +18,7 @@ function Timeline() {
 
   // マウント時に一回だけ読み込み
   useEffect(() => {
+    // getSessionUser();
     // firebaseのコレクションを指定
     const postData = collection(db, "posts");
     // 時系列に並び替える → データの並べ替え ドキュメントで検索
@@ -38,7 +39,10 @@ function Timeline() {
       </div>
       {/* FlipMoveで囲む + 関数コンポーネントで使うなら → fowardRefで囲んで,,,ドキュメントみて → post.jsにある */}
       <div>
-        {user.uid === process.env.REACT_APP_ADMIN ? (
+        {console.log("AUTH_USER : ", sessionStorage.getItem("AUTH_USER_UID"))}
+        {/* auth_user.idにすると初ログイン時にエラー */}
+        {sessionStorage.getItem("AUTH_USER_UID") ===
+        process.env.REACT_APP_ADMIN ? (
           <div>
             <TweetBox />
           </div>

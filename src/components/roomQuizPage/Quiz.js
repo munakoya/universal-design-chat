@@ -42,8 +42,10 @@ function Quiz() {
 
   let score = 0;
 
-  const { user } = useAuth();
-  const userInfo = doc(db, "user", `${user.uid}`);
+  // const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
+  const userInfo = doc(db, "user", `${auth_user.uid}`);
   useEffect(() => {
     // すべてのルームデータをroomsに → roomsから選択されたルームと一致するものをroomに
     const roomList = collection(db, "room-list");
@@ -76,7 +78,7 @@ function Quiz() {
     const userList = collection(db, "user");
     const qq = query(userList);
     getDocs(qq).then((querySnapshot) => {
-      setUserData(usersData.find((x) => x.uid === user.uid));
+      setUserData(usersData.find((x) => x.uid === auth_user.uid));
     });
     return userData;
   }
@@ -132,7 +134,7 @@ function Quiz() {
     });
     // ここ変更 roomIdと作成時のidを統一 → roomIdを取得して
     await updateDoc(roomInfo, {
-      members: arrayUnion(user.displayName),
+      members: arrayUnion(auth_user.displayName),
     });
     console.log("合格");
   }

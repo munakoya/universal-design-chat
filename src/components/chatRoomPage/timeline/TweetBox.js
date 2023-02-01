@@ -1,22 +1,24 @@
 /*
 ツイートボックスのコンポーネント
 文字列と画像urlを入力 → 投稿ボタンをクリックすると、sendTweet関数が実行されてdbに登録される
+話題を投稿してもらいます。
 
 TODO
 tweetを複数行入力できるようにする
+→ textareaにすればよき → reactのform集めたライブラリ使いやすかった気がする
 */
 
 import React, { useState } from "react";
-import { useAuth } from "../../../hooks/useAuth";
+import { useParams } from "react-router-dom";
 import { Avatar, Button } from "@mui/material";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import db from "../../../firebase";
 import "./tweetBox.css";
-import { useParams } from "react-router-dom";
 
 function TweetBox() {
-  const { user } = useAuth();
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
   const [tweetMessage, setTweetMessage] = useState("");
   const [tweetImage, setTweetImage] = useState("");
@@ -33,25 +35,25 @@ function TweetBox() {
 
   // 送信処理
   const handleSubmit = (e) => {
-    // リロードされないように
     e.preventDefault();
     // 空送信できないように変更
     if (tweetMessage === "") return;
-    sendRoomTweet(tweetMessage, tweetImage, user); // firebase.jsで定義している関数
+    sendRoomTweet(tweetMessage, tweetImage, auth_user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
     setTweetImage("");
   };
 
-  async function sendRoomTweet(tweetMessage, tweetImage, user) {
+  async function sendRoomTweet(tweetMessage, tweetImage, auth_user) {
     try {
       await addDoc(collection(db, "roomPosts", params.id, "posts"), {
-        // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい
-        displayName: user.displayName,
-        username: user.email,
+        // addするデータ のプロパティを決める
+        // いらないデータ消す
+        displayName: auth_user.displayName,
+        username: auth_user.email,
         verified: true,
         text: tweetMessage,
-        avatar: user.photoURL,
+        avatar: auth_user.photoURL,
         image: tweetImage,
         // 固有のuuidをset → map関数で回すため → docidとかでもいいかも
         id: uuidv4(),
@@ -66,7 +68,7 @@ function TweetBox() {
     <div className="tweetBox">
       <form onSubmit={handleSubmit}>
         <div className="tweetBox_input">
-          <Avatar src={user.photoURL} />
+          <Avatar src={auth_user.photoURL} />
           <input
             value={tweetMessage}
             placeholder="話題を投稿しよう！"

@@ -31,8 +31,10 @@ import { uuidv4 } from "@firebase/util";
 import { Button } from "@mui/material";
 import "./create.css";
 function Create() {
-  const { user } = useAuth();
-  const userInfo = doc(db, "user", `${user.uid}`);
+  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
+
+  const userInfo = doc(db, "user", `${auth_user.uid}`);
   const allRoomArray = doc(db, "all-room-array", "all-rooms");
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -67,10 +69,10 @@ function Create() {
       title: roomTitle,
       description: description,
       icon: icon,
-      createUser: user.displayName,
+      createUser: auth_user.displayName,
       //   quiz: quiz, // quizはコレクションかなあ
       createdAt: serverTimestamp(),
-      members: [user.displayName],
+      members: [auth_user.displayName],
       // クイズはクイズで分けたほうがいいかもしれん
       // マップ型の配列に変更
       quiz: [
@@ -177,20 +179,21 @@ function Create() {
             placeholder="ルーム名"
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setRoomTitle(e.target.value)}
-            required
+            required="true"
           ></input>
           <input
             value={description}
             placeholder="ルーム説明"
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setDescription(e.target.value)}
-            required
+            required="true"
           ></input>
           <input
             value={icon}
             placeholder="imageURL"
             type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
             onChange={(e) => setIcon(e.target.value)}
+            required="true"
           ></input>
           <div className="createQuiz-input">
             <div className="createQuizSet">
@@ -199,14 +202,14 @@ function Create() {
                 placeholder="Question1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion1(e.target.value)}
-                required
+                required="true"
               ></input>
               <input
                 value={answer1}
                 placeholder="Answer1"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer1(e.target.value)}
-                required
+                required="true"
               ></input>
             </div>
             <div className="createQuizSet">
@@ -215,14 +218,14 @@ function Create() {
                 placeholder="Question 2"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion2(e.target.value)}
-                required
+                required="true"
               ></input>
               <input
                 value={answer2}
                 placeholder="Answer 2"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer2(e.target.value)}
-                required
+                required="true"
               ></input>
             </div>
             <div className="createQuizSet">
@@ -231,14 +234,14 @@ function Create() {
                 placeholder="Question 3"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion3(e.target.value)}
-                required
+                required="true"
               ></input>
               <input
                 value={answer3}
                 placeholder="Answer 3"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer3(e.target.value)}
-                required
+                required="true"
               ></input>
             </div>
             <div className="createQuizSet">
@@ -247,14 +250,14 @@ function Create() {
                 placeholder="Question 4"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion4(e.target.value)}
-                required
+                required="true"
               ></input>
               <input
                 value={answer4}
                 placeholder="Answer 4"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer4(e.target.value)}
-                required
+                required="true"
               ></input>
             </div>
             <div className="createQuizSet">
@@ -263,14 +266,14 @@ function Create() {
                 placeholder="Question 5"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setQuestion5(e.target.value)}
-                required
+                required="true"
               ></input>
               <input
                 value={answer5}
                 placeholder="Answer 5"
                 type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
                 onChange={(e) => setAnswer5(e.target.value)}
-                required
+                required="true"
               ></input>
             </div>
             {/* <Button className="pushQuiz" onClick={addNewQuiz()}>

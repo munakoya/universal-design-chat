@@ -1,9 +1,12 @@
+/**
+ * ログインページ
+ * useAuthのuserデータとsessionがnullのとき遷移
+ */
+
 import { useAuth } from '../../hooks/useAuth';
 import './styles.css';
 
 function UnauthenticatedApp() {
-    // ユーザ認証の情報取得 → onClickでlogin呼び出し → 関数?
-    // → useAuth とAuthContextの中のloginにつながっていると思われる → だからonClickでポップアップなる
     const { login } = useAuth();
 
     return (
