@@ -87,7 +87,7 @@ body {
   /* タイムラインとウィジェットをよこならびにするため */
   display: flex;
   /* 縦画面いっぱい */
-  height: 100vh;
+  height: 95vh;
   /* 最大 */
   max-width: 1300px;
   /* 中央寄せ */
