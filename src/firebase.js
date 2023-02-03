@@ -141,6 +141,14 @@ function getTopicMessages(roomId, topicId, callback) {
 
 // ツイートする
 async function sendTweet(tweetMessage, tweetImage, user) {
+  // youtubeの動画url (未再生)
+  if (tweetImage.indexOf("watch?v=") !== -1) {
+    tweetImage = tweetImage.replace("watch?v=", "embed/");
+    // 動画が再生済み
+    if (tweetImage.indexOf("&") !== -1) {
+      tweetImage = tweetImage.substring(0, tweetImage.indexOf("&"));
+    }
+  }
   try {
     await addDoc(collection(db, "posts"), {
       // addするデータ のプロパティを決める → ここをログイン中のuserごとにしたい

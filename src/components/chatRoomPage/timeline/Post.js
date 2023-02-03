@@ -29,8 +29,20 @@ const Post = forwardRef(
                 <p>{text}</p>
               </div>
             </div>
-            {/* ランダムで画像を取ってくる */}
-            <img src={image} alt="" />
+            {/* youtubeのurlの処理はfirebase.jsのsendTweetにあります */}
+            {image.indexOf("embed") === -1 ? (
+              <img src={image} alt="" />
+            ) : (
+              <div className="iframe_wrapper">
+                <iframe
+                  src={image}
+                  alt=""
+                  controls
+                  playsInline
+                  title="指定された画像or動画"
+                ></iframe>
+              </div>
+            )}
           </div>
         </div>
       </Link>

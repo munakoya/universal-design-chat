@@ -1,16 +1,14 @@
-import { Search } from "@mui/icons-material";
+/**
+ * ウィジェットのコンポーネント
+ * 主におすすめルームの出力と検索
+ *
+ * TODO
+ * 検索機能 → 完全一致解消したい
+ * そもそもホームのウィジェットで新規ユーザー向けの使い方モーダルウィンドウだしたい
+ */
 import React, { useEffect, useState } from "react";
-// twitterのライブラリ
-// import {
-//   TwitterTimelineEmbed,
-//   TwitterShareButton,
-//   TwitterTweetEmbed,
-// } from "react-twitter-embed";
-import "./Widgets.css";
 import {
   collection,
-  doc,
-  getDoc,
   onSnapshot,
   orderBy,
   query,
@@ -18,14 +16,15 @@ import {
 } from "firebase/firestore";
 import db from "../../../firebase";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Search } from "@mui/icons-material";
+import "./Widgets.css";
 
 function Widgets() {
   let roomMembers = [];
   let [searchKeyword, setSearchKeyword] = useState("");
 
   // ルーム取得
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState([]); // ルーム全件取得
   let [searchRooms, setSearchRooms] = useState([]);
 
   useEffect(() => {
@@ -34,7 +33,6 @@ function Widgets() {
   }, []);
 
   async function getRoomList() {
-    // すべてのルームデータをroomsに → roomsから選択されたルームと一致するものをroomに
     const roomList = collection(db, "room-list");
     const q = query(roomList, orderBy("createdAt", "desc"));
     onSnapshot(q, (querySnapshots) => {

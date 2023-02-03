@@ -82,7 +82,7 @@ function App() {
       }}
     >
       {/* カラーリスト*/}
-      {auth_user ? (
+      {sessionStorage.getItem("AUTH_USER_UID") || user ? (
         <div className="selectColor">
           <button
             className="back_default"
@@ -157,7 +157,7 @@ function App() {
       <div className="container">
         {/* auth_userでやると多分遅いのかな？ → エラー出る */}
         {/* AUTH_USER_UIDのみで行けそう？ */}
-        {JSON.parse(sessionStorage.getItem("AUTH_USER")) || user ? (
+        {sessionStorage.getItem("AUTH_USER_UID") || user ? (
           <AuthenticatedApp />
         ) : (
           <UnauthenticatedApp />
