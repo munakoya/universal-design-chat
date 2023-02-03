@@ -20,6 +20,9 @@ function Profile() {
   function SignOut() {
     signOut(auth);
     sessionStorage.removeItem("AUTH_USER");
+    sessionStorage.removeItem("AUTH_USER_UID");
+    sessionStorage.removeItem("AUTH_USER_PHOTOURL");
+    sessionStorage.removeItem("AUTH_USER_NAME");
     navigation("/");
     window.location.reload();
   }

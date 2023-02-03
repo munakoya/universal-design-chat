@@ -1,22 +1,18 @@
 /*
 投稿されたツイートのコンポーネント
+
+TODO
+投稿時の改行と出力時の改行の実装
+投稿時はtexaareaに変更するだけ
 */
 import React, { forwardRef } from "react";
-import {
-  ChatBubbleOutline,
-  FavoriteBorder,
-  PublishOutlined,
-  Repeat,
-  VerifiedUser,
-} from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import "./Post.css";
 
 // なめらかに動かす(udemy 47)
 const Post = forwardRef(
-  // propsで受け取る変数 → Timeline.jsでuseState使ってfirebaseから値を取得 ex) post.displayName
   // propsとref → fowardRefの()で最後閉じる
-  ({ displayName, username, verified, text, image, avatar }, ref) => {
+  ({ displayName, text, image, avatar }, ref) => {
     return (
       // 大枠のdivにもrefをつけること
       <div className="post" ref={ref}>
@@ -27,28 +23,30 @@ const Post = forwardRef(
           <div className="post_header">
             <div className="post_headerText">
               {/* ユーザーネーム */}
-              <h3>
-                {displayName}
-                {/* <span className="post_headerSpecial"> */}
-                {/* バッジ */}
-                {/* <VerifiedUser className="post_badge" />@{username} */}
-                {/* </span> */}
-              </h3>
+              <h3>{displayName}</h3>
             </div>
-            {/* ツイートのテキスト内容 */}
+            {/* ツイートのテキスト内容 ここpタグ一つにまとめてるから改行されない？*/}
             <div className="post_headerDescription">
               <p>{text}</p>
             </div>
           </div>
-          {/* ランダムで画像を取ってくる */}
-          <img src={image} alt="" />
+          {/* youtubeのurlの処理はfirebase.jsのsendTweetにあります */}
+          {image.indexOf("embed") === -1 ? (
+            <img src={image} alt="" />
+          ) : (
+            <div className="iframe_wrapper">
+              <iframe
+                src={image}
+                alt=""
+                controls
+                playsInline
+                title="指定された画像or動画"
+              ></iframe>
+            </div>
+          )}
+
           {/* footer → 実装しなくてもいいかなと */}
-          <div className="post_footer">
-            {/* <ChatBubbleOutline fontSize="small" />
-            <Repeat fontSize="small" />
-            <FavoriteBorder fontSize="small" />
-            <PublishOutlined fontSize="small" /> */}
-          </div>
+          <div className="post_footer"></div>
         </div>
       </div>
     );

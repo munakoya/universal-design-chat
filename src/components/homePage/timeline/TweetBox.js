@@ -8,12 +8,10 @@ tweetを複数行入力できるようにする
 
 import React, { useState } from "react";
 import { sendTweet } from "../../../firebase";
-import { useAuth } from "../../../hooks/useAuth";
 import { Avatar, Button } from "@mui/material";
 import "./TweetBox.css";
 
 function TweetBox() {
-  // const { user } = useAuth();
   // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
@@ -45,6 +43,7 @@ function TweetBox() {
       <form onSubmit={handleSubmit}>
         <div className="tweetBox_input">
           <Avatar src={sessionStorage.getItem("AUTH_USER_PHOTOURL")} />
+          {/* textareaに変更すると改行して文字を書けるけど出力は改行部分がスペースになる */}
           <input
             value={tweetMessage}
             placeholder="お知らせを投稿してください"
@@ -55,7 +54,7 @@ function TweetBox() {
         <input
           value={tweetImage}
           className="tweetBox_imageInput"
-          placeholder="画像のURLを入力してください"
+          placeholder="画像もしくは動画(Youtube)のURLを入力してください"
           type="text"
           onChange={handleChangeImage}
         ></input>

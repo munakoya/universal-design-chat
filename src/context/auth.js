@@ -48,6 +48,7 @@ const AuthProvider = (props) => {
     // uidへの直接アクセス用 ↑ 経由だとエラー出る
     sessionStorage.setItem("AUTH_USER_UID", user.uid);
     sessionStorage.setItem("AUTH_USER_PHOTOURL", user.photoURL);
+    sessionStorage.setItem("AUTH_USER_NAME", user.displayName);
   };
 
   const value = { user, login };

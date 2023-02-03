@@ -45,13 +45,19 @@ function TweetBox() {
   };
 
   async function sendRoomTweet(tweetMessage, tweetImage, auth_user) {
+    // youtubeの動画url (未再生)
+    if (tweetImage.indexOf("watch?v=") !== -1) {
+      tweetImage = tweetImage.replace("watch?v=", "embed/");
+      // 動画が再生済み
+      if (tweetImage.indexOf("&") !== -1) {
+        tweetImage = tweetImage.substring(0, tweetImage.indexOf("&"));
+      }
+    }
     try {
       await addDoc(collection(db, "roomPosts", params.id, "posts"), {
         // addするデータ のプロパティを決める
         // いらないデータ消す
         displayName: auth_user.displayName,
-        username: auth_user.email,
-        verified: true,
         text: tweetMessage,
         avatar: auth_user.photoURL,
         image: tweetImage,
@@ -80,7 +86,7 @@ function TweetBox() {
         <input
           value={tweetImage}
           className="tweetBox_imageInput"
-          placeholder="画像のURLを入力してください"
+          placeholder="画像もしくは動画(Youtube)URLを入力してください"
           type="text"
           onChange={handleChangeImage}
         ></input>

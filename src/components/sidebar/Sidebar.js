@@ -13,14 +13,29 @@ import SearchIcon from "@mui/icons-material/Search";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import ChatIcon from "@mui/icons-material/Chat";
-import { Button } from "@mui/material";
+import { Avatar, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import udc_icon from "../../img/UDC_icon.png";
 import "./Sidebar.css";
+import { useAuth } from "../../hooks/useAuth";
 function Sidebar() {
+  const { user } = useAuth();
   return (
     <div className="sidebar">
-      <img src={udc_icon} className="sidebar_udc_icon" alt="udc_icon" />
+      {/* <img src={udc_icon} className="sidebar_udc_icon" alt="udc_icon" /> */}
+      <div className="sidebar_profile">
+        <Link to="/mypage">
+          {/* 三項演算子使うのが一番アクセスいい → セッションのみの記述だとアクセス時にアイコンが反映されない */}
+          <Avatar
+            src={
+              user
+                ? user.photoURL
+                : sessionStorage.getItem("AUTH_USER_PHOTOURL")
+            }
+          />
+          <h3>{sessionStorage.getItem("AUTH_USER_NAME")}</h3>
+        </Link>
+      </div>
 
       {/* サイドバーオプション */}
       <nav>

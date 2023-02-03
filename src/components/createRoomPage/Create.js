@@ -2,10 +2,9 @@
  * Createコンポーネント
  *
  * TODO
- * 一回目なぜかルーム作成できない
- * → ルーム作成しませんってでる
- *
- * ルーム作成時にall-room-arrayに登録する
+ * バリデーション → 空欄時の処理、returnして作成させないのか、alertを出すか
+ * 問題数、正解数、問題形式の選択をユーザーが選択、編集できるように
+ * formの装飾
  *
  * 注意点
  * → ルーム作成時、画像のurlを指定
@@ -13,15 +12,10 @@
  * 現状、画像のリンクをコピーってして指定する画像urlは反映される → 画像があるurl ex)公式ホームページのurlなどは画像表示されないので注意
  */
 import React, { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
 import {
-  collection,
   serverTimestamp,
   doc,
   setDoc,
-  addDoc,
-  query,
-  onSnapshot,
   updateDoc,
   arrayUnion,
   getDoc,
@@ -35,32 +29,28 @@ function Create() {
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
 
   const userInfo = doc(db, "user", `${auth_user.uid}`);
-  const allRoomArray = doc(db, "all-room-array", "all-rooms");
+  const allRoomArray = doc(db, "all-room-array", "all-rooms"); // 検索用
+
+  // 入力ルーム情報を入れるstate
   const [roomTitle, setRoomTitle] = useState("");
   const [description, setDescription] = useState("");
   const [icon, setIcon] = useState("");
-
-  // マップ型配列だから、add? pushとかでも追加できると思われる
+  // 問題と解答は後々ユーザー側で問題数、問題形式を選択できるようにしたい
   const [question1, setQuestion1] = useState("");
   const [answer1, setAnswer1] = useState("");
   const [question2, setQuestion2] = useState("");
   const [answer2, setAnswer2] = useState("");
-
   const [question3, setQuestion3] = useState("");
   const [answer3, setAnswer3] = useState("");
-
   const [question4, setQuestion4] = useState("");
   const [answer4, setAnswer4] = useState("");
-
   const [question5, setQuestion5] = useState("");
   const [answer5, setAnswer5] = useState("");
 
-  const [rooms, setRooms] = useState([]);
   // 入力項目をdbに登録
+  // room-list, all-room-list, userのcreateRooms, all-room-array
   async function createRoom() {
-    if (roomTitle === "") return;
-    // console.log(`checkCount : ${checkCount} | 新規ルーム作成を行います`);
-    // e.preventDefault();
+    if (roomTitle === "") return; // ルームタイトルが空欄はだめ
     let id = uuidv4();
 
     // userのmyRoomListにも追加する
@@ -70,11 +60,9 @@ function Create() {
       description: description,
       icon: icon,
       createUser: auth_user.displayName,
-      //   quiz: quiz, // quizはコレクションかなあ
       createdAt: serverTimestamp(),
       members: [auth_user.displayName],
-      // クイズはクイズで分けたほうがいいかもしれん
-      // マップ型の配列に変更
+      // クイズはmap型配列
       quiz: [
         {
           question: question1,
@@ -99,13 +87,10 @@ function Create() {
         },
       ],
     });
-    // all-room-list作成してidをタイトルにする
-    // これにすると同じ名前のルームは最後に作成されたルームに更新される → 実際はルーム自体存在するけどアクセスできない
     setDoc(doc(db, "all-room-list", roomTitle), {
       roomId: id,
       title: roomTitle,
     });
-    // userdbに追加
     updateDoc(userInfo, {
       createRooms: arrayUnion(roomTitle),
     });
@@ -114,7 +99,6 @@ function Create() {
     await updateDoc(allRoomArray, {
       rooms: arrayUnion(roomTitle),
     });
-    //   ルームにリダイレクトしたい
     setRoomTitle("");
     setDescription("");
     setIcon("");
@@ -130,7 +114,7 @@ function Create() {
     setAnswer5("");
   }
 
-  // let checkCount = 0;
+  // 同名ルームをチェックしてなければ登録
   async function registerRoomCheck(e) {
     e.preventDefault();
 
@@ -144,29 +128,6 @@ function Create() {
       // 同じルーム名が無い
       createRoom();
     }
-
-    // 初期化
-    // checkCount = 0;
-    // e.preventDefault();
-    // const allroomsData = collection(db, "all-room-list");
-    // const q = query(allroomsData);
-    // onSnapshot(q, (querySnapshots) => {
-    //   setRooms(querySnapshots.docs.map((doc) => doc.data()));
-    // });
-    // // existsで実装できそう → userと一緒 auth.jsに書いてある
-    // for (let room of rooms) {
-    //   if (room.title === roomTitle) {
-    //     checkCount = 0;
-    //     console.log(`checkCount : ${checkCount} | 同じルーム名が存在します。`);
-    //     break;
-    //   } else {
-    //     checkCount = 1;
-    //     console.log(`check : ${checkCount}`);
-    //   }
-    // }
-    // checkCount === 1
-    //   ? createRoom()
-    //   : console.log(`checkCount : ${checkCount} | ルームを作成しません。`);
   }
 
   return (
@@ -177,108 +138,105 @@ function Create() {
           <input
             value={roomTitle}
             placeholder="ルーム名"
-            type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+            type="text"
             onChange={(e) => setRoomTitle(e.target.value)}
-            required="true"
+            required={true}
           ></input>
           <input
             value={description}
             placeholder="ルーム説明"
-            type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+            type="text"
             onChange={(e) => setDescription(e.target.value)}
-            required="true"
+            required={true}
           ></input>
           <input
             value={icon}
             placeholder="imageURL"
-            type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+            type="text"
             onChange={(e) => setIcon(e.target.value)}
-            required="true"
+            required={true}
           ></input>
           <div className="createQuiz-input">
             <div className="createQuizSet">
               <input
                 value={question1}
                 placeholder="Question1"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setQuestion1(e.target.value)}
-                required="true"
+                required={true}
               ></input>
               <input
                 value={answer1}
                 placeholder="Answer1"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setAnswer1(e.target.value)}
-                required="true"
+                required={true}
               ></input>
             </div>
             <div className="createQuizSet">
               <input
                 value={question2}
                 placeholder="Question 2"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setQuestion2(e.target.value)}
-                required="true"
+                required={true}
               ></input>
               <input
                 value={answer2}
                 placeholder="Answer 2"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setAnswer2(e.target.value)}
-                required="true"
+                required={true}
               ></input>
             </div>
             <div className="createQuizSet">
               <input
                 value={question3}
                 placeholder="Question 3"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setQuestion3(e.target.value)}
-                required="true"
+                required={true}
               ></input>
               <input
                 value={answer3}
                 placeholder="Answer 3"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setAnswer3(e.target.value)}
-                required="true"
+                required={true}
               ></input>
             </div>
             <div className="createQuizSet">
               <input
                 value={question4}
                 placeholder="Question 4"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setQuestion4(e.target.value)}
-                required="true"
+                required={true}
               ></input>
               <input
                 value={answer4}
                 placeholder="Answer 4"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setAnswer4(e.target.value)}
-                required="true"
+                required={true}
               ></input>
             </div>
             <div className="createQuizSet">
               <input
                 value={question5}
                 placeholder="Question 5"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setQuestion5(e.target.value)}
-                required="true"
+                required={true}
               ></input>
               <input
                 value={answer5}
                 placeholder="Answer 5"
-                type="text" // inputに書き込まれるe(イベント)が発生 → tweetMessageに文字列を追加(e.target.value)
+                type="text"
                 onChange={(e) => setAnswer5(e.target.value)}
-                required="true"
+                required={true}
               ></input>
             </div>
-            {/* <Button className="pushQuiz" onClick={addNewQuiz()}>
-              +
-            </Button> */}
           </div>
           <Button
             className="createRoom-createButton"
