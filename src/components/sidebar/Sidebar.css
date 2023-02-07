@@ -53,3 +53,9 @@ Sidebar.jsのcss
     /* 上開ける */
     margin-top: 20px !important;
 }
+
+.pro_user_name{
+    margin-left: 40px;
+    margin-top: -33px;
+
+}

@@ -1,5 +1,5 @@
 .profile {
-    flex: 0.45;
+    flex: 0.78;
     height: 90vh;
     background-color: #fff;
     margin-top: 20px;
@@ -9,17 +9,19 @@
 .profile_container {
     margin-top: -20px;
     line-height: 1.2;
+    margin-left: 20px;
 }
 
 .profile_header {
     margin-top: -2px;
     line-height: 1.8;
+    margin-left: 20px;
 }
 
 .user_name {
-    margin-left: 12%;
-    margin-top: -35px;
-    line-height: 1.8;
+    margin-left: 5%;
+    margin-top: -45px;
+    line-height: 2.3;
 }
 
 .List_2 {
@@ -36,4 +38,8 @@
 
 .profile_myRoomList_score {
     margin-bottom: 10px;
+}
+
+.profile>button{
+    margin-left: 20px;
 }

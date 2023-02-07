@@ -192,9 +192,10 @@ function Quiz() {
           );
         })}
       </div>
-      <h3>解答</h3>
+
       {/* 本当はcreateでmap型配列にクイズを追加していってプロパティを名揃えたい */}
       <div className="quizList_ansInput">
+        <h3>解答</h3>
         <input
           value={ans1}
           placeholder="Q1"

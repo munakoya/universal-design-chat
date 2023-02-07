@@ -39,9 +39,11 @@ return (
                 {selectUser?.myRoomList?.map((myRoom) => {
                     return (
                         <div>
-                            <li key={myRoom}>
-                                <Link to={`/room/${myRoom}/chat-room`}>{myRoom}</Link>
-                            </li>
+                            <Link to={`/room/${myRoom}/chat-room`}>
+                                <li key={myRoom}>
+                                    {myRoom}
+                                </li>
+                            </Link>
                         </div>
                     );
                 })}

@@ -1,72 +1,75 @@
 /* 
 Post.jsのcss
 */
-.post{
+.post {
     /* 横並び */
     display: flex;
     /* 縦方向に中央 */
     align-items: flex-start;
     border-bottom: 1px solid var(--udc-background);
-
 }
-.post_body{
+
+.post_body {
     /* 100%あてる */
     flex: 1;
 }
-p{
+
+p {
     margin: 0;
     padding: 0;
 }
 
-.post_body > img{
+.post_body>img {
     border-radius: 20px;
     /* post_bodyの横幅の100%ってこと */
     width: 100% !important;
+    margin-left: -15px;
 }
 
-.post_footer{
+.post_footer {
     display: flex;
     /* display flexにするとjustify-content使えるようになる */
     justify-content: space-between;
     margin-top: 10px;
 }
 
-.post_headerDescription{
+.post_headerDescription {
     margin-bottom: 10px;
     font-size: 15px;
 }
 
-.post_headerText > h3{
+.post_headerText>h3 {
     font-size: 15px;
     margin-bottom: 5px;
 }
 
-.post_badge{
+.post_badge {
     font-size: 14px !important;
     color: var(--udc-color);
 }
 
-.post_headerSpecial{
+.post_headerSpecial {
     font-weight: 600;
     font-size: 12px;
     color: gray;
 }
 
-.post_avatar{
+.post_avatar {
     padding: 15px;
 }
 
-.iframe_wrapper{
+.iframe_wrapper {
     position: relative;
     padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
 }
+
 .iframe_wrapper iframe {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 90%;
     height: 100%;
     border-radius: 20px;
     border: none;
