@@ -10,13 +10,15 @@ import './styles.css';
 import { Button } from '@mui/material';
 
 function UnauthenticatedApp() {
-    const { login } = useAuth();
+  const { login } = useAuth();
+
     // モーダル
   const [Modal, open, close, isOpen] = useModal("root", {
     components: {
+      preventScroll:true,
       Modal: () => {
         return (
-            <div className='modal_rule'>
+          <div className='modal_rule' id='overlay'>
 
 <h2>利用規約</h2>
 <h3>この利用規約（以下，「本規約」という。）は，UDC（以下，「当サイト」という。）がこのウェブサイト上で提供するサービス（以下，「本サービス」という。）の利用条件を定めるものです。登録ユーザーの皆さま（以下，「ユーザー」という。）には，本規約に従って，本サービスをご利用いただきます。</h3>
@@ -156,13 +158,20 @@ function UnauthenticatedApp() {
 本サービスに関して紛争が生じた場合には，当サイトの本店所在地を管轄する裁判所を専属的合意管轄とします。
 </p>
 
-                <Button onClick={close}>閉じる</Button>
+                <Button onClick={resetScroll}>閉じる</Button>
+
+
           </div>
         );
       },
     },
-    preventScroll: true, // スクロールの有無
+    // preventScroll: true, // スクロールの有無
   });
+  // open時のスクロール位置リセット
+  const resetScroll = () => {
+    window.scrollTo(0,0);
+    close()
+  }
 
     return (
         <div className='unAuthenticated'>
@@ -170,7 +179,7 @@ function UnauthenticatedApp() {
             <h2>Welcome to UDC !</h2>
             <div>
                 {/* 利用規約文を追加 */}
-                {/* <Modal></Modal> */}
+          <Modal/>
                 <Button onClick={open}>利用規約</Button>
                 <button onClick={login} className="login">
                     Login with Google

@@ -91,9 +91,7 @@ function RoomList() {
   };
   return (
     <div className="roomList">
-      <div className="allRooms">
-        <h2 className="roomList_header">ルームリスト</h2>
-      </div>
+      <h2 className="roomList_header">ルームリスト</h2>
       <div className="modal">
         <ul>
           {/* urlにtitleを埋め込んでルーム指定 → propsだとうまくいかない */}

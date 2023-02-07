@@ -33,7 +33,9 @@ function Sidebar() {
                 : sessionStorage.getItem("AUTH_USER_PHOTOURL")
             }
           />
-          <h3>{sessionStorage.getItem("AUTH_USER_NAME")}</h3>
+          <h3 className="pro_user_name">
+            ：{sessionStorage.getItem("AUTH_USER_NAME")}
+          </h3>
         </Link>
       </div>
 

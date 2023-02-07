@@ -6,8 +6,6 @@
     margin-right: 10px;
 }
 
-
-
 .quizList_header {
     position: sticky;
     top: 0;
@@ -17,11 +15,15 @@
     /* border: 1px solid var(--udc-background); */
     padding: 10px 20px;
     margin-top: 0;
-
 }
 
 .quizList_ansInput {
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin-left: 20px;
+}
+
+.quizList {
+    margin-left: 20px;
 }

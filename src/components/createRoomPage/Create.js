@@ -133,6 +133,12 @@ function Create() {
   return (
     <div className="create">
       <h2 className="create-header">ルーム作成</h2>
+      <div className="create_explain">
+        <p>
+          注意：問題が空欄だと自動で正解扱いになります。
+          <br /> 　　　　解答は一文字でも異なると不正解となります。
+        </p>
+      </div>
       <form>
         <div className="createRoom-input">
           <input
