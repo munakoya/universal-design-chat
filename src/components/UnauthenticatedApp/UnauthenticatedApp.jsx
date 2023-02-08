@@ -5,15 +5,14 @@
 
 import { useAuth } from '../../hooks/useAuth';
 import { useModal } from "react-hooks-use-modal"; // モーダルコンポーネント → ルーム選択後に使用
-
-import './styles.css';
 import { Button } from '@mui/material';
+import './styles.css';
 
 function UnauthenticatedApp() {
   const { login } = useAuth();
 
     // モーダル
-  const [Modal, open, close, isOpen] = useModal("root", {
+  const [Modal, open, close] = useModal("root", {
     components: {
       preventScroll:true,
       Modal: () => {
@@ -159,8 +158,6 @@ function UnauthenticatedApp() {
 </p>
 
                 <Button onClick={resetScroll}>閉じる</Button>
-
-
           </div>
         );
       },

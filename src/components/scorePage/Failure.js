@@ -2,17 +2,10 @@
  * 3点以下の場合に出力
  * Failureコンポーネント
  */
-import { async } from "@firebase/util";
-import { Button } from "@mui/material";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "../../firebase";
 
 function Failure() {

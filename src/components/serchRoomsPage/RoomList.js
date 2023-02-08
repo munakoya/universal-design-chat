@@ -7,22 +7,23 @@ myRoomListにあるものは表示しない or クイズ画面に遷移しない
 
 TODO
 ・検索機能の実装
+・ルーム作成時にタグを作成して条件で絞り込めるように
 */
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { collection, query, onSnapshot } from "firebase/firestore";
 import { useModal } from "react-hooks-use-modal"; // モーダルコンポーネント → ルーム選択後に使用
+import { Button } from "@mui/material";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import db from "../../firebase";
 import "./roomList.css";
 import "./roomDetail.css";
-import { Button } from "@mui/material";
 
 function RoomList() {
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState([]);
   let [selectedRoom, setSelectedRoom] = useState([]);
-  // モーダル
-  const [Modal, open, close, isOpen] = useModal("root", {
+  // ルーム詳細モーダル
+  const [Modal, open, close] = useModal("root", {
     components: {
       Modal: ({ title }) => {
         return (
@@ -94,7 +95,6 @@ function RoomList() {
       <h2 className="roomList_header">ルームリスト</h2>
       <div className="modal">
         <ul>
-          {/* urlにtitleを埋め込んでルーム指定 → propsだとうまくいかない */}
           {rooms.map((room) =>
             room.title !== "test" ? (
               <li
@@ -107,9 +107,8 @@ function RoomList() {
               >
                 {room.title}
               </li>
-            ) : (
-              console.log("testはスルー")
-            )
+            ) : // console.log("testはスルー")
+            null
           )}
         </ul>
         <Modal title={selectedRoom}></Modal>

@@ -4,7 +4,7 @@ firebase関連の関数が定義されている
 */
 
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
 
 // google認証系のimport
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
@@ -16,13 +16,9 @@ import {
   onSnapshot,
   query,
   orderBy,
-  doc,
-  getDoc,
 } from "firebase/firestore";
 
 import { v4 as uuidv4 } from "uuid";
-import TweetBox from "./components/homePage/timeline/TweetBox";
-import { useState } from "react";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_APIKEY,
@@ -36,7 +32,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 // googleログインの関数
@@ -44,9 +40,6 @@ async function loginWithGoogle() {
   try {
     //   googleのクレデンシャル？を生成
     const provider = new GoogleAuthProvider();
-    // getAuthでfirebaseのauthenticationインスタンスを返す
-    // const auth = getAuth();
-
     //   ポップアップでサインフロー処理
     const { user } = await signInWithPopup(auth, provider);
 
@@ -73,16 +66,7 @@ async function loginWithGoogle() {
 async function sendMessage(roomId, user, text) {
   // topic
   try {
-    //   addDocとcollectionの関数を使用してドキュメントを追加
-    // addDocを使用するために参照を取得するcollectionを使用
-    //   collectionの引数 → パスを形成するfirebaseインスタンス chat-roomコレクション roomID(textでdogsとかfoodとか)コレクションのmessages(こいつもコレクション)
-    //   多分firebaseのパス指定は、カンマ
-    //   firestoreは存在しないコレクションとドキュメントを作成するため、目的のパスを指定するだけで済む
-    //   個人的に後でroomごとのmembersっていうのとquiz追加して、自分の保持しているroomを表示
     await addDoc(collection(db, "chat-rooms", roomId, "messages"), {
-      // db, "chat-rooms", roomId, "topic"
-      // messagesの中に以下のプロパティが追加される(メッセージを送信するたびに)
-      // userはuseAuthで取得したログインユーザー情報を使用していると思われ
       uid: user.uid,
       displayName: user.displayName,
       avatar: user.photoURL,
@@ -94,8 +78,6 @@ async function sendMessage(roomId, user, text) {
     console.error(error);
   }
 }
-// sendMessage関数 → roomのサブコレクションsendMessageにドキュメントを追加する関数？
-// propsにroomIDとuserデータとtextを受け取る
 
 // チャットルーム内のすべてのメッセージを取得
 function getMessages(roomId, callback) {
@@ -168,20 +150,6 @@ async function sendTweet(tweetMessage, tweetImage, user) {
   }
 }
 const auth = getAuth();
-
-// async function checkAdminiStrator(user) {
-//   try {
-//     (await user.uid) === process.env.REACT_APP_ADMIN ? (
-//       <div>
-//         <TweetBox />
-//       </div>
-//     ) : (
-//       console.log("管理者ではありません。管理者 : ", process.env.ADMIN)
-//     );
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
 
 // export{}で定義した関数を外部でimport 可能に
 export {
