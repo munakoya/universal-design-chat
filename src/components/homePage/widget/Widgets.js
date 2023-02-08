@@ -3,7 +3,7 @@
  * 主におすすめルームの出力と検索
  *
  * TODO
- * 検索機能 → 完全一致解消したい
+ * 検索機能 → 完全一致解消したい → アルゴリア検討
  * そもそもホームのウィジェットで新規ユーザー向けの使い方モーダルウィンドウだしたい
  */
 import React, { useEffect, useState } from "react";
@@ -21,11 +21,11 @@ import "./Widgets.css";
 
 function Widgets() {
   let roomMembers = [];
-  let [searchKeyword, setSearchKeyword] = useState("");
+  const [searchKeyword, setSearchKeyword] = useState("");
 
   // ルーム取得
   const [rooms, setRooms] = useState([]); // ルーム全件取得
-  let [searchRooms, setSearchRooms] = useState([]);
+  const [searchRooms, setSearchRooms] = useState([]);
 
   useEffect(() => {
     //  すべてのルームデータ取得
@@ -45,6 +45,7 @@ function Widgets() {
   }
 
   // キーワード検索時にウィジェット追加
+  // 現状完全一致 → アルゴリアなどを使って検索機能を実装したい
   function searchRoom() {
     // 文字列を調べる
     const SearchRoomList = collection(db, "all-room-array");
@@ -65,6 +66,7 @@ function Widgets() {
           {searchRooms.map((roomArray) => {
             // firestore db, all-room-array, all-room,rooms
             return roomArray.rooms.map((room) => {
+              // 完全一致の条件式
               if (room.indexOf(`${searchKeyword}`)) {
               } else {
                 return (
@@ -83,7 +85,6 @@ function Widgets() {
   }
 
   return (
-    // 基本classNameはcssのときに使います。css当てるのが楽になるだけなのでそこまで気にしなくておk
     <div className="widgets">
       <div className="widgets_input">
         <Search className="widgets_searchicon" />
@@ -94,28 +95,10 @@ function Widgets() {
           onChange={(e) => setSearchKeyword(e.target.value)}
         />
       </div>
-      {searchKeyword ? searchRoom() : console.log("keyword入ってません")}
+      {searchKeyword ? searchRoom() : null}
 
       <div className="widgets_widgetContainer">
         <h2>人気ルーム</h2>
-        {/* タイムラインを取得 */}
-        {/* <TwitterTimelineEmbed
-          sourceType="profile"
-          // どの人のタイムラインか
-          screenName="SoccerKingJP"
-          options={{ height: 450 }}
-        /> */}
-        {/* <TwitterShareButton
-          url={"https://twitter.com/SoccerKingJP"}
-          options={{ text: "#W杯", via: "SoccerKingJP" }}
-        /> */}
-        {/* ライブラリを追加 → 使い方はtwitter-tweetEmbed調べて*/}
-        {/* <TwitterTweetEmbed
-          tweetId={"1588924861279539200"}
-          options={{ height: 400 }}
-        /> */}
-
-        {/* 検索欄に文字が入ったら当てはまるものを表示 */}
 
         {/* 人気ルームなど表示 */}
         {/* 配列に追加していって大きければ、roomのidメモっておく */}

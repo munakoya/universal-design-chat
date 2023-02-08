@@ -1,28 +1,17 @@
 /**
  * 4点以上で合格
  * → Passコンポーネント出力
- *
- * TODO
- * 入室ボタン
  */
 
-import { async } from "@firebase/util";
-import { Button } from "@mui/material";
-import {
-  collection,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "../../firebase";
 
 function Pass() {
   const [rooms, setRooms] = useState([]);
   const params = useParams();
-  // マウント時に一回だけ読み込み
   useEffect(() => {
     const roomData = collection(db, "room-list");
     const q = query(roomData);

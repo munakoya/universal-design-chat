@@ -1,20 +1,19 @@
-import { Button } from "@mui/material";
+/**
+ * お問い合わせページ
+ *
+ * TODO
+ * cloudFunctionsなどを使用して、問い合わせの際に通知、自動返信などできたら
+ */
+
 import React, { useState } from "react";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  setDoc,
-} from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import db from "../../firebase";
 import "./SendMail.css";
-import { useAuth } from "../../hooks/useAuth";
+
 function SendMail() {
-  // const { user } = useAuth();
-  // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
   const [inquiryTitle, setInquiryTitle] = useState([]);
   const [inquiryContent, setInquiryContent] = useState([]);
@@ -26,6 +25,8 @@ function SendMail() {
         title: inquiryTitle,
         text: inquiryContent,
         from: auth_user.uid,
+        user: auth_user.displayName,
+        email: auth_user.email,
         timestamp: serverTimestamp(),
       });
       setInquiryTitle("");
@@ -35,18 +36,6 @@ function SendMail() {
     }
   }
 
-  function testMail() {
-    console.log("testMail");
-    // set
-    setDoc(doc(db, "mail", auth_user.uid), {
-      to: "muna.sakasakuta@gmail.com",
-      from: auth_user.email,
-      message: {
-        subject: "Hello from Firebase!",
-        html: "This is an <code>HTML</code> email body.",
-      },
-    });
-  }
   return (
     <div className="sendMail">
       <h2 className="sendMail-header">お問い合わせ</h2>
@@ -76,7 +65,6 @@ function SendMail() {
             label="お問い合わせ内容"
             multiline
             rows={8}
-            // defaultValue="Default Value"
             variant="filled"
             type="text"
             value={inquiryContent}

@@ -1,35 +1,32 @@
 /**
  * マイページのコンポーネント
  * ユーザー情報を出力する。
- *
- * 設定メニュー作成
  */
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
+import { useModal } from "react-hooks-use-modal";
 import { Avatar, Button } from "@mui/material";
+import { signOut } from "@firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 import db, { auth } from "../../firebase";
 import "./profile.css";
-import { signOut } from "@firebase/auth";
-import { useModal } from "react-hooks-use-modal";
 
 function Profile() {
+  const [selectUser, setSelectUser] = useState([]);
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER")); // user情報取得
+  const navigation = useNavigate(); // ホームに戻してリロード → ログイン画面に戻す
   function SignOut() {
     signOut(auth);
+    // セッションストレージの削除
     sessionStorage.removeItem("AUTH_USER");
     sessionStorage.removeItem("AUTH_USER_UID");
     sessionStorage.removeItem("AUTH_USER_PHOTOURL");
     sessionStorage.removeItem("AUTH_USER_NAME");
     navigation("/");
+    // リロードしてログアウト
     window.location.reload();
   }
-  // ログインユーザー情報
-  // const { user } = useAuth();
-  const [selectUser, setSelectUser] = useState([]);
-  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
-
-  const navigation = useNavigate();
 
   useEffect(() => {
     getUser();
@@ -42,7 +39,7 @@ function Profile() {
     if (selectUserSnap.exists()) {
       setSelectUser(selectUserSnap.data());
     } else {
-      console.log("(泣)");
+      console.log("ユーザー情報の取得に失敗しました。");
     }
   }
   // モーダル
@@ -184,7 +181,6 @@ function Profile() {
         );
       },
     },
-    // preventScroll: true, // スクロールの有無
   });
 
   return (
@@ -193,12 +189,8 @@ function Profile() {
       <div className="profile_container">
         <Avatar src={selectUser.icon} />
         <h3 className="user_name">: {selectUser.name}</h3>
-
-        {/* <p>Email : {user.email}</p> */}
-        {/* firestoreからdb/userを持ってくる → ルーム一覧と点数 */}
         <div className="profile_myRoomList">
           <div className="List_2">
-            {/* <h2>所属ルーム一覧</h2> */}
             <h3>所属ルーム数 : {selectUser?.myRoomList?.length}</h3>
             <h3>作成ルーム数 : {selectUser?.createRooms?.length}</h3>
           </div>
@@ -226,9 +218,8 @@ function Profile() {
                   ・スコア : {myRoom.score}
                 </p>
               </div>
-            ) : (
-              console.log(`不合格ルーム : ${myRoom.title} | ${myRoom.score}`)
-            )
+            ) : // console.log(`不合格ルーム : ${myRoom.title} | ${myRoom.score}`)
+            null
           )}
         </div>
         <p></p>

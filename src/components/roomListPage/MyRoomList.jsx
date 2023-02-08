@@ -5,20 +5,17 @@
 import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { doc, getDoc} from 'firebase/firestore';
-import { useAuth } from '../../hooks/useAuth';
 import db from '../../firebase';
 import './myRoomList.css';
-import RoomTimeLine from '../chatRoomPage/timeline/RoomTimeLine';
 
 // propsで渡す
 function MyRoomList() {
-    // const { user } = useAuth();
     // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
-    const [selectUser, setSelectUser] = useState([]);
+const [selectUser, setSelectUser] = useState([]);
 
     useEffect(() => {
-      getUser();
+      getUser(); // ログインユーザーの取得
     }, []);
     
 // ログイン中のユーザーデータを取得する
@@ -28,7 +25,7 @@ async function getUser() {
     if (selectUserSnap.exists()) {
         setSelectUser(selectUserSnap.data())
     } else {
-            console.log("(泣)")
+            console.log("ユーザー情報の取得に失敗しました。")
         }
 }
     

@@ -6,9 +6,13 @@ TODO
 クイズの形式を4択に変える
 クイズの出力の仕方
 ルーム選択 → 詳細画面 → 問題 と 解答(4 : 4)
+
+ルームの取得とユーザー情報の取得の仕方変えられそう → ドキュメント指定のexists()使えば数行になる
 */
 import React, { useEffect } from "react";
+import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { Button } from "@mui/material";
 import {
   collection,
   orderBy,
@@ -21,10 +25,7 @@ import {
   arrayRemove,
 } from "firebase/firestore";
 import db from "../../firebase";
-import { useState } from "react";
 import "./quiz.css";
-import { Button } from "@mui/material";
-import { useAuth } from "../../hooks/useAuth";
 
 function Quiz() {
   // urlからroomIDを取得して、クイズ情報を読み込む → 本当は関数にしたい
@@ -42,10 +43,10 @@ function Quiz() {
 
   let score = 0;
 
-  // const { user } = useAuth();
   // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
   const userInfo = doc(db, "user", `${auth_user.uid}`);
+
   useEffect(() => {
     // すべてのルームデータをroomsに → roomsから選択されたルームと一致するものをroomに
     const roomList = collection(db, "room-list");
@@ -93,8 +94,7 @@ function Quiz() {
   //
   function checkMyRoomScore() {
     let checkCount = 0;
-    let index = 0;
-    // myRoomScoreをmapで一つ一つ調べる
+    // myRoomScoreをmapで一つ一つ調べる → そもそも出力させない
     for (let myScore of selectUser?.myRoomScore) {
       // 以前不合格で再受験 → 合格
       if (myScore.title === params.id) {
@@ -112,7 +112,6 @@ function Quiz() {
             myRoomScore: arrayUnion({ title: selectRoom.title, score: score }),
           });
         }
-        checkCount = 0;
         break;
       } else {
         checkCount = 1;
@@ -138,8 +137,8 @@ function Quiz() {
     });
     console.log("合格");
   }
-  // 採点処理
 
+  // 完全一致の採点処理
   async function quizScore() {
     if (ans1 === selectRoom.quiz[0].answer) {
       score++;
@@ -156,10 +155,6 @@ function Quiz() {
     if (ans5 === selectRoom.quiz[4].answer) {
       score++;
     }
-
-    // 合否処理 → 画面遷移
-    // 合格の場合 → 得点出力 → room入室ボタンを出力
-    // 不合格 → 得点と再入試ボタン
 
     // 初受験かどうか調べて、初 → score登録, 2回目以降 → 更新
     checkMyRoomScore();
@@ -193,7 +188,6 @@ function Quiz() {
         })}
       </div>
 
-      {/* 本当はcreateでmap型配列にクイズを追加していってプロパティを名揃えたい */}
       <div className="quizList_ansInput">
         <h3>解答</h3>
         <input
