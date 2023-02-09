@@ -176,8 +176,10 @@ function UnauthenticatedApp() {
             <h2>Welcome to UDC !</h2>
             <div>
                 {/* 利用規約文を追加 */}
-          <Modal/>
-                <Button onClick={open}>利用規約</Button>
+          <Modal />
+          <div className='terms_of_service'>
+            <Button onClick={open}>利用規約</Button>
+          </div>
                 <button onClick={login} className="login">
                     Login with Google
                 </button>
