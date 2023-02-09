@@ -56,7 +56,7 @@ function App() {
     if (selectUserSnap.exists()) {
       setSelectUser(selectUserSnap.data());
     } else {
-      console.log("(泣)");
+      console.log("ユーザー情報の取得に失敗しました");
     }
   }
 

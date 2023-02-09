@@ -30,7 +30,7 @@ function RoomTimeLine() {
 
   return (
     <div className="roomTimeLine">
-      <div className="roomTimeLine">
+      <div className="roomTimeLine_header">
         <h2>
           <Link to="/rooms" className="back">
             ◀

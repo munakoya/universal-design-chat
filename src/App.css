@@ -4,7 +4,9 @@
 
 /* ここにcss貼り付け */
 
-
+.terms_of_service{
+  margin-left: 35%;
+}
 
 .score {
   background-color: #fff;

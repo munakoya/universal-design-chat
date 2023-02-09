@@ -96,7 +96,7 @@ function RoomList() {
       <div className="modal">
         <ul>
           {rooms.map((room) =>
-            room.title !== "test" ? (
+            room.title !== "test" ? ( // 初ログインで作成されるルームはスルーします
               <li
                 key={room.roomId}
                 onClick={() => {

@@ -27,7 +27,7 @@ const Post = forwardRef(
             </div>
             {/* ツイートのテキスト内容 ここpタグ一つにまとめてるから改行されない？*/}
             <div className="post_headerDescription">
-              <p>{text}</p>
+              <p style={{ whiteSpace: "pre-line" }}>{text}</p>
             </div>
           </div>
           {/* youtubeのurlの処理はfirebase.jsのsendTweetにあります */}

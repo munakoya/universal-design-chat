@@ -1,19 +1,23 @@
 /*
 */
 .message_input_container {
-    display: flex;
+    display: block;
     gap: 4px;
     /* flex: 0.6; */
     /* 入力フォームを下に固定 */
-    position: fixed;
+    position: sticky;
+    bottom: 0;
     margin-bottom: 15px;
-    margin-left: 3%;
+    /* margin-left: 3%; */
     background-color: #fff;
+    width: fit-content;
+    /* min-width: 50px; */
 
 }
 
 .message_input {
     padding: 12px 90px;
+    
     background: var(--color-gray);
     border-radius: var(--border-radius);
 }
@@ -23,4 +27,5 @@
     background: var(--color-blue);
     border-radius: var(--border-radius);
     cursor: pointer;
+    transition: 0.8s;
 }
