@@ -18,7 +18,7 @@
 
 .messages_container {
     width: 100%;
-    padding: 16px;
+    /* padding: 16px; */
     flex-grow: 1;
     margin-top: -60px;
     border: 1px solid var(--color-gray);
@@ -35,13 +35,14 @@
 .chat_header {
     /* 固定 → stickyで固定*/
     position: sticky;
-    top: -1px;
+    top: 0;
     background-color: white;
     /* headerは一番上に来てほしいので100を当てる */
     z-index: 100;
     padding: 5px, 20px;
     text-align: center;
     font-size: 25px;
+    margin-top: 0;
 }
 
 .sender {
