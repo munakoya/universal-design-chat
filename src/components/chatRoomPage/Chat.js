@@ -14,19 +14,20 @@ import { useParams } from "react-router-dom";
 import ChatMessageList from "./MessageList/ChatMessageList";
 import ChatMessageInput from "./MessageInput/ChatMessageInput";
 import "./chat.css";
+import Chatui from "./Chatui";
 
 function Chat() {
   const params = useParams(); // url内のidを取得
 
   return (
     <div className="chat">
-      {console.log("url内のid : ", params.id)}
       <h2 className="chat_header">全体チャット</h2>
       <div className="messages_container">
         {/* そもそもちゃんとpropsを渡せてない → urlで渡したくないならpropsだけど渡せない */}
         {/* セキュリティルールを追加 */}
-        <ChatMessageList roomId={params.id} />
-        <ChatMessageInput roomId={params.id} />
+        {/* <ChatMessageList roomId={params.id} />
+        <ChatMessageInput roomId={params.id} /> */}
+        <Chatui roomId={params.id} />
       </div>
     </div>
   );

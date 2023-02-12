@@ -1,0 +1,32 @@
+.topic_chatui_container {
+    padding-top: 36px;
+    margin: 0;
+}
+
+/* チャットのメッセージボックス */
+.cs-message--outgoing .cs-message__content {
+    color: rgba(0, 0, 0, .87);
+    background-color: #cbe4f9;
+    border-radius: 0.7em 0 0 0.7em;
+}
+
+.cs-message--incoming .cs-message__content {
+    color: rgba(0, 0, 0, .87);
+    background-color: #eaf2f8;
+    border-radius: 0 0.7em 0.7em 0;
+}
+
+.topic_messageInput {
+    /* width: 80%; */
+    flex: 0.9;
+    /* height: 60%; */
+}
+
+.topic_sendButton {
+    flex: 0.1;
+}
+
+.topic_input_container {
+    display: flex;
+    margin-left: 5%;
+}
