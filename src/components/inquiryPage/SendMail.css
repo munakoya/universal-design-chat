@@ -1,12 +1,36 @@
 .sendMail {
-    width: 100%;
+    /* width: 100%;
     height: 90vh;
     background-color: #fff;
     margin-top: 20px;
-    margin-right: 25px;
+    margin-right: 25px; */
+    flex: 0.5;
+    height: 90vh;
+    background-color: #fff;
+    margin-top: 20px;
+    overflow-y: scroll;
+    border-right: 1px solid var(--udc-background);
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
 }
-
-
+.sendMail::-webkit-scrollbar {
+    display: none;
+}
+.sendMail-header{
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* headerは一番上に来てほしいので100を当てる */
+    z-index: 100;
+    border: 1px solid var(--udc-background);
+    padding: 20px, 25px;
+    margin: 0;
+}
+.sendMail-header>h2{
+    font-size: 25px;
+    font-weight: 800;
+    text-align: center;
+}
 p.send {
     line-height: 5.0;
 }
@@ -23,13 +47,9 @@ p.case {
 .sendMail-form {
     display: flex;
     flex-direction: column;
-    flex: 0.7;
+    /* flex: 0.7; */
 
 
-}
-
-.sendMail-header {
-    text-align: center;
 }
 
 .sendMail-title {
@@ -41,12 +61,11 @@ p.case {
     width: 500px;
 }
 
-.MuiBox-root.css-xn6ruc {
-    margin-left: 25%;
-    margin-right: 25%;
-}
-
 .Send {
     font-size: 200%;
     text-align: center;
+}
+
+.sendMail_container{
+    margin: 5%;
 }

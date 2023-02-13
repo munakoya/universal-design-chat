@@ -58,7 +58,9 @@ function Sidebar() {
 
       {/* fullWidth → 画面いっぱい */}
       <Button variant="outlined" className="sidebar_tweet" fullWidth>
-        <Link to={"/create-room"}>新規ルーム作成</Link>
+        <Link to={"/create-room"} style={{ width: "100%" }}>
+          新規ルーム作成
+        </Link>
       </Button>
     </div>
   );

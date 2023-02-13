@@ -3,8 +3,17 @@
     margin-top: 20px;
     margin-right: 25px;
     height: 90vh;
-    width: 100%;
+    /* width: 100%; */
+    flex: 0.8;
+    border-right: 1px solid var(--udc-background);
+        
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
+    /* スクロールバーを消す */
+}
 
+.create::-webkit-scrollbar {
+    display: none;
 }
 
 
@@ -54,4 +63,8 @@
 .create_explain {
     text-align: center;
     margin-top: -10px;
+}
+
+.createRoom-createButton{
+    border: solid #000000 1px;
 }

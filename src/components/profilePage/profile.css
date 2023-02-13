@@ -1,27 +1,49 @@
 .profile {
-    flex: 0.78;
+    flex: 0.5;
     height: 90vh;
     background-color: #fff;
     margin-top: 20px;
     overflow-y: scroll;
+    border-right: 1px solid var(--udc-background);
+    /* スクロール → chromeのみに適用される */
+    overflow-y: scroll;
+    
 }
-
+.profile::-webkit-scrollbar {
+    display: none;
+}
 .profile_container {
     margin-top: -20px;
     line-height: 1.2;
     margin-left: 20px;
+    padding-top: 36px;
 }
 
 .profile_header {
-    margin-top: -2px;
+    /* margin-top: -2px;
     line-height: 1.8;
-    margin-left: 20px;
+    margin-left: 20px; */
+    /* 固定 → stickyで固定*/
+        position: sticky;
+        top: 0;
+        background-color: white;
+        /* headerは一番上に来てほしいので100を当てる */
+        z-index: 100;
+        border: 1px solid var(--udc-background);
+        padding: 20px, 25px;
+        margin: 0;
+}
+.profile_header>h2 {
+    font-size: 25px;
+    font-weight: 800;
+    text-align: center;
 }
 
 .user_name {
-    margin-left: 5%;
+    margin-left: 10%;
     margin-top: -45px;
     line-height: 2.3;
+    
 }
 
 .List_2 {
@@ -42,4 +64,28 @@
 
 .profile>button{
     margin-left: 20px;
+}
+
+.profile_button{
+    display: flex;
+    justify-content:space-around;
+}
+.profile_button .edit_icon{
+    padding-right: 5px;
+}
+
+.profile_button .logout_icon {
+    padding-right: 5px;
+}
+.profile_button .rule_icon{
+    padding-right: 5px;
+}
+.profile_logout{
+    border-radius: 30px !important;
+}
+.profile_rule{
+    border-radius: 30px !important;
+}
+.profile_edit{
+    border-radius: 30px !important;
 }

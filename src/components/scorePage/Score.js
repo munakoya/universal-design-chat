@@ -8,6 +8,7 @@ import { useParams } from "react-router-dom";
 import db from "../../firebase";
 import Failure from "./Failure";
 import Pass from "./Pass";
+import "./score.css";
 
 function Score() {
   const params = useParams(); // params.id → roomIDが取れます
@@ -42,11 +43,17 @@ function Score() {
 
   return (
     <div className="score">
-      <h2 className="score_header">採点結果</h2>
+      <div className="score_header">
+        <h2>採点結果</h2>
+      </div>
       {selectUser?.myRoomScore?.map((value) => {
         if (value.title === params.id) {
           console.log(`score : ${value.score}`);
-          return <div>{value.score >= 4 ? <Pass /> : <Failure />}</div>;
+          return (
+            <div className="score_container">
+              {value.score >= 4 ? <Pass /> : <Failure />}
+            </div>
+          );
         }
       })}
     </div>

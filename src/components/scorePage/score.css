@@ -1,0 +1,48 @@
+.score{
+    background-color: #fff;
+        margin-top: 20px;
+        margin-right: 25px;
+        height: 90vh;
+        /* width: 100%; */
+        flex: 0.8;
+        border-right: 1px solid var(--udc-background);
+    
+        /* スクロール → chromeのみに適用される */
+        overflow-y: scroll;
+        /* スクロールバーを消す */
+}
+.score::-webkit-scrollbar {
+    display: none;
+}
+
+.score_container{
+    margin: 5%;
+}
+
+.score_header{
+    /* 固定 → stickyで固定*/
+    position: sticky;
+    top: 0;
+    background-color: white;
+    /* headerは一番上に来てほしいので100を当てる */
+    z-index: 100;
+    border: 1px solid var(--udc-background);
+    padding: 20px, 25px;
+}
+
+.score_header > h2{
+    font-size: 25px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.room_enteringButton{
+    display: flex;
+    justify-content: space-around;
+}
+.failure_button{
+    display: flex;
+    justify-content:space-evenly;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}

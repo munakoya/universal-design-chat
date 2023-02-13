@@ -23,9 +23,16 @@
     margin-left: 20px;
 }
 
+/* 反映されてないと思われ */
 .widgets_input>input {
     border: none;
     background-color: var(--udc-background);
+    width: 100%;
+}
+.widgets_search_input{
+    border: none;
+        background-color: var(--udc-background);
+        width: 100%;
 }
 
 .widgets_searchIcon {

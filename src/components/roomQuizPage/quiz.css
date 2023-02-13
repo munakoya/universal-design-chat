@@ -1,9 +1,21 @@
 .quiz {
-    width: 100%;
+    /* width: 100%;
     height: 90vh;
     background-color: #fff;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 10px; */
+    display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        min-width: 200px;
+        flex: 0.8;
+        border-right: 1px solid var(--udc-background);
+        background-color: #fff;
+        margin-top: 20px;
+        height: 90vh;
+}
+.quiz::-webkit-scrollbar {
+    display: none;
 }
 
 .quizList_header {
@@ -26,4 +38,16 @@
 
 .quizList {
     margin-left: 20px;
+}
+
+.quiz_score_Button{
+    margin: 5%;
+    padding: 2%;
+    background-color: #50b7f5;
+    border-radius: 30px;
+    width: 20%;
+}
+
+.quiz_score_Button Link{
+    color: #fff;
 }

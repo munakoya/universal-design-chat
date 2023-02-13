@@ -22,8 +22,9 @@ import {
 } from "firebase/firestore";
 import db from "../../firebase";
 import { uuidv4 } from "@firebase/util";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import "./create.css";
+import { Box } from "@mui/system";
 function Create() {
   // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
@@ -117,142 +118,227 @@ function Create() {
   // 同名ルームをチェックしてなければ登録
   async function registerRoomCheck(e) {
     e.preventDefault();
-
+    if (roomTitle === "") {
+      alert("ルーム名は必ず入力してね！");
+      return;
+    }
     const allRoomData = doc(db, "all-room-list", `${roomTitle}`);
     const allRoomDataSnap = await getDoc(allRoomData);
 
     if (allRoomDataSnap.exists()) {
-      console.log("同じルーム名が存在されます");
+      alert("同じルーム名が存在します。 (T_T) \n別のルーム名を入力してね！");
       // ここにエラー出力
     } else {
       // 同じルーム名が無い
-      createRoom();
+      if (window.confirm(`「${roomTitle}」ルームを作成します。`)) {
+        createRoom();
+      }
     }
   }
 
   return (
     <div className="create">
-      <h2 className="create-header">ルーム作成</h2>
-      <div className="create_explain">
-        <p>
-          注意：問題が空欄だと自動で正解扱いになります。
-          <br /> 　　　　解答は一文字でも異なると不正解となります。
-        </p>
-      </div>
-      <form>
-        <div className="createRoom-input">
-          <input
-            value={roomTitle}
-            placeholder="ルーム名"
-            type="text"
-            onChange={(e) => setRoomTitle(e.target.value)}
-            required={true}
-          ></input>
-          <input
-            value={description}
-            placeholder="ルーム説明"
-            type="text"
-            onChange={(e) => setDescription(e.target.value)}
-            required={true}
-          ></input>
-          <input
-            value={icon}
-            placeholder="imageURL"
-            type="text"
-            onChange={(e) => setIcon(e.target.value)}
-            required={true}
-          ></input>
-          <div className="createQuiz-input">
-            <div className="createQuizSet">
-              <input
-                value={question1}
-                placeholder="Question1"
-                type="text"
-                onChange={(e) => setQuestion1(e.target.value)}
-                required={true}
-              ></input>
-              <input
-                value={answer1}
-                placeholder="Answer1"
-                type="text"
-                onChange={(e) => setAnswer1(e.target.value)}
-                required={true}
-              ></input>
-            </div>
-            <div className="createQuizSet">
-              <input
-                value={question2}
-                placeholder="Question 2"
-                type="text"
-                onChange={(e) => setQuestion2(e.target.value)}
-                required={true}
-              ></input>
-              <input
-                value={answer2}
-                placeholder="Answer 2"
-                type="text"
-                onChange={(e) => setAnswer2(e.target.value)}
-                required={true}
-              ></input>
-            </div>
-            <div className="createQuizSet">
-              <input
-                value={question3}
-                placeholder="Question 3"
-                type="text"
-                onChange={(e) => setQuestion3(e.target.value)}
-                required={true}
-              ></input>
-              <input
-                value={answer3}
-                placeholder="Answer 3"
-                type="text"
-                onChange={(e) => setAnswer3(e.target.value)}
-                required={true}
-              ></input>
-            </div>
-            <div className="createQuizSet">
-              <input
-                value={question4}
-                placeholder="Question 4"
-                type="text"
-                onChange={(e) => setQuestion4(e.target.value)}
-                required={true}
-              ></input>
-              <input
-                value={answer4}
-                placeholder="Answer 4"
-                type="text"
-                onChange={(e) => setAnswer4(e.target.value)}
-                required={true}
-              ></input>
-            </div>
-            <div className="createQuizSet">
-              <input
-                value={question5}
-                placeholder="Question 5"
-                type="text"
-                onChange={(e) => setQuestion5(e.target.value)}
-                required={true}
-              ></input>
-              <input
-                value={answer5}
-                placeholder="Answer 5"
-                type="text"
-                onChange={(e) => setAnswer5(e.target.value)}
-                required={true}
-              ></input>
-            </div>
-          </div>
-          <Button
-            className="createRoom-createButton"
-            type="button" // type="submit"にするとenterキーで送信される buttonならenterキー誤送信防げます
-            onClick={registerRoomCheck}
-          >
-            ルーム作成
-          </Button>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <h2 className="create-header">ルーム作成</h2>
+        <div className="create_explain">
+          <p>
+            注意：問題が空欄だと自動で正解扱いになります。
+            <br /> 　　　　解答は一文字でも異なると不正解となります。
+          </p>
         </div>
-      </form>
+        <form>
+          <div className="createRoom-input">
+            <TextField
+              value={roomTitle}
+              id="filled-multiline-flexible"
+              label="ルーム名"
+              multiline
+              maxRows={4}
+              variant="filled"
+              style={{ width: "100%" }}
+              onChange={(e) => setRoomTitle(e.target.value)}
+              required={true}
+            />
+            <TextField
+              value={description}
+              label="ルーム説明"
+              multiline
+              maxRows={4}
+              variant="filled"
+              id="filled-multiline-flexible"
+              type="text"
+              onChange={(e) => setDescription(e.target.value)}
+              required={true}
+              style={{ width: "100%" }}
+            />
+            <TextField
+              value={icon}
+              label="画像URL"
+              multiline
+              maxRows={4}
+              variant="filled"
+              id="filled-multiline-flexible"
+              type="text"
+              onChange={(e) => setIcon(e.target.value)}
+              required={true}
+              style={{ width: "100%" }}
+            ></TextField>
+            <div className="createQuiz-input">
+              <div className="createQuizSet">
+                <TextField
+                  value={question1}
+                  label="問題①"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setQuestion1(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+                <TextField
+                  value={answer1}
+                  label="答え①"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setAnswer1(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+              </div>
+              <div className="createQuizSet">
+                <TextField
+                  value={question2}
+                  label="問題②"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setQuestion2(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+                <TextField
+                  value={answer2}
+                  label="答え②"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setAnswer2(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+              </div>
+              <div className="createQuizSet">
+                <TextField
+                  value={question3}
+                  label="問題③"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setQuestion3(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+                <TextField
+                  value={answer3}
+                  label="答え③"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setAnswer3(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+              </div>
+              <div className="createQuizSet">
+                <TextField
+                  value={question4}
+                  label="問題④"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setQuestion4(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+                <TextField
+                  value={answer4}
+                  label="答え④"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setAnswer4(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+              </div>
+              <div className="createQuizSet">
+                <TextField
+                  value={question5}
+                  label="問題⑤"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setQuestion5(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+                <TextField
+                  value={answer5}
+                  label="答え⑤"
+                  multiline
+                  maxRows={4}
+                  variant="filled"
+                  id="filled-multiline-flexible"
+                  type="text"
+                  onChange={(e) => setAnswer5(e.target.value)}
+                  required={true}
+                  style={{ width: "45%" }}
+                />
+              </div>
+            </div>
+            <Button
+              className="createRoom-createButton"
+              type="button" // type="submit"にするとenterキーで送信される buttonならenterキー誤送信防げます
+              onClick={registerRoomCheck}
+              variant="contained"
+              style={{
+                margin: "10%",
+                padding: "2%",
+                backgroundColor: "#50b7f5",
+                borderRadius: "30px",
+              }}
+            >
+              ルーム作成
+            </Button>
+          </div>
+        </form>
+      </Box>
     </div>
   );
 }

@@ -10,6 +10,9 @@ import { Avatar, Button } from "@mui/material";
 import { signOut } from "@firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import db, { auth } from "../../firebase";
+import EditIcon from "@mui/icons-material/Edit";
+import LogoutIcon from "@mui/icons-material/Logout";
+import TextSnippetIcon from "@mui/icons-material/TextSnippet";
 import "./profile.css";
 
 function Profile() {
@@ -185,7 +188,9 @@ function Profile() {
 
   return (
     <div className="profile">
-      <h1 className="profile_header">マイページ</h1>
+      <div className="profile_header">
+        <h2>マイページ</h2>
+      </div>
       <div className="profile_container">
         <Avatar src={selectUser.icon} />
         <h3 className="user_name">: {selectUser.name}</h3>
@@ -223,10 +228,34 @@ function Profile() {
           )}
         </div>
         <p></p>
+        <Modal />
+        <div className="profile_button">
+          <Button
+            onClick={SignOut}
+            variant="outlined"
+            className="profile_logout"
+          >
+            <LogoutIcon className="logout_icon" />
+            ログアウト
+          </Button>
+          <Button onClick={open} variant="outlined" className="profile_rule">
+            <TextSnippetIcon className="rule_icon" />
+            利用規約
+          </Button>
+          <Button
+            variant="outlined"
+            className="profile_edit"
+            onClick={() => {
+              alert(
+                "大変申し訳ありませんが、現在編集機能はありません。\n今後に期待です。。"
+              );
+            }}
+          >
+            <EditIcon className="edit_icon" />
+            編集
+          </Button>
+        </div>
       </div>
-      <Modal />
-      <Button onClick={SignOut}>ログアウト</Button>
-      <Button onClick={open}>利用規約</Button>
     </div>
   );
 }

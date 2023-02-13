@@ -7,6 +7,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "../../firebase";
+import "./score.css";
 
 function Failure() {
   const [rooms, setRooms] = useState([]);
@@ -47,17 +48,40 @@ function Failure() {
                   <p>{room.createUser}</p>
                 </div>
 
-                <div className="room_retry">
-                  <Button>
-                    <Link to={`/search-rooms/${params.id}/quiz`}>
-                      もう一度解く！
-                    </Link>
-                  </Button>
-                </div>
-                <div className="room_list">
-                  <Button>
-                    <Link to={"/search-rooms"}>ルーム一覧に戻る</Link>
-                  </Button>
+                <div className="failure_button">
+                  <div className="room_retry">
+                    <Button
+                      style={{
+                        padding: "20px",
+                        backgroundColor: "#50b7f5",
+                        borderRadius: "30px",
+                      }}
+                    >
+                      <Link
+                        to={`/search-rooms/${params.id}/quiz`}
+                        style={{ width: "100%", color: "#fff" }}
+                      >
+                        もう一度解く！
+                      </Link>
+                    </Button>
+                  </div>
+                  <div className="room_list">
+                    <Button
+                      style={{
+                        width: "100%",
+                        padding: "20px",
+                        backgroundColor: "#50b7f5",
+                        borderRadius: "30px",
+                      }}
+                    >
+                      <Link
+                        to={"/search-rooms"}
+                        style={{ width: "100%", color: "#fff" }}
+                      >
+                        ルーム一覧に戻る
+                      </Link>
+                    </Button>
+                  </div>
                 </div>
               </div>
             );
