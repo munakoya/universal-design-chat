@@ -18,6 +18,7 @@ import db from "../../../firebase";
 import { Link } from "react-router-dom";
 import { Search } from "@mui/icons-material";
 import "./Widgets.css";
+import { Input } from "@mui/material";
 
 function Widgets() {
   let roomMembers = [];
@@ -88,11 +89,13 @@ function Widgets() {
     <div className="widgets">
       <div className="widgets_input">
         <Search className="widgets_searchicon" />
-        <input
+        <Input
           placeholder="キーワード検索"
           type="text"
           value={searchKeyword}
           onChange={(e) => setSearchKeyword(e.target.value)}
+          className="widgets_search_input"
+          
         />
       </div>
       {searchKeyword ? searchRoom() : null}

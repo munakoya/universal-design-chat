@@ -8,6 +8,7 @@ import { Link, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { collection, onSnapshot, query } from "firebase/firestore";
 import db from "../../firebase";
+import "./score.css";
 
 function Pass() {
   const [rooms, setRooms] = useState([]);
@@ -47,8 +48,19 @@ function Pass() {
                 </div>
 
                 <div className="room_enteringButton">
-                  <Button>
-                    <Link to={`/room/${params.id}/chat-room`}>
+                  <Button
+                    style={{
+                      margin: "2%",
+                      padding: "2%",
+                      backgroundColor: "#50b7f5",
+                      borderRadius: "30px",
+                      width: "80%",
+                    }}
+                  >
+                    <Link
+                      to={`/room/${params.id}/chat-room`}
+                      style={{ width: "100%", color: "#fff" }}
+                    >
                       ルームに入室
                     </Link>
                   </Button>

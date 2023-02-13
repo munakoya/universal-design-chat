@@ -40,6 +40,7 @@ const Post = forwardRef(
                   controls
                   playsInline
                   title="指定された画像or動画"
+                  allowFullScreen // 全画面
                 ></iframe>
               </div>
             )}

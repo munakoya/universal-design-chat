@@ -12,7 +12,7 @@ TODO
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 import {
   collection,
   orderBy,
@@ -26,6 +26,8 @@ import {
 } from "firebase/firestore";
 import db from "../../firebase";
 import "./quiz.css";
+import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 function Quiz() {
   // urlからroomIDを取得して、クイズ情報を読み込む → 本当は関数にしたい
@@ -40,6 +42,8 @@ function Quiz() {
   const [ans3, setAns3] = useState("");
   const [ans4, setAns4] = useState("");
   const [ans5, setAns5] = useState("");
+
+  const navigation = useNavigate();
 
   let score = 0;
 
@@ -92,27 +96,34 @@ function Quiz() {
   }
 
   //
-  function checkMyRoomScore() {
+  async function checkMyRoomScore() {
     let checkCount = 0;
-    // myRoomScoreをmapで一つ一つ調べる → そもそも出力させない
+    // myRoomScoreをmapで一つ一つ調べる → そもそも出力させない → 検索で出てきたときの処理とかめんどいからこっちで制御
+    // スパゲティで申し訳ないです。
     for (let myScore of selectUser?.myRoomScore) {
       // 以前不合格で再受験 → 合格
       if (myScore.title === params.id) {
         // 不合格の点数 かつ 今回合格
         if (myScore.score <= 3 && score >= 4) {
           // 更新(削除)
-          updateDoc(userInfo, {
+
+          await updateDoc(userInfo, {
             myRoomScore: arrayRemove({
               title: myScore.title,
               score: myScore.score,
             }),
           });
           // 更新(追加)
-          updateDoc(userInfo, {
+          await updateDoc(userInfo, {
             myRoomScore: arrayUnion({ title: selectRoom.title, score: score }),
           });
         }
+        if (myScore.score >= 4) {
+          console.log("すでに合格済です。");
+          break;
+        }
         break;
+        // 未受験
       } else {
         checkCount = 1;
       }
@@ -127,7 +138,6 @@ function Quiz() {
   // 合否判定、登録
   async function judgeScorePass() {
     const roomInfo = doc(db, "room-list", `${selectRoom?.roomId}`);
-
     await updateDoc(userInfo, {
       myRoomList: arrayUnion(selectRoom.title),
     });
@@ -140,31 +150,34 @@ function Quiz() {
 
   // 完全一致の採点処理
   async function quizScore() {
-    if (ans1 === selectRoom.quiz[0].answer) {
-      score++;
-    }
-    if (ans2 === selectRoom.quiz[1].answer) {
-      score++;
-    }
-    if (ans3 === selectRoom.quiz[2].answer) {
-      score++;
-    }
-    if (ans4 === selectRoom.quiz[3].answer) {
-      score++;
-    }
-    if (ans5 === selectRoom.quiz[4].answer) {
-      score++;
-    }
+    if (window.confirm("入力した内容で採点します！")) {
+      if (ans1 === selectRoom.quiz[0].answer) {
+        score++;
+      }
+      if (ans2 === selectRoom.quiz[1].answer) {
+        score++;
+      }
+      if (ans3 === selectRoom.quiz[2].answer) {
+        score++;
+      }
+      if (ans4 === selectRoom.quiz[3].answer) {
+        score++;
+      }
+      if (ans5 === selectRoom.quiz[4].answer) {
+        score++;
+      }
 
-    // 初受験かどうか調べて、初 → score登録, 2回目以降 → 更新
-    checkMyRoomScore();
-    // 合否を判断 → 4点以上でmyRoomListに追加
-    if (score >= 4) {
-      judgeScorePass();
-    } else {
-      console.log("不合格");
+      // 初受験かどうか調べて、初 → score登録, 2回目以降 → 更新
+      checkMyRoomScore();
+      // 合否を判断 → 4点以上でmyRoomListに追加
+      if (score >= 4) {
+        judgeScorePass();
+      } else {
+        console.log("不合格");
+      }
+      return console.log("得点 : ", score);
     }
-    return console.log("得点 : ", score);
+    return navigation(`/search-rooms/${params.id}/quiz`);
   }
 
   // 上で特定したroomのデータをselectRoomに入れる
@@ -173,57 +186,114 @@ function Quiz() {
 
   return (
     <div className="quiz">
-      <div className="quizList">
-        <h2 className="quizList_header">{selectRoom?.title}</h2>
-        <h3>問題</h3>
-        {selectRoom?.quiz?.map((value, index) => {
-          return (
-            <div key={value.question} className="quizList_question">
-              <p>
-                {`Q.${index + 1} : `}
-                {value.question}
-              </p>
-            </div>
-          );
-        })}
-      </div>
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <div className="quizList">
+          <h2 className="quizList_header">{selectRoom?.title}</h2>
+          <h3>問題</h3>
+          {selectRoom?.quiz?.map((value, index) => {
+            return (
+              <div key={value.question} className="quizList_question">
+                <p>
+                  {`Q.${index + 1} : `}
+                  {value.question}
+                </p>
+              </div>
+            );
+          })}
+        </div>
 
-      <div className="quizList_ansInput">
-        <h3>解答</h3>
-        <input
-          value={ans1}
-          placeholder="Q1"
-          type="text"
-          onChange={(e) => setAns1(e.target.value)}
-        ></input>
-        <input
-          value={ans2}
-          placeholder="Q2"
-          type="text"
-          onChange={(e) => setAns2(e.target.value)}
-        ></input>
-        <input
-          value={ans3}
-          placeholder="Q3"
-          type="text"
-          onChange={(e) => setAns3(e.target.value)}
-        ></input>
-        <input
-          value={ans4}
-          placeholder="Q4"
-          type="text"
-          onChange={(e) => setAns4(e.target.value)}
-        ></input>
-        <input
-          value={ans5}
-          placeholder="Q5"
-          type="text"
-          onChange={(e) => setAns5(e.target.value)}
-        ></input>
+        <div className="quizList_ansInput">
+          <h3>解答</h3>
+          <TextField
+            value={ans1}
+            id="filled-multiline-flexible"
+            label="Q1"
+            multiline
+            maxRows={4}
+            variant="filled"
+            style={{ width: "100%" }}
+            placeholder="答えを入力してね！"
+            type="text"
+            onChange={(e) => setAns1(e.target.value)}
+          />
+          <TextField
+            value={ans2}
+            id="filled-multiline-flexible"
+            label="Q2"
+            multiline
+            maxRows={4}
+            variant="filled"
+            style={{ width: "100%" }}
+            placeholder="答えを入力してね！"
+            type="text"
+            onChange={(e) => setAns2(e.target.value)}
+          />
+          <TextField
+            value={ans3}
+            id="filled-multiline-flexible"
+            label="Q3"
+            multiline
+            maxRows={4}
+            variant="filled"
+            style={{ width: "100%" }}
+            placeholder="答えを入力してね！"
+            type="text"
+            onChange={(e) => setAns3(e.target.value)}
+          />
+          <TextField
+            value={ans4}
+            id="filled-multiline-flexible"
+            label="Q4"
+            multiline
+            maxRows={4}
+            variant="filled"
+            style={{ width: "100%" }}
+            placeholder="答えを入力してね！"
+            type="text"
+            onChange={(e) => setAns4(e.target.value)}
+          />
+          <TextField
+            value={ans5}
+            id="filled-multiline-flexible"
+            label="Q5"
+            multiline
+            maxRows={4}
+            variant="filled"
+            style={{ width: "100%" }}
+            placeholder="答えを入力してね！"
+            type="text"
+            onChange={(e) => setAns5(e.target.value)}
+          ></TextField>
+        </div>
+      </Box>
+      <div>
+        <Button
+          className="quiz_score_Button"
+          type="submit"
+          onClick={quizScore}
+          style={{
+            margin: "5%",
+            padding: "2%",
+            backgroundColor: "#50b7f5",
+            borderRadius: "30px",
+            width: "40%",
+          }}
+        >
+          <Link
+            to={`/search-rooms/${selectRoom?.title}/quiz/score`}
+            style={{ color: "#fff", fontWeight: "bold", width: "100%" }}
+          >
+            採点
+          </Link>
+        </Button>
       </div>
-      <Button className="quiz_score_Button" type="submit" onClick={quizScore}>
-        <Link to={`/search-rooms/${selectRoom?.title}/quiz/score`}>採点</Link>
-      </Button>
     </div>
   );
 }

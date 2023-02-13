@@ -19,6 +19,8 @@ import "./roomList.css";
 import "./roomDetail.css";
 
 function RoomList() {
+  const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
+
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState([]);
   let [selectedRoom, setSelectedRoom] = useState([]);
@@ -45,17 +47,54 @@ function RoomList() {
                     <p>{room.description}</p>
                     <h2>所属メンバー</h2>
                     <ul>
-                      <li key={room.members}>{room.members}</li>
+                      {room.members.map((value, index) => {
+                        return index < 5 ? (
+                          <li key={value}>{`${value}`}</li>
+                        ) : null;
+                      })}
                     </ul>
                     <h2>ルーム作成者</h2>
                     <p>{room.createUser}</p>
                   </div>
                   <div className="select_button">
-                    <Button onClick={close}>戻る</Button>
-                    <Button>
-                      <Link to={`/search-rooms/${room.title}/quiz`}>
-                        テストに進む
-                      </Link>
+                    <Button
+                      onClick={close}
+                      variant="contained"
+                      style={{
+                        margin: "2%",
+                        padding: "2%",
+                        backgroundColor: "#50b7f5",
+                        borderRadius: "30px",
+                      }}
+                    >
+                      一覧に戻る
+                    </Button>
+                    <Button
+                      variant="contained"
+                      style={{
+                        margin: "5%",
+                        padding: "2%",
+                        backgroundColor: "#50b7f5",
+                        borderRadius: "30px",
+                      }}
+                    >
+                      {/* ルームに所属してい場合、ルームに移動させる */}
+                      {room.members.indexOf(`${auth_user.displayName}`) !==
+                      -1 ? (
+                        <Link
+                          to={`/room/${room.title}/chat-room`}
+                          style={{ color: "#fff" }}
+                        >
+                          ルームに入室
+                        </Link>
+                      ) : (
+                        <Link
+                          to={`/search-rooms/${room.title}/quiz`}
+                          style={{ color: "#fff" }}
+                        >
+                          テストに進む
+                        </Link>
+                      )}
                     </Button>
                   </div>
                 </div>
@@ -101,7 +140,7 @@ function RoomList() {
                 key={room.roomId}
                 onClick={() => {
                   getSelectedRoom(room.title);
-                  console.log(selectedRoom);
+                  // console.log(selectedRoom);
                   open();
                 }}
               >
