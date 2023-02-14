@@ -20,7 +20,7 @@ function Chatui({ roomId }) {
     const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
     const messages = useMessages(params.id)
 
-    const [value, setValue] = useState()
+    const [value, setValue] = useState("")
 
     const handleChange = (e) => {
         setValue(e.target.value);
@@ -28,7 +28,10 @@ function Chatui({ roomId }) {
   };
     // 送信処理
   const handleSubmit = (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    if (value === "") {
+      return
+    }
       console.log("実行")
     // firebaseのsendMessage関数を呼び出して、dbに値をセット
     sendMessage(roomId, auth_user, value);

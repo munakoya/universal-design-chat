@@ -23,7 +23,7 @@ function TopicChatui({ roomId }) {
     const messages = useTopicMessages(params.id, params.id2
     )
 
-    const [value, setValue] = useState()
+    const [value, setValue] = useState("")
 
       async function sendTopicMessage(roomId, topicId, auth_user, text) {
     try {
@@ -50,7 +50,10 @@ function TopicChatui({ roomId }) {
   };
     // 送信処理
   const handleSubmit = (e) => {
-      e.preventDefault();
+    e.preventDefault();
+    if (value === "") {
+      return
+    }
       console.log("実行")
     // firebaseのsendMessage関数を呼び出して、dbに値をセット
     sendTopicMessage(roomId, params.id2,auth_user, value);
