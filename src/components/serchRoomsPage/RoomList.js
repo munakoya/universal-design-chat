@@ -46,10 +46,13 @@ function RoomList() {
                     <h2>ルーム説明</h2>
                     <p>{room.description}</p>
                     <h2>所属メンバー</h2>
-                    <ul>
+                    <ul style={{ display: "flex", listStyle: "none" }}>
                       {room.members.map((value, index) => {
                         return index < 5 ? (
-                          <li key={value}>{`${value}`}</li>
+                          <li key={value} style={{ flexDirection: "row" }}>
+                            {`| ${value} | `}
+                            {index >= 4 ? "..." : ""}
+                          </li>
                         ) : null;
                       })}
                     </ul>
