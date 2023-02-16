@@ -94,6 +94,7 @@ function Create() {
     });
     updateDoc(userInfo, {
       createRooms: arrayUnion(roomTitle),
+      myRoomList: arrayUnion(roomTitle),
     });
 
     // all-room-arrayに追加
