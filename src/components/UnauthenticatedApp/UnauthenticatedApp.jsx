@@ -171,7 +171,7 @@ function UnauthenticatedApp() {
   }
 
     return (
-        <div className='unAuthenticated'>
+      <div className='unAuthenticated'>
             <h1>Universal Design Chat</h1>
             <h2>Welcome to UDC !</h2>
             <div>

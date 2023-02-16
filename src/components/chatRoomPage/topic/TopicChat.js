@@ -5,8 +5,8 @@
 
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import TopicChatMessageList from "./TopicChatMessageList/TopicChatMessageList";
-import TopicChatMessageInput from "./TopicChatMessageInput/TopicChatMessageInput";
+// import TopicChatMessageList from "./TopicChatMessageList/TopicChatMessageList";
+// import TopicChatMessageInput from "./TopicChatMessageInput/TopicChatMessageInput";
 import "./topicChat.css";
 import TopicChatui from "./TopicChatui";
 
