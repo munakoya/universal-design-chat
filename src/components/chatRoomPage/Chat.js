@@ -11,8 +11,8 @@ urlはそのままでセキュリティルールを編集して登録済みの�
 
 import React from "react";
 import { useParams } from "react-router-dom";
-import ChatMessageList from "./MessageList/ChatMessageList";
-import ChatMessageInput from "./MessageInput/ChatMessageInput";
+// import ChatMessageList from "./MessageList/ChatMessageList";
+// import ChatMessageInput from "./MessageInput/ChatMessageInput";
 import "./chat.css";
 import Chatui from "./Chatui";
 

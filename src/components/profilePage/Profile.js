@@ -242,7 +242,7 @@ function Profile() {
             <TextSnippetIcon className="rule_icon" />
             利用規約
           </Button>
-          <Button
+          {/* <Button
             variant="outlined"
             className="profile_edit"
             onClick={() => {
@@ -253,7 +253,7 @@ function Profile() {
           >
             <EditIcon className="edit_icon" />
             編集
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>

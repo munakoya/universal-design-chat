@@ -23,7 +23,7 @@ function RoomList() {
 
   const [rooms, setRooms] = useState([]);
   const [roomDetails, setRoomDetails] = useState([]);
-  let [selectedRoom, setSelectedRoom] = useState([]);
+  const [selectedRoom, setSelectedRoom] = useState([]);
   // ルーム詳細モーダル
   const [Modal, open, close] = useModal("root", {
     components: {
