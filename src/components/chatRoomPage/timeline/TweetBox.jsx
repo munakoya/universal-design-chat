@@ -15,6 +15,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import db from "../../../firebase";
 import "./tweetBox.css";
+import { sanitizingReturn } from "../../../functions/sanitizing";
 
 function TweetBox() {
   // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
@@ -37,7 +38,11 @@ function TweetBox() {
   const handleSubmit = (e) => {
     e.preventDefault();
     // 空送信できないように変更
-    if (tweetMessage === "") return;
+    if (tweetMessage.length === 0) return; /// この記述反応微妙です
+    if (sanitizingReturn(tweetMessage) === false) {
+      alert("不正な文字が含まれています。")
+      return
+    }
     sendRoomTweet(tweetMessage, tweetImage, auth_user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
