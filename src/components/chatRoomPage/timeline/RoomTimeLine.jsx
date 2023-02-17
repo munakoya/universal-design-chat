@@ -10,7 +10,7 @@ import FlipMove from "react-flip-move"; // なめらかに動くライブラリ
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import db from "../../../firebase";
 import TweetBox from "./TweetBox";
-import Post from "./Post.js";
+import Post from "./Post.jsx";
 import "./roomTimeLine.css";
 
 function RoomTimeLine() {
