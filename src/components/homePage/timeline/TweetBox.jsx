@@ -32,7 +32,7 @@ function TweetBox() {
     // リロードされないように
     e.preventDefault();
     // 空送信できないように変更
-    if (tweetMessage === "" && tweetImage === "") return;
+    if (tweetMessage === "" && tweetImage === "") return; 
     sendTweet(tweetMessage, tweetImage, auth_user); // firebase.jsで定義している関数
     // 送信後入力フォームをクリア
     setTweetMessage("");
@@ -49,6 +49,7 @@ function TweetBox() {
             placeholder="お知らせを投稿してください"
             type="text"
             onChange={handleChangeMessage}
+            required
           ></input>
         </div>
         <input
@@ -57,6 +58,7 @@ function TweetBox() {
           placeholder="画像もしくは動画(Youtube)のURLを入力してください"
           type="text"
           onChange={handleChangeImage}
+          required
         ></input>
         <Button className="tweetBox_tweetButton" type="submit">
           投稿する

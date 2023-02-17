@@ -25,6 +25,7 @@ import { uuidv4 } from "@firebase/util";
 import { Button, TextField } from "@mui/material";
 import "./create.css";
 import { Box } from "@mui/system";
+import { sanitizingReturn } from "../../functions/sanitizing";
 function Create() {
   // セッション管理してリロード時のstateリセットによるログインページに遷移しないように
   const auth_user = JSON.parse(sessionStorage.getItem("AUTH_USER"));
@@ -51,7 +52,7 @@ function Create() {
   // 入力項目をdbに登録
   // room-list, all-room-list, userのcreateRooms, all-room-array
   async function createRoom() {
-    if (roomTitle === "") return; // ルームタイトルが空欄はだめ
+    if (roomTitle === "") return;// ルームタイトルが空欄はだめ
     let id = uuidv4();
 
     // userのmyRoomListにも追加する
@@ -123,6 +124,11 @@ function Create() {
       alert("ルーム名は必ず入力してね！");
       return;
     }
+    // 不正な文字のアラート
+    if (sanitizingReturn(roomTitle) === false) {
+      alert("ルーム名に不正な文字が含まれています。")
+      return
+    };
     const allRoomData = doc(db, "all-room-list", `${roomTitle}`);
     const allRoomDataSnap = await getDoc(allRoomData);
 
@@ -176,7 +182,6 @@ function Create() {
               id="filled-multiline-flexible"
               type="text"
               onChange={(e) => setDescription(e.target.value)}
-              required={true}
               style={{ width: "100%" }}
             />
             <TextField
@@ -188,7 +193,6 @@ function Create() {
               id="filled-multiline-flexible"
               type="text"
               onChange={(e) => setIcon(e.target.value)}
-              required={true}
               style={{ width: "100%" }}
             ></TextField>
             <div className="createQuiz-input">
@@ -202,7 +206,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setQuestion1(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
                 <TextField
@@ -214,7 +217,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setAnswer1(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
               </div>
@@ -228,7 +230,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setQuestion2(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
                 <TextField
@@ -240,7 +241,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setAnswer2(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
               </div>
@@ -254,7 +254,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setQuestion3(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
                 <TextField
@@ -266,7 +265,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setAnswer3(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
               </div>
@@ -280,7 +278,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setQuestion4(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
                 <TextField
@@ -292,7 +289,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setAnswer4(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
               </div>
@@ -306,7 +302,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setQuestion5(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
                 <TextField
@@ -318,7 +313,6 @@ function Create() {
                   id="filled-multiline-flexible"
                   type="text"
                   onChange={(e) => setAnswer5(e.target.value)}
-                  required={true}
                   style={{ width: "45%" }}
                 />
               </div>

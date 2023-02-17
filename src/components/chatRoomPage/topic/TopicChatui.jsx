@@ -46,7 +46,6 @@ function TopicChatui({ roomId }) {
 
     const handleChange = (e) => {
         setValue(e.target.value);
-        console.log("onchange : ", value)
   };
     // 送信処理
   const handleSubmit = (e) => {
